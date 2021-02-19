@@ -7,9 +7,11 @@ import androidx.lifecycle.ViewModel;
 public class ActivityLoginVM extends ViewModel {
 
     private MutableLiveData<String> fragmentSelected;
+    private MutableLiveData<Boolean> logginOk;
 
     public ActivityLoginVM(){
         this.fragmentSelected = new MutableLiveData<>();
+        this.logginOk = new MutableLiveData<>(false);
     }
 
     public LiveData<String> getFragmentSelected(){
@@ -31,6 +33,27 @@ public class ActivityLoginVM extends ViewModel {
             fragmentSelected = new MutableLiveData<>();
         }
         fragmentSelected.setValue(newValue);
+    }
+
+    public LiveData<Boolean> getLogginOk(){
+        if (logginOk == null){
+            logginOk = new MutableLiveData<>();
+        }
+        return logginOk;
+    }
+
+    public Boolean getValueLogginOk(){
+        if (logginOk == null){
+            logginOk = new MutableLiveData<>();
+        }
+        return logginOk.getValue();
+    }
+
+    public void changeLogginOk(Boolean newValue){
+        if (logginOk == null){
+            logginOk = new MutableLiveData<>();
+        }
+        logginOk.setValue(newValue);
     }
 
 }

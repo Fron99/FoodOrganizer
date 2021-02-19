@@ -9,4 +9,9 @@
     <string name="remember_me">Remember me</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign Up</string>
+    <string name="register">Register</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="menus">Menus</string>
+    <string name="other_options">Other options</string>
+    <string name="calendarMenus">Calendar Menus</string>
 </resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1064356040464",
+    "project_id": "foodorganize-4365d",
+    "storage_bucket": "foodorganize-4365d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064356040464:android:4e6bdb7cfbbfccf5af1f95",
+        "android_client_info": {
+          "package_name": "es.fron99.foodorganize"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1064356040464-jbgva1kvd100eo395lbekk0egj0u6mnq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfhRqgrrD7_3soBOQHjHlOVoVSZdlwx8g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1064356040464-jbgva1kvd100eo395lbekk0egj0u6mnq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,11 +6,14 @@ import android.os.Bundle;
 
 import es.fron99.foodorganize.R;
 
-public class FoodCalendar extends AppCompatActivity {
+public class ActivityTotal extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_total);
+
+        this.getSupportActionBar().hide();
+
     }
 }

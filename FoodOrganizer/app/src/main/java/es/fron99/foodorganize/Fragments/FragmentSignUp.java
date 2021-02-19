@@ -1,49 +1,32 @@
 package es.fron99.foodorganize.Fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 import es.fron99.foodorganize.R;
+import es.fron99.foodorganize.ViewModels.ActivityLoginVM;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentSignUp#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class FragmentSignUp extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private ActivityLoginVM activityLoginVM;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public FragmentSignUp() {}
 
-    public FragmentSignUp() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentSignUp.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FragmentSignUp newInstance(String param1, String param2) {
         FragmentSignUp fragment = new FragmentSignUp();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,16 +34,57 @@ public class FragmentSignUp extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sign_up, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        activityLoginVM = new ViewModelProvider(requireActivity()).get(ActivityLoginVM.class);
+        asignOnClicks(view);
+
+    }
+
+
+    private void asignOnClicks(View view){
+
+        Button btnSigUp = view.findViewById(R.id.outlinedButton);
+
+        btnSigUp.setOnClickListener(v -> {
+
+            String email = ((TextInputLayout)view.findViewById(R.id.textInputLayoutUsername)).getEditText().getText().toString();
+            String password = ((TextInputLayout)view.findViewById(R.id.textInputLayoutPassword)).getEditText().getText().toString();
+
+
+            if (password.length()>=6){
+
+                //TODO Añadir mas emails, dejar asi por ahora
+                if (email.contains("@gmail.com")){
+
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+                            email,password).
+                            addOnCompleteListener(requireActivity(), task -> {
+
+                                //TODO Mostrar mensaje de error
+                                if (task.isSuccessful()){
+                                    activityLoginVM.changeLogginOk(true);
+                                }
+
+                            });
+
+                }
+
+            }
+
+        });
+
+    }
+
+
 }

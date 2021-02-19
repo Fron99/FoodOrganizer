@@ -1,8 +1,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/backgroundApp">
+    android:background="@color/bubbleGumRoseLight2">
+
 
     <ImageView
         android:id="@+id/imageView"
@@ -36,7 +38,8 @@
             android:layout_marginBottom="20dp"
             android:text="@string/sign_in"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            app:strokeWidth="2dp"/>
 
 
         <Button
@@ -50,7 +53,8 @@
             app:layout_constraintTop_toBottomOf="@id/btnSignIn"
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:textColor="@color/white"
-            android:backgroundTint="@color/black"/>
+            android:backgroundTint="@color/bubbleGumRoseDark"
+            tools:targetApi="lollipop" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
