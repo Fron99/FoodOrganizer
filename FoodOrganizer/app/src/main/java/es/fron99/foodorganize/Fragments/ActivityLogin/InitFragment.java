@@ -1,4 +1,4 @@
-package es.fron99.foodorganize.Fragments;
+package es.fron99.foodorganize.Fragments.ActivityLogin;
 
 import android.graphics.Color;
 import android.os.Bundle;

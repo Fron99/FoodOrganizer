@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import es.fron99.foodorganize.Fragments.FragmentSignIn;
-import es.fron99.foodorganize.Fragments.FragmentSignUp;
-import es.fron99.foodorganize.Fragments.InitFragment;
+import es.fron99.foodorganize.Fragments.ActivityLogin.FragmentSignIn;
+import es.fron99.foodorganize.Fragments.ActivityLogin.FragmentSignUp;
+import es.fron99.foodorganize.Fragments.ActivityLogin.InitFragment;
 import es.fron99.foodorganize.R;
 import es.fron99.foodorganize.ViewModels.ActivityLoginVM;
 

@@ -1,4 +1,4 @@
-package es.fron99.foodorganize.Fragments;
+package es.fron99.foodorganize.Fragments.ActivityTotal;
 
 import android.os.Bundle;
 
@@ -26,9 +26,9 @@ import es.fron99.foodorganize.Models.Menu;
 import es.fron99.foodorganize.R;
 
 
-public class FragmentListMenu extends Fragment {
+public class FragmentCalendarMenus extends Fragment {
 
-    public FragmentListMenu() {}
+    public FragmentCalendarMenus() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

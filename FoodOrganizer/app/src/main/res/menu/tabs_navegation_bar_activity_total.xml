@@ -4,7 +4,8 @@
     <item
         android:id="@+id/tabCalendarMenus"
         android:icon="@drawable/icon_calendar_foods"
-        android:title="@string/calendarMenus" />
+        android:title="@string/calendarMenus"
+        />
 
     <item
         android:id="@+id/tabMenus"

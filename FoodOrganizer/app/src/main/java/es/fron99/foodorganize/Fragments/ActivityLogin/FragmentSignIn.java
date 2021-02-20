@@ -1,4 +1,4 @@
-package es.fron99.foodorganize.Fragments;
+package es.fron99.foodorganize.Fragments.ActivityLogin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

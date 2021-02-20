@@ -14,4 +14,6 @@
     <string name="other_options">Other options</string>
     <string name="calendarMenus">Calendar Menus</string>
     <string name="food">Food</string>
+    <string name="close_session">Close session</string>
+    <string name="settings">Settings</string>
 </resources>

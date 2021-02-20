@@ -1,16 +1,17 @@
 package es.fron99.foodorganize.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
+import android.view.MenuItem;
 
-import es.fron99.foodorganize.Fragments.FragmentListMenu;
-import es.fron99.foodorganize.Fragments.InitFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import es.fron99.foodorganize.Fragments.ActivityTotal.FragmentCalendarMenus;
+import es.fron99.foodorganize.Fragments.ActivityTotal.FragmentListFood;
+import es.fron99.foodorganize.Fragments.ActivityTotal.FragmentListMenus;
 import es.fron99.foodorganize.R;
 
 public class ActivityTotal extends AppCompatActivity {
@@ -22,9 +23,36 @@ public class ActivityTotal extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.fragmentTotal, FragmentListMenu.class, null)
+                .replace(R.id.fragmentTotal, FragmentCalendarMenus.class, null)
                 .commit();
+
+        BottomNavigationView btmNavView = findViewById(R.id.btmNavView);
+
+        btmNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                Class classGet = FragmentCalendarMenus.class;
+
+                switch (item.getItemId()){
+                    case R.id.tabCalendarMenus: classGet = FragmentCalendarMenus.class; break;
+                    case R.id.tabMenus: classGet = FragmentListMenus.class; break;
+                    case R.id.tabFood: classGet = FragmentListFood.class; break;
+                }
+
+                getSupportFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .replace(R.id.fragmentTotal, classGet, null)
+                        .commit();
+
+                return true;
+            }
+        });
+
+        btmNavView.setOnNavigationItemReselectedListener(item -> {});
+
     }
+
 
     @Override
     public void onBackPressed() {
