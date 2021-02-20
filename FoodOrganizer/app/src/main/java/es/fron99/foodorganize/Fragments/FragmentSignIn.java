@@ -48,12 +48,14 @@ public class FragmentSignIn extends Fragment {
     private void asignOnClicks(View view){
 
         Button btnSigIn = view.findViewById(R.id.outlinedButton);
+        TextInputLayout textInputLayoutEmail = (TextInputLayout)view.findViewById(R.id.textInputLayoutEmail);
+        TextInputLayout textInputLayoutPassword = (TextInputLayout)view.findViewById(R.id.textInputLayoutPassword);
+
 
         btnSigIn.setOnClickListener(v -> {
 
-            String email = ((TextInputLayout)view.findViewById(R.id.textInputLayoutUsername)).getEditText().getText().toString();
-            String password = ((TextInputLayout)view.findViewById(R.id.textInputLayoutPassword)).getEditText().getText().toString();
-
+            String email = textInputLayoutEmail.getEditText().getText().toString();
+            String password = textInputLayoutPassword.getEditText().getText().toString();
 
             if (password.length()>=6){
 
@@ -71,8 +73,12 @@ public class FragmentSignIn extends Fragment {
 
                             });
 
+                }else{
+                    textInputLayoutEmail.setError("The mail must be @gmail.com");
                 }
 
+            }else{
+                textInputLayoutPassword.setError("The password must contain at least 6 characters");
             }
 
         });

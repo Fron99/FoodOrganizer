@@ -58,7 +58,7 @@ public class FragmentSignUp extends Fragment {
 
         btnSigUp.setOnClickListener(v -> {
 
-            String email = ((TextInputLayout)view.findViewById(R.id.textInputLayoutUsername)).getEditText().getText().toString();
+            String email = ((TextInputLayout)view.findViewById(R.id.textInputLayoutEmail)).getEditText().getText().toString();
             String password = ((TextInputLayout)view.findViewById(R.id.textInputLayoutPassword)).getEditText().getText().toString();
 
 

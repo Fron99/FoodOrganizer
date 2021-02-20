@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">FoodOrganize</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Food Organize</string>>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">Login</string>
-    <string name="username">Username</string>
+    <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="remember_me">Remember me</string>
@@ -14,4 +13,5 @@
     <string name="menus">Menus</string>
     <string name="other_options">Other options</string>
     <string name="calendarMenus">Calendar Menus</string>
+    <string name="food">Food</string>
 </resources>

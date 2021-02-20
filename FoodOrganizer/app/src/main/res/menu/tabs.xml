@@ -3,13 +3,17 @@
 
     <item
         android:id="@+id/tabCalendarMenus"
-        android:icon="@drawable/menu_calendars"
+        android:icon="@drawable/icon_calendar_foods"
         android:title="@string/calendarMenus" />
 
     <item
         android:id="@+id/tabMenus"
-        android:icon="@drawable/menus"
+        android:icon="@drawable/icon_menus"
         android:title="@string/menus" />
 
+    <item
+        android:id="@+id/tabFood"
+        android:icon="@drawable/icon_food"
+        android:title="@string/food" />
 
 </menu>

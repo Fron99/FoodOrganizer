@@ -23,10 +23,11 @@ public class ActivityLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (getActionBar() != null){
+            getActionBar().hide();
+        }
+
         activityLoginVM = new ViewModelProvider(this).get(ActivityLoginVM.class);
-
-        this.getSupportActionBar().hide();
-
 
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)

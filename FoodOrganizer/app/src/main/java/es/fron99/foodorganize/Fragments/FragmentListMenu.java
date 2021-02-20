@@ -5,33 +5,30 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.google.android.material.shape.MarkerEdgeTreatment;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+
+import devs.mulham.horizontalcalendar.HorizontalCalendar;
+import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
+import es.fron99.foodorganize.Adapters.AdapterListMenus;
+import es.fron99.foodorganize.Models.Menu;
 import es.fron99.foodorganize.R;
 
 
 public class FragmentListMenu extends Fragment {
 
     public FragmentListMenu() {}
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentListMenu.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentListMenu newInstance(String param1, String param2) {
-        FragmentListMenu fragment = new FragmentListMenu();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +45,46 @@ public class FragmentListMenu extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        /* starts before 1 month from now */
+        Calendar startDate = Calendar.getInstance();
+        startDate.add(Calendar.DAY_OF_MONTH,0);
+
+        /* ends after 1 month from now */
+        Calendar endDate = Calendar.getInstance();
+        endDate.add(Calendar.DAY_OF_MONTH, 6);
+
+        HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(requireActivity(), R.id.calendarView)
+                .range(startDate, endDate)
+                .datesNumberOnScreen(5)
+                .build();
+
+        /*
+        horizontalCalendar.centerCalendarToPosition(0);
+
+        horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
+            @Override
+            public void onDateSelected(Calendar date, int position) {
+                if (date.get(Calendar.DAY_OF_MONTH) == Calendar.getInstance().get(Calendar.DAY_OF_MONTH)){
+                }
+            }
+        });
+
+
+        ArrayList<Menu> menusLunch = new ArrayList<>(Arrays.asList(new Menu(),new Menu(),new Menu(),new Menu()));
+        ArrayList<Menu> menusDinner = new ArrayList<>(Arrays.asList(new Menu(),new Menu(),new Menu(),new Menu()));
+
+        RecyclerView recycledLunch = view.findViewById(R.id.recycledLunch);
+        RecyclerView recycledDinner = view.findViewById(R.id.recycledDinner);
+
+        recycledDinner.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
+        recycledDinner.setAdapter(new AdapterListMenus(menusDinner));
+
+        recycledLunch.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
+        recycledLunch.setAdapter(new AdapterListMenus(menusLunch));
+
+        */
+
 
 
     }
