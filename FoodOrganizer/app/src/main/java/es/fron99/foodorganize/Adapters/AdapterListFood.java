@@ -1,23 +1,20 @@
 package es.fron99.foodorganize.Adapters;
 
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
-
 import es.fron99.foodorganize.Models.Food;
-import es.fron99.foodorganize.Models.Menu;
 import es.fron99.foodorganize.R;
 
-public class AdapterListMenus extends RecyclerView.Adapter<AdapterListMenus.ViewHolder>{
+public class AdapterListFood extends RecyclerView.Adapter<AdapterListFood.ViewHolder>{
 
-    private ArrayList<Menu> menus;
+    private ArrayList<Food> food;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView txtViewNameMenu, txtViewSmallDescriptionMenu;
@@ -56,29 +53,30 @@ public class AdapterListMenus extends RecyclerView.Adapter<AdapterListMenus.View
 
     }
 
-    public AdapterListMenus(ArrayList<Menu> dataSet) {
-        menus = new ArrayList<>(dataSet);
+    public AdapterListFood(ArrayList<Food> dataSet) {
+        food = new ArrayList<>(dataSet);
     }
 
     @NonNull
     @Override
-    public AdapterListMenus.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.row_list_food, viewGroup, false);
-        return new AdapterListMenus.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
+
     @Override
-    public void onBindViewHolder(AdapterListMenus.ViewHolder viewHolder, final int position) {
-        Menu menu = this.menus.get(position);
-        viewHolder.setTxtViewNameMenu(menu.getName());
-        viewHolder.setTxtViewSmallDescriptionMenu(menu.getSmallDescription());
-        viewHolder.setImageView(R.drawable.icon_menus);
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        Food food = this.food.get(position);
+        viewHolder.setTxtViewNameMenu(food.getName());
+        viewHolder.setTxtViewSmallDescriptionMenu(food.getSmallDescription());
+        viewHolder.setImageView(R.drawable.icon_food);
     }
 
     @Override
     public int getItemCount() {
-        return menus.size();
+        return food.size();
     }
 
 }

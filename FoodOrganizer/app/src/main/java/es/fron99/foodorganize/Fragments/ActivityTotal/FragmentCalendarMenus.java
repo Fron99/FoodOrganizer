@@ -5,24 +5,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.google.android.material.shape.MarkerEdgeTreatment;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
-import es.fron99.foodorganize.Adapters.AdapterListMenus;
-import es.fron99.foodorganize.Models.Menu;
 import es.fron99.foodorganize.R;
 
 
@@ -39,18 +30,15 @@ public class FragmentCalendarMenus extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_list_menu, container, false);
+        return inflater.inflate(R.layout.fragment_calendar_menus, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.DAY_OF_MONTH,0);
-
-        /* ends after 1 month from now */
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.DAY_OF_MONTH, 6);
 
@@ -59,7 +47,7 @@ public class FragmentCalendarMenus extends Fragment {
                 .datesNumberOnScreen(5)
                 .build();
 
-        /*
+
         horizontalCalendar.centerCalendarToPosition(0);
 
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
@@ -70,6 +58,7 @@ public class FragmentCalendarMenus extends Fragment {
             }
         });
 
+        /*
 
         ArrayList<Menu> menusLunch = new ArrayList<>(Arrays.asList(new Menu(),new Menu(),new Menu(),new Menu()));
         ArrayList<Menu> menusDinner = new ArrayList<>(Arrays.asList(new Menu(),new Menu(),new Menu(),new Menu()));
@@ -82,10 +71,7 @@ public class FragmentCalendarMenus extends Fragment {
 
         recycledLunch.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
         recycledLunch.setAdapter(new AdapterListMenus(menusLunch));
-
-        */
-
-
+*/
 
     }
 }
