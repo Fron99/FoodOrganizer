@@ -9,7 +9,7 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/item"
+        android:id="@+id/itemSettings"
         android:title="@string/settings"
         android:contentDescription="@string/settings"
         app:showAsAction="never"/>

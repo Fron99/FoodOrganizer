@@ -1,57 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
-    android:layout_height="200dp"
-    android:layout_margin="15dp">
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:backgroundTint="@color/colorCardCalendarMenu"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="10dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewRecycledLunch"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/bubbleGumRoseLight1"
-        app:cardCornerRadius="12dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="250dp"
+        android:layout_height="200dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/txtViewNameMenu"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.36"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:maxLines="1"/>
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/txtViewSmallDescriptionMenu"
+            android:layout_width="0dp"
+            android:layout_height="98dp"
+            android:gravity="start|top"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txtViewNameMenu"
+            app:layout_constraintHorizontal_bias="0.428"
+            app:layout_constraintStart_toStartOf="@+id/txtViewNameMenu"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewNameMenu"
+            app:layout_constraintVertical_bias="0.418"
+            android:maxLines="6"/>
 
-            <TextView
-                android:id="@+id/nameMenu"
-                android:layout_width="147dp"
-                android:layout_height="27dp"
-                android:gravity="center"
-                app:layout_constraintBottom_toTopOf="@id/smallDescriptionMenu"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.509"
-                app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/txtViewTimePrepareMenu"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="140dp"
+            android:gravity="center|start"
+            app:layout_constraintBottom_toBottomOf="@+id/iconTimer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iconTimer"
+            app:layout_constraintTop_toTopOf="@+id/iconTimer" />
 
-            <TextView
-                android:id="@+id/smallDescriptionMenu"
-                android:layout_width="161dp"
-                android:layout_height="57dp"
-                android:layout_margin="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameMenu" />
+        <ImageView
+            android:id="@+id/iconTimer"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/icon_timer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtViewTimePrepareMenu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewSmallDescriptionMenu"
+            app:layout_constraintVertical_bias="0.529" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

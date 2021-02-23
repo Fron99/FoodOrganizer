@@ -1,10 +1,10 @@
 package es.fron99.foodorganize.Adapters;
 
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,13 +18,14 @@ public class AdapterListFood extends RecyclerView.Adapter<AdapterListFood.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView txtViewNameMenu, txtViewSmallDescriptionMenu;
-        private final ImageView imageView;
+        private final ImageView imageView, optionsMenu;
 
         public ViewHolder(View view) {
             super(view);
             txtViewNameMenu = view.findViewById(R.id.nameFood);
             txtViewSmallDescriptionMenu = view.findViewById(R.id.smallDescriptionFood);
             imageView = view.findViewById(R.id.imageView);
+            optionsMenu = view.findViewById(R.id.textViewOptions);
         }
 
         public TextView getTxtViewNameMenu() {
@@ -51,6 +52,14 @@ public class AdapterListFood extends RecyclerView.Adapter<AdapterListFood.ViewHo
             imageView.setImageResource(resourseId);
         }
 
+        public ImageView getOptionsMenu() {
+            return optionsMenu;
+        }
+
+        public void setOptionsMenu(int id) {
+            optionsMenu.setImageResource(id);
+        }
+
     }
 
     public AdapterListFood(ArrayList<Food> dataSet) {
@@ -61,7 +70,7 @@ public class AdapterListFood extends RecyclerView.Adapter<AdapterListFood.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.row_list_food, viewGroup, false);
+                .inflate(R.layout.row_list_food_and_menus, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -72,6 +81,25 @@ public class AdapterListFood extends RecyclerView.Adapter<AdapterListFood.ViewHo
         viewHolder.setTxtViewNameMenu(food.getName());
         viewHolder.setTxtViewSmallDescriptionMenu(food.getSmallDescription());
         viewHolder.setImageView(R.drawable.icon_food);
+        viewHolder.getOptionsMenu().setOnClickListener(view -> {
+            PopupMenu popup = new PopupMenu(view.getContext(), viewHolder.getOptionsMenu());
+            popup.inflate(R.menu.menu_row_list_menu);
+            popup.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.itemEliminar:
+                        //handle menu1 click
+                        return true;
+                    case R.id.itemModificar:
+                        //handle menu2 click
+                        return true;
+                    default:
+                        return false;
+                }
+            });
+            popup.show();
+
+        });
+
     }
 
     @Override

@@ -30,10 +30,23 @@ class FragmentListMenus : Fragment() {
         activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
 
         val comidasDisponible: ArrayList<Food> = ArrayList()
-        comidasDisponible.add(Food("",""))
+        comidasDisponible.add(Food("Huevo frito","Un huevo frito",5))
+        comidasDisponible.add(Food("Papas fritas","Patatas fritas de paquete",5))
 
         listMenus = ArrayList()
         listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
+        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
+        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
+        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
+        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
+        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
+        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
+        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
+        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
+        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
+        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
+        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
+
 
         var recyclerViewFood = view.findViewById<RecyclerView>(R.id.recyclerListMenus)
 
