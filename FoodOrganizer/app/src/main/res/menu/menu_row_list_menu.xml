@@ -4,14 +4,14 @@
 
     <item
         android:id="@+id/itemEliminar"
-        android:title="@string/eliminar"
-        android:contentDescription="@string/eliminar"
+        android:title="@string/delete"
+        android:contentDescription="@string/delete"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/itemModificar"
-        android:title="@string/modificar"
-        android:contentDescription="@string/modificar"
+        android:title="@string/modify"
+        android:contentDescription="@string/modify"
         app:showAsAction="never"/>
 
 </menu>

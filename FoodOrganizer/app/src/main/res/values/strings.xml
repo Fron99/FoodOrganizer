@@ -1,24 +1,27 @@
 <resources>
-    <string name="app_name">Food Organize</string>>
+    <string name="appName">Food Organize</string>>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="password">Contraseña</string>
-    <string name="forgot_password">¿Contraseña olvidada?</string>
-    <string name="remember_me">Recuerdame</string>
-    <string name="sign_in">Iniciar sesión</string>
-    <string name="sign_up">Registrarme</string>
+    <string name="forgotPassword">¿Contraseña olvidada?</string>
+    <string name="rememberMe">Recuerdame</string>
+    <string name="signIn">Iniciar sesión</string>
+    <string name="signUp">Registrarme</string>
     <string name="register">Registrarme</string>
     <string name="confirmPassword">Confirmar contraseña</string>
     <string name="menus">Menus</string>
-    <string name="other_options">Otras opciones</string>
+    <string name="otherOptions">Otras opciones</string>
     <string name="calendarMenus">Calendario</string>
     <string name="food">Comidas</string>
-    <string name="close_session">Cerrar sesión</string>
+    <string name="closeSession">Cerrar sesión</string>
     <string name="settings">Ajustes</string>
     <string name="optionsInRow">⋮</string>
-    <string name="icono">Icono</string>
-    <string name="eliminar">Eliminar</string>
-    <string name="modificar">Modificar</string>
+    <string name="icon">Icono</string>
+    <string name="delete">Eliminar</string>
+    <string name="modify">Modificar</string>
     <string name="add">Añadir</string>
+    <string name="addMenu">Añadir menu</string>
+    <string name="addFood">Añadir comida</string>
+    <string name="addTimeMenu">Añadir franja menu</string>
 </resources>

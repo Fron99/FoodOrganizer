@@ -1,90 +1,84 @@
 package es.fron99.foodorganize.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import es.fron99.foodorganize.Models.Food;
 import es.fron99.foodorganize.Models.Menu;
+import es.fron99.foodorganize.Models.TimeMenu;
 import es.fron99.foodorganize.R;
 
-public class AdapterListCalendarMenus  extends RecyclerView.Adapter<AdapterListCalendarMenus.ViewHolder> {
+public class AdapterListCalendarMenus extends RecyclerView.Adapter<AdapterListCalendarMenus.ViewHolder> {
 
-    private ArrayList<Menu> menus;
+    private ArrayList<TimeMenu> timeMenu;
+    private Context context;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView txtViewNameMenu, txtViewSmallDescriptionMenu, txtViewTimePrepareMenu;
+        private final TextView txtViewNameTimeMenu;
+        private final RecyclerView recycledMenusTimeMenu;
+        private final Button btnAddMenuTimeMenu;
 
         public ViewHolder(View view) {
             super(view);
-            txtViewNameMenu = view.findViewById(R.id.txtViewNameMenu);
-            txtViewSmallDescriptionMenu = view.findViewById(R.id.txtViewSmallDescriptionMenu);
-            txtViewTimePrepareMenu = view.findViewById(R.id.txtViewTimePrepareMenu);
+            txtViewNameTimeMenu = view.findViewById(R.id.txtViewNameTimeMenu);
+            recycledMenusTimeMenu = view.findViewById(R.id.recycledMenusTimeMenu);
+            btnAddMenuTimeMenu = view.findViewById(R.id.btnAddMenuTimeMenu);
         }
 
-        public TextView getTxtViewNameMenu() {
-            return txtViewNameMenu;
+        public TextView getTxtViewNameTimeMenu() {
+            return txtViewNameTimeMenu;
         }
 
-        public TextView getTxtViewSmallDescriptionMenu() {
-            return txtViewSmallDescriptionMenu;
+        public RecyclerView getRecycledMenusTimeMenu() {
+            return recycledMenusTimeMenu;
         }
 
-        public void setTxtViewNameMenu(String nameMenu) {
-            txtViewNameMenu.setText(nameMenu);
+        public Button getBtnAddMenuTimeMenu() {
+            return btnAddMenuTimeMenu;
         }
 
-        public void setTxtViewSmallDescriptionMenu(String smallDescriptionMenu) {
-            txtViewSmallDescriptionMenu.setText(smallDescriptionMenu);
-        }
-
-        public TextView getTxtViewTimePrepareMenu() {
-            return txtViewTimePrepareMenu;
-        }
-
-        public void setTxtViewTimePrepareMenu(String timePrepareMenu) {
-            txtViewTimePrepareMenu.setText(timePrepareMenu);
+        public void setTxtViewNameTimeMenu(String s) {
+            txtViewNameTimeMenu.setText(s);
         }
 
     }
 
-    public AdapterListCalendarMenus(ArrayList<Menu> dataSet) {
-        menus = new ArrayList<>(dataSet);
+    public AdapterListCalendarMenus(Context context, ArrayList<TimeMenu> dataSet) {
+        this.timeMenu = new ArrayList<>(dataSet);
+        this.context = context;
     }
 
     @NonNull
     @Override
     public AdapterListCalendarMenus.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.menu_card, viewGroup, false);
+                .inflate(R.layout.time_menu_card, viewGroup, false);
         return new AdapterListCalendarMenus.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(AdapterListCalendarMenus.ViewHolder viewHolder, final int position) {
-        Menu menu = this.menus.get(position);
-        viewHolder.setTxtViewNameMenu(menu.getName());
-
-        String descripcion = menu.getSmallDescription()+"\n\n";
-
-        for (Food food :menu.getFoods()) {
-            descripcion += "- "+food.getName()+"\n";
-        }
-
-        viewHolder.setTxtViewSmallDescriptionMenu(descripcion);
-        viewHolder.setTxtViewTimePrepareMenu(menu.getTimeToPrepare()+"MIN");
+        TimeMenu timeMenu = this.timeMenu.get(position);
+        ArrayList<Menu> menusTimeMenu = timeMenu.getMenus();
+        viewHolder.setTxtViewNameTimeMenu(timeMenu.getName());
+        viewHolder.getRecycledMenusTimeMenu().setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        viewHolder.getRecycledMenusTimeMenu().setAdapter(new AdapterListTimeMenu(menusTimeMenu));
+        //TODO Añadir funcionalidad al boton
     }
 
 
     @Override
     public int getItemCount() {
-        return menus.size();
+        return timeMenu.size();
     }
 
 }

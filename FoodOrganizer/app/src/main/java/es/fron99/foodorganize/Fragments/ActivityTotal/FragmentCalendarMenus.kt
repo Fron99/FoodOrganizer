@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import devs.mulham.horizontalcalendar.HorizontalCalendar
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import es.fron99.foodorganize.Adapters.AdapterListCalendarMenus
-import es.fron99.foodorganize.Adapters.AdapterListFood
 import es.fron99.foodorganize.Models.Food
 import es.fron99.foodorganize.Models.Menu
+import es.fron99.foodorganize.Models.TimeMenu
 import es.fron99.foodorganize.R
+import java.sql.Time
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -26,6 +27,7 @@ class FragmentCalendarMenus : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         val startDate = Calendar.getInstance()
         startDate.add(Calendar.DAY_OF_MONTH, 0)
@@ -46,21 +48,26 @@ class FragmentCalendarMenus : Fragment() {
             }
         }
 
+
+
         val comidasDisponible: ArrayList<Food> = ArrayList()
         comidasDisponible.add(Food("Huevo frito","Un huevo frito",5))
+        comidasDisponible.add(Food("Papas fritas","Patatas fritas de paquete",3))
+        comidasDisponible.add(Food("Papas fritas","Patatas fritas de paquete",3))
         comidasDisponible.add(Food("Papas fritas","Patatas fritas de paquete",3))
 
         var listMenus : ArrayList<Menu> = ArrayList()
         listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
         listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
 
-        var recycledLunch = view.findViewById<RecyclerView>(R.id.recycledLunch)
-        recycledLunch.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recycledLunch.adapter = AdapterListCalendarMenus(listMenus)
+        var listTimeMenu : ArrayList<TimeMenu> = ArrayList()
+        listTimeMenu.add(TimeMenu("Desayunoaaaaaaaaaaaaaaaaaaaaaaaaaaa",listMenus))
+        listTimeMenu.add(TimeMenu("Almuerzo",listMenus))
+        listTimeMenu.add(TimeMenu("Cena",listMenus))
 
-        var recycledDinner = view.findViewById<RecyclerView>(R.id.recycledDinner)
-        recycledDinner.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recycledDinner.adapter = AdapterListCalendarMenus(listMenus)
+        var recycledLunch = view.findViewById<RecyclerView>(R.id.recycledTimeMenu)
+        recycledLunch.layoutManager = LinearLayoutManager(context)
+        recycledLunch.adapter = AdapterListCalendarMenus(context, listTimeMenu)
 
 
     }

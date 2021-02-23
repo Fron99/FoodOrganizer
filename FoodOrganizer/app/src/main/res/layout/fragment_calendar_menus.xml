@@ -16,114 +16,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:textColorSelected="#FFFF" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewRecycledLunch"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toTopOf="@id/cardViewRecycledDinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calendarView">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/txtViewLunch"
-                android:layout_width="128dp"
-                android:layout_height="33dp"
-                android:layout_marginEnd="120dp"
-                android:text="Almuerzo"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/recycledLunch"
-                app:layout_constraintEnd_toStartOf="@id/btnAddMenuLunch"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:maxLines="1"/>
-
-            <Button
-                android:id="@+id/btnAddMenuLunch"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="@string/add"
-                app:layout_constraintBottom_toTopOf="@+id/recycledLunch"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/txtViewLunch"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycledLunch"
-                android:layout_width="393dp"
-                android:layout_height="220dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtViewLunch" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewRecycledDinner"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycledTimeMenu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardViewRecycledLunch">
+        app:layout_constraintTop_toBottomOf="@id/calendarView" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/txtViewDinner"
-                android:layout_width="128dp"
-                android:layout_height="33dp"
-                android:layout_marginEnd="120dp"
-                android:text="Cena"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/recycledDinner"
-                app:layout_constraintEnd_toStartOf="@id/btnAddMenuDinner"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:maxLines="1"/>
-
-            <Button
-                android:id="@+id/btnAddMenuDinner"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="Añadir"
-                app:layout_constraintBottom_toTopOf="@+id/recycledDinner"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/txtViewDinner"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycledDinner"
-                android:layout_width="393dp"
-                android:layout_height="220dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtViewDinner" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -131,12 +32,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:contentDescription="Añadir franja menu"
+        android:contentDescription="@string/addTimeMenu"
         android:src="@drawable/ic_icon_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
