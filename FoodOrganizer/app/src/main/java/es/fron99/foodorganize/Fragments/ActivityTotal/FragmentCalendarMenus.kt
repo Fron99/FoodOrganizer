@@ -63,7 +63,7 @@ class FragmentCalendarMenus : Fragment() {
         var listTimeMenu : ArrayList<TimeMenu> = ArrayList()
         listTimeMenu.add(TimeMenu("Desayunoaaaaaaaaaaaaaaaaaaaaaaaaaaa",listMenus))
         listTimeMenu.add(TimeMenu("Almuerzo",listMenus))
-        listTimeMenu.add(TimeMenu("Cena",listMenus))
+        listTimeMenu.add(TimeMenu("Cena",ArrayList()))
 
         var recycledLunch = view.findViewById<RecyclerView>(R.id.recycledTimeMenu)
         recycledLunch.layoutManager = LinearLayoutManager(context)

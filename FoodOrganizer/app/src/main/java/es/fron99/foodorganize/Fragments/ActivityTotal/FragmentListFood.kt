@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,12 +14,13 @@ import es.fron99.foodorganize.Adapters.AdapterListFood
 import es.fron99.foodorganize.Models.Food
 import es.fron99.foodorganize.R
 import es.fron99.foodorganize.ViewModels.ActivityTotalVM
+import java.util.ArrayList
 
 
 class FragmentListFood : Fragment() {
 
     private lateinit var activityTotalVM : ActivityTotalVM
-    private lateinit var listFood : ArrayList<Food>
+    private lateinit var recyclerViewFood : RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -30,27 +32,16 @@ class FragmentListFood : Fragment() {
 
         activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
 
-        listFood = ArrayList()
-        listFood.add(Food("Huevo frito", "Esto es un huevo frito con muchas cosas ricas en grasas",5))
-        listFood.add(Food("Macarrones con tomate", "Unos buenos macarrones con tomates muy ricos",5))
-        listFood.add(Food("Pimiento relleno", "Pimiento relleno de arroz con carne, riquisimo del fer",5))
-        listFood.add(Food("Huevo frito", "Esto es un huevo frito con muchas cosas ricas en grasas",5))
-        listFood.add(Food("Macarrones con tomate", "Unos buenos macarrones con tomates muy ricos",5))
-        listFood.add(Food("Pimiento relleno", "Pimiento relleno de arroz con carne, riquisimo del fer",5))
-        listFood.add(Food("Huevo frito", "Esto es un huevo frito con muchas cosas ricas en grasas",5))
-        listFood.add(Food("Macarrones con tomate", "Unos buenos macarrones con tomates muy ricos",5))
-        listFood.add(Food("Pimiento relleno", "Pimiento relleno de arroz con carne, riquisimo del fer",5))
-        listFood.add(Food("Huevo frito", "Esto es un huevo frito con muchas cosas ricas en grasas",5))
-        listFood.add(Food("Macarrones con tomate", "Unos buenos macarrones con tomates muy ricos",5))
-        listFood.add(Food("Pimiento relleno", "Pimiento relleno de arroz con carne, riquisimo del fer",5))
-        listFood.add(Food("Pimiento rellenoPimiento rellenoPimiento rellenoPimiento rellenoPimiento rellenoPimiento relleno", "Pimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del ferPimiento relleno de arroz con carne, riquisimo del fer",5))
-
-        var recyclerViewFood = view.findViewById<RecyclerView>(R.id.recyclerListFood)
-
+        recyclerViewFood = view.findViewById(R.id.recyclerListFood)
         var layoutManager = LinearLayoutManager(context)
-
         recyclerViewFood.layoutManager = layoutManager
-        recyclerViewFood.adapter = AdapterListFood(listFood)
+        recyclerViewFood.adapter = AdapterListFood(activityTotalVM.foods.value)
+
+        var observerFood : Observer<ArrayList<Food>> = Observer {
+            recyclerViewFood.adapter?.notifyDataSetChanged()
+        }
+
+        activityTotalVM.foods.observe(requireActivity(), observerFood)
 
     }
 
