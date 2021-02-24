@@ -33,11 +33,11 @@ class FragmentListFood : Fragment() {
         activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
 
         recyclerViewFood = view.findViewById(R.id.recyclerListFood)
-        var layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
         recyclerViewFood.layoutManager = layoutManager
         recyclerViewFood.adapter = AdapterListFood(activityTotalVM.foods.value)
 
-        var observerFood : Observer<ArrayList<Food>> = Observer {
+        val observerFood : Observer<ArrayList<Food>> = Observer {
             recyclerViewFood.adapter?.notifyDataSetChanged()
         }
 

@@ -18,7 +18,6 @@ import es.fron99.foodorganize.ViewModels.ActivityTotalVM
 class FragmentListMenus : Fragment() {
 
     private lateinit var activityTotalVM : ActivityTotalVM
-    private lateinit var listMenus : ArrayList<Menu>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -27,31 +26,12 @@ class FragmentListMenus : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
 
-        val comidasDisponible: ArrayList<Food> = ArrayList()
-        comidasDisponible.add(Food("Huevo frito","Un huevo frito",5))
-        comidasDisponible.add(Food("Papas fritas","Patatas fritas de paquete",5))
-
-        listMenus = ArrayList()
-        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
-        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
-        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
-        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
-        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
-        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
-        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
-        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
-        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
-        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
-        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
-        listMenus.add(Menu("Huevo con papas fritas","Huevo frito con papas fritas de segundo", comidasDisponible))
-
-
-        var recyclerViewFood = view.findViewById<RecyclerView>(R.id.recyclerListMenus)
-
+        val recyclerViewFood = view.findViewById<RecyclerView>(R.id.recyclerListMenus)
         recyclerViewFood.layoutManager = LinearLayoutManager(context)
-        recyclerViewFood.adapter = AdapterListMenus(listMenus)
+        recyclerViewFood.adapter = AdapterListMenus(activityTotalVM.menus.value)
 
     }
 
