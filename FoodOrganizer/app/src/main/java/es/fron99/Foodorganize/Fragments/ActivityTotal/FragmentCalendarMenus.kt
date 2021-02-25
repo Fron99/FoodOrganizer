@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import devs.mulham.horizontalcalendar.HorizontalCalendar
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import es.fron99.Foodorganize.Adapters.AdapterListCalendarMenus
+import es.fron99.Foodorganize.Dao.DatabaseFoodOrganize
 import es.fron99.Foodorganize.R
+import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 import java.util.*
 
@@ -29,6 +31,8 @@ class FragmentCalendarMenus : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
+
+        activityTotalVM.remplaceTimeMenu(Repository().getTimeMenus(requireContext()))
 
         val startDate = activityTotalVM.daySelected.clone() as Calendar
         startDate.add(Calendar.DAY_OF_MONTH, -7)

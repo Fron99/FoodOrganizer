@@ -7,10 +7,10 @@ import es.fron99.Foodorganize.Dao.Model.FoodDao
 interface FoodDaoInt {
 
     @Query("SELECT id, Name, SmallDescription, TimeToPrepare FROM Foods")
-    fun getFoods(): List<FoodDao?>?
+    fun getFoods(): List<FoodDao>
 
-    @Query("SELECT id, Name, SmallDescription, TimeToPrepare FROM Foods WHERE id IN (:foodIds)")
-    fun getFoodsById(foodIds: IntArray?): List<FoodDao?>?
+    @Query("SELECT id, Name, SmallDescription, TimeToPrepare FROM Foods WHERE id = :foodIds")
+    fun getFoodsById(foodIds: Int): List<FoodDao>
 
     @Update
     fun updateFood(vararg foods: FoodDao?)

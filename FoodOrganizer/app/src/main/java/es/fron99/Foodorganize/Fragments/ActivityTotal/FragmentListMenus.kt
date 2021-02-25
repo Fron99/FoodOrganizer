@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.fron99.Foodorganize.Adapters.AdapterListMenus
 import es.fron99.Foodorganize.R
+import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 
 class FragmentListMenus : Fragment() {
@@ -25,6 +26,8 @@ class FragmentListMenus : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
+
+        activityTotalVM.remplaceMenu(Repository().getMenus(requireContext()))
 
         val recyclerViewFood = view.findViewById<RecyclerView>(R.id.recyclerListMenus)
         recyclerViewFood.layoutManager = LinearLayoutManager(context)

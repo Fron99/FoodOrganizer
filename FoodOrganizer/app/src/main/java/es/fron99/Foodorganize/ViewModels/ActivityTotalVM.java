@@ -67,7 +67,7 @@ public class ActivityTotalVM extends ViewModel {
         timeMenu.setValue(totalTimeMenu);
     }
 
-    public void removeTimeMenu(TimeMenu newValue){
+    public void removeTimeMenu(ArrayList newValue){
         if (timeMenu == null){
             timeMenu = new MutableLiveData<>(new ArrayList<>());
         }
@@ -75,6 +75,14 @@ public class ActivityTotalVM extends ViewModel {
         assert totalTimeMenu != null;
         totalTimeMenu.remove(newValue);
         timeMenu.setValue(totalTimeMenu);
+    }
+
+    public void remplaceTimeMenu(ArrayList<TimeMenu> newValue){
+        if (timeMenu == null){
+            timeMenu = new MutableLiveData<>(new ArrayList<>());
+        }
+        assert newValue != null;
+        timeMenu.setValue(newValue);
     }
 
     public TimeMenu getTimeMenu(int i){
@@ -110,6 +118,15 @@ public class ActivityTotalVM extends ViewModel {
         totalMenu.remove(newValue);
         menus.setValue(totalMenu);
     }
+
+    public void remplaceMenu(ArrayList<Menu> newValue){
+        if (menus == null){
+            menus = new MutableLiveData<>(new ArrayList<>());
+        }
+        assert newValue != null;
+        menus.setValue(newValue);
+    }
+
 
     public Menu getMenu(int i){
         if (menus == null){
