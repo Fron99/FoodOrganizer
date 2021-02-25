@@ -4,28 +4,32 @@ import androidx.room.*
 
 @Dao
 interface Menu_FoodDaoInt {
-
     /*
-    //TODO Hacer todo
 
-    @Query("SELECT idMenu, idFood FROM Menus_Foods")
-    fun getMenu_Food(): List<FoodDao?>?
+  @Query("SELECT idFood FROM Menus_Foods WHERE idMenu IN (:menusIds)")
+  fun getFoodsByIdMenu(menusIds: IntArray?): ArrayList<Int>
 
-    @Query("SELECT idMenu, idFood FROM Menus_Foods WHERE idMenu IN (:menusIds)")
-    fun getFoodsByIdMenu(menusIds: IntArray?): List<FoodDao?>?
 
-    @Query("SELECT idMenu, idFood FROM Menus_Foods WHERE idFood IN (:foodIds)")
-    fun getMenusByIdFood(foodIds: IntArray?): List<FoodDao?>?
+  //TODO Hacer todo
 
-    @Update
-    fun updateFood(vararg foods: FoodDao?)
+  @Query("SELECT idMenu, idFood FROM Menus_Foods")
+  fun getMenu_Food(): List<FoodDao?>?
 
-    @Insert
-    fun insertFood(vararg foods: FoodDao?)
+  @Query("SELECT idMenu, idFood FROM Menus_Foods WHERE idMenu IN (:menusIds)")
+  fun getFoodsByIdMenu(menusIds: IntArray?): List<FoodDao?>?
 
-    @Delete
-    fun deleteFood(food: FoodDao?)
-    */
+  @Query("SELECT idMenu, idFood FROM Menus_Foods WHERE idFood IN (:foodIds)")
+  fun getMenusByIdFood(foodIds: IntArray?): List<FoodDao?>?
+
+  @Update
+  fun updateFood(vararg foods: FoodDao?)
+
+  @Insert
+  fun insertFood(vararg foods: FoodDao?)
+
+  @Delete
+  fun deleteFood(food: FoodDao?)
+  */
 
 
 }

@@ -155,6 +155,14 @@ public class ActivityTotalVM extends ViewModel {
         foods.setValue(totalFood);
     }
 
+    public void remplaceFood(ArrayList<Food> newValue){
+        if (foods == null){
+            foods = new MutableLiveData<>(new ArrayList<>());
+        }
+        assert newValue != null;
+        foods.setValue(newValue);
+    }
+
     public Food getFood(int i){
         if (foods == null){
             foods = new MutableLiveData<>(new ArrayList<>());

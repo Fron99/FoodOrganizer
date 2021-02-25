@@ -19,10 +19,10 @@ import es.fron99.Foodorganize.Dao.Model.TimeMenu_MenuDao;
 public abstract class DatabaseFoodOrganize extends RoomDatabase {
 
     public abstract FoodDaoInt foodDao();
-    public abstract Menu_FoodDaoInt menu_FoodDaoDao();
-    public abstract MenuDaoInt menuDaoInt();
-    public abstract TimeMenu_MenuDaoInt timeMenu_menuDaoInt();
-    public abstract TimeMenuDaoInt timeMenuDaoInt();
+    public abstract Menu_FoodDaoInt menu_FoodDao();
+    public abstract MenuDaoInt menuDao();
+    public abstract TimeMenu_MenuDaoInt timeMenu_menuDao();
+    public abstract TimeMenuDaoInt timeMenuDao();
 
     private static DatabaseFoodOrganize INSTANCE;
 

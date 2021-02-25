@@ -13,6 +13,7 @@ import es.fron99.Foodorganize.Adapters.AdapterListFood
 import es.fron99.Foodorganize.Models.Food
 
 import es.fron99.Foodorganize.R
+import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 import java.util.ArrayList
 
@@ -31,6 +32,8 @@ class FragmentListFood : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
+
+        activityTotalVM.remplaceFood(Repository().getFoods(requireContext()))
 
         recyclerViewFood = view.findViewById(R.id.recyclerListFood)
         val layoutManager = LinearLayoutManager(context)
