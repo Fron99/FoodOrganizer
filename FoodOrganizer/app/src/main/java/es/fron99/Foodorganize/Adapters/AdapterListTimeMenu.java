@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import es.fron99.Foodorganize.Dao.Model.Food;
+import es.fron99.Foodorganize.Models.Food;
 import es.fron99.Foodorganize.Models.Menu;
 import es.fron99.Foodorganize.R;
 

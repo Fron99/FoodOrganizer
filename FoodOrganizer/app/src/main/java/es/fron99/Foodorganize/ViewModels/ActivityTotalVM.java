@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 
-import es.fron99.Foodorganize.Dao.Model.Food;
+import es.fron99.Foodorganize.Models.Food;
 import es.fron99.Foodorganize.Models.Menu;
 import es.fron99.Foodorganize.Models.TimeMenu;
 

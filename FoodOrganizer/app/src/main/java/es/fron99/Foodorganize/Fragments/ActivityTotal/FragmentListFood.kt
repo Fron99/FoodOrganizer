@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.fron99.Foodorganize.Adapters.AdapterListFood
-import es.fron99.Foodorganize.Dao.Model.Food
+import es.fron99.Foodorganize.Models.Food
 
 import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM

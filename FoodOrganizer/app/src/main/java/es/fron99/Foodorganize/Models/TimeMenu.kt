@@ -1,3 +1,3 @@
-package es.fron99.Foodorganize.Dao.Model
+package es.fron99.Foodorganize.Models
 
 class TimeMenu(var name:String, var menus:ArrayList<Menu>)  {}

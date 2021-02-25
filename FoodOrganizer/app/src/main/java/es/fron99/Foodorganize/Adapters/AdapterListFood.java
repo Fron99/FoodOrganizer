@@ -6,10 +6,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
-import es.fron99.Foodorganize.Dao.Model.Food;
+
+import es.fron99.Foodorganize.Models.Food;
 import es.fron99.Foodorganize.R;
 
 public class AdapterListFood extends RecyclerView.Adapter<AdapterListFood.ViewHolder>{

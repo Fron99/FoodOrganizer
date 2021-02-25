@@ -4,13 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Foods")
-class Food(
+@Entity(tableName = "Menus")
+class MenuDao(
         @PrimaryKey(autoGenerate = true)
+        @ColumnInfo(name = "id")
         var id: Int,
         @ColumnInfo(name = "Name")
-        var name: String,
+        var name:String,
         @ColumnInfo(name = "SmallDescription")
-        var smallDescription: String,
-        @ColumnInfo(name = "TimeToPrepare")
-        var timeToPrepare: Int) {}
+        var smallDescription:String)
