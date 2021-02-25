@@ -6,6 +6,8 @@ import es.fron99.Foodorganize.Dao.Model.TimeMenuDao
 import es.fron99.Foodorganize.Models.Food
 import es.fron99.Foodorganize.Models.Menu
 import es.fron99.Foodorganize.Models.TimeMenu
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UtilRepository {
 
@@ -20,7 +22,7 @@ class UtilRepository {
         }
 
         fun parseTimeMenuDaoToTimeMenu(timeMenuToParse : TimeMenuDao) : TimeMenu {
-            return TimeMenu(timeMenuToParse.id, timeMenuToParse.name, ArrayList())
+            return TimeMenu(timeMenuToParse.id, timeMenuToParse.name, ArrayList(), Date())
         }
 
         fun parseListFoodDaoToArrayListFood(foodToParse : List<FoodDao>) : ArrayList<Food>{

@@ -16,7 +16,7 @@ import es.fron99.Foodorganize.Models.Food
 import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
-import java.util.ArrayList
+import java.util.*
 
 class ActivityTotal : AppCompatActivity() {
 
@@ -27,6 +27,10 @@ class ActivityTotal : AppCompatActivity() {
         setContentView(R.layout.activity_total)
 
         activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
+
+        activityTotalVM.remplaceTimeMenu(Repository().getTimeMenusByDate(this, Calendar.getInstance()))
+        activityTotalVM.remplaceFood(Repository().getFoods(this))
+        activityTotalVM.remplaceMenu(Repository().getMenus(this))
 
         supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
@@ -52,7 +56,9 @@ class ActivityTotal : AppCompatActivity() {
             true
         }
 
-        btmNavView.setOnNavigationItemReselectedListener { item: MenuItem? -> }
+        //No hacer nada, esta puesto asi para que no lance una
+        //excepcion al volver a seleccionar la opcion seleccionada
+        btmNavView.setOnNavigationItemReselectedListener { }
 
     }
 

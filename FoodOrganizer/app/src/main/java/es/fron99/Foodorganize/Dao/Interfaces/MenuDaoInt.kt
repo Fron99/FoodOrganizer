@@ -12,10 +12,10 @@ interface MenuDaoInt {
     fun getMenus(): List<MenuDao>
 
     @Query("SELECT id, Name, SmallDescription FROM Menus WHERE id = :menusIds")
-    fun getMenusById(menusIds: Int): List<MenuDao>
+    fun getMenuById(menusIds: Int): MenuDao
 
-    @Query("SELECT F.id, F.Name, F.SmallDescription, F.TimeToPrepare FROM  Menus_Foods AS MF INNER JOIN Foods AS F ON F.id = MF.idFood WHERE MF.idMenu = :menusIds")
-    fun getFoodsOfMenu(menusIds: Int): List<FoodDao>
+    @Query("SELECT M.id, M.Name, M.SmallDescription FROM TimeMenus_Menus AS TMM INNER JOIN Menus AS M ON M.id = TMM.idMenu WHERE TMM.idTimeMenu = :menusIds")
+    fun getMenusOfTimeMenu(menusIds: Int): List<MenuDao>
 
     @Update
     fun updateMenus(vararg menus: MenuDao?)

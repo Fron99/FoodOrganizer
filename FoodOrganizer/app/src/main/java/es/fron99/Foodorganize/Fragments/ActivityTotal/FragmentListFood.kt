@@ -33,7 +33,7 @@ class FragmentListFood : Fragment() {
 
         activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
 
-        activityTotalVM.remplaceFood(Repository().getFoods(requireContext()))
+
 
         recyclerViewFood = view.findViewById(R.id.recyclerListFood)
         val layoutManager = LinearLayoutManager(context)

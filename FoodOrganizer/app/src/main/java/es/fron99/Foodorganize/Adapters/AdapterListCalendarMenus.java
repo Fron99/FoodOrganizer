@@ -73,12 +73,20 @@ public class AdapterListCalendarMenus extends RecyclerView.Adapter<AdapterListCa
         viewHolder.getRecycledMenusTimeMenu().setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         viewHolder.getRecycledMenusTimeMenu().setAdapter(new AdapterListTimeMenu(menusTimeMenu));
         //TODO Añadir funcionalidad al boton
-    }
 
+
+
+    }
 
     @Override
     public int getItemCount() {
         return timeMenu.size();
+    }
+
+    public void setTimeMenus(ArrayList<TimeMenu> newValue){
+        timeMenu.clear();
+        timeMenu.addAll(newValue);
+        this.notifyDataSetChanged();
     }
 
 }

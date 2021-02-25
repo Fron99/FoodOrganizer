@@ -25,9 +25,7 @@ class FragmentListMenus : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
-
-        activityTotalVM.remplaceMenu(Repository().getMenus(requireContext()))
+        activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
 
         val recyclerViewFood = view.findViewById<RecyclerView>(R.id.recyclerListMenus)
         recyclerViewFood.layoutManager = LinearLayoutManager(context)

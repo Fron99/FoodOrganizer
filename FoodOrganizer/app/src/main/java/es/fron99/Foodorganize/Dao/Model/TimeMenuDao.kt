@@ -3,6 +3,7 @@ package es.fron99.Foodorganize.Dao.Model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
 
 @Entity(tableName = "TimeMenus")
 class TimeMenuDao(
@@ -10,4 +11,6 @@ class TimeMenuDao(
         @ColumnInfo(name = "id")
         var id:Int,
         @ColumnInfo(name = "Name")
-        var name:String)
+        var name:String,
+        @ColumnInfo(name = "Date")
+        var date : Date)

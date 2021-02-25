@@ -11,17 +11,16 @@ import androidx.recyclerview.widget.RecyclerView
 import devs.mulham.horizontalcalendar.HorizontalCalendar
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import es.fron99.Foodorganize.Adapters.AdapterListCalendarMenus
-import es.fron99.Foodorganize.Dao.DatabaseFoodOrganize
 import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class FragmentCalendarMenus : Fragment() {
 
     private lateinit var activityTotalVM : ActivityTotalVM
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_calendar_menus, container, false)
@@ -31,8 +30,6 @@ class FragmentCalendarMenus : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
-
-        activityTotalVM.remplaceTimeMenu(Repository().getTimeMenus(requireContext()))
 
         val startDate = activityTotalVM.daySelected.clone() as Calendar
         startDate.add(Calendar.DAY_OF_MONTH, -7)
@@ -51,13 +48,19 @@ class FragmentCalendarMenus : Fragment() {
 
             override fun onDateSelected(date: Calendar, position: Int) {
                 activityTotalVM.daySelected = date
+                activityTotalVM.remplaceTimeMenu(Repository().getTimeMenusByDate(requireContext(), date))
             }
 
         }
 
         val recycledTimeMenu = view.findViewById<RecyclerView>(R.id.recycledTimeMenu)
         recycledTimeMenu.layoutManager = LinearLayoutManager(context)
-        recycledTimeMenu.adapter = AdapterListCalendarMenus(context, activityTotalVM.timeMenus.value)
+        val adapter = AdapterListCalendarMenus(context, activityTotalVM.timeMenus.value)
+        recycledTimeMenu.adapter = adapter
+
+        activityTotalVM.timeMenus.observe(requireActivity()) {
+            adapter.setTimeMenus(it)
+        }
 
     }
 
