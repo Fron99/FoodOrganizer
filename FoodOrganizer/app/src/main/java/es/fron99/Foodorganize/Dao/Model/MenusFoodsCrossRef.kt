@@ -3,6 +3,7 @@ package es.fron99.Foodorganize.Dao.Model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 
 @Entity(tableName = "MenusFoodsCrossRef",
         primaryKeys = ["idMenu","idFood"],
@@ -15,7 +16,9 @@ import androidx.room.ForeignKey
                         parentColumns = ["idFood"],
                         childColumns = ["idFood"],
                         onDelete = ForeignKey.CASCADE)
-        ])
+        ],
+        indices = [Index("idMenu", unique = true), Index("idFood", unique = true)]
+)
 
 class MenusFoodsCrossRef(
         @ColumnInfo(name = "idMenu")

@@ -11,5 +11,6 @@ data class TimeMenuWithMenus(
                 entityColumn = "idMenu",
                 associateBy = Junction(TimeMenusMenusCrossRef::class)
         )
+        //TODO Cambiar MenuDao por MenuWithFoods
         var menus: List<MenuDao>
 )

@@ -14,6 +14,7 @@ import java.util.Objects;
 
 import es.fron99.Foodorganize.Dao.Model.FoodDao;
 import es.fron99.Foodorganize.Dao.Model.MenuWithFoods;
+import es.fron99.Foodorganize.Dao.Model.TimeMenuWithMenus;
 import es.fron99.Foodorganize.Models.Food;
 import es.fron99.Foodorganize.Models.Menu;
 import es.fron99.Foodorganize.Models.TimeMenu;
@@ -23,19 +24,19 @@ import es.fron99.Foodorganize.Repository.Repository;
 public class ActivityTotalVM extends AndroidViewModel {
 
     private MutableLiveData<String> fragmentSelected;
-    private MutableLiveData<ArrayList<TimeMenu>> timeMenu;
+    private LiveData<List<TimeMenuWithMenus>> timeMenu;
     private LiveData<List<MenuWithFoods>> menus;
     private LiveData<List<FoodDao>> foods;
     private Calendar daySelected;
 
     public ActivityTotalVM(@NonNull Application application) {
         super(application);
-        this.fragmentSelected = new MutableLiveData<>();
         Repository repository = new Repository();
-        //this.timeMenu = new MutableLiveData<>(new ArrayList<>());
+        daySelected = Calendar.getInstance();
+        this.fragmentSelected = new MutableLiveData<>();
         this.menus = repository.getMenus(application);
         this.foods = repository.getFoods(application);
-        daySelected = Calendar.getInstance();
+        this.timeMenu = repository.getTimeMenusByDate(application, daySelected);
     }
 
 
@@ -67,7 +68,7 @@ public class ActivityTotalVM extends AndroidViewModel {
         return menus;
     }
 
-    public LiveData<ArrayList<TimeMenu>> getTimeMenus(){
+    public LiveData<List<TimeMenuWithMenus>> getTimeMenus(){
         if (timeMenu == null){
             timeMenu = new MutableLiveData<>(new ArrayList<>());
         }

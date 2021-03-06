@@ -23,7 +23,7 @@ import es.fron99.Foodorganize.Dao.Model.TimeMenuDao;
 import es.fron99.Foodorganize.Dao.Model.TimeMenusMenusCrossRef;
 
 
-@Database(entities = {FoodDao.class, MenuDao.class, MenusFoodsCrossRef.class, TimeMenuDao.class, TimeMenusMenusCrossRef.class}, version = 1)
+@Database(entities = {FoodDao.class, MenuDao.class, MenusFoodsCrossRef.class, TimeMenuDao.class, TimeMenusMenusCrossRef.class}, version = 1, exportSchema = false)
 @TypeConverters(ConverterDate.class)
 public abstract class DatabaseFoodOrganize extends RoomDatabase {
 
@@ -54,7 +54,7 @@ public abstract class DatabaseFoodOrganize extends RoomDatabase {
                                         db.execSQL("INSERT INTO Menus(Name, SmallDescription) VALUES ('Menu Ejemplo "+i+"','Descripcion de comida de ejemplo')");
 
                                     for (int i = 1; i < 50; i++ )
-                                        db.execSQL("INSERT INTO MenuFoodCrossRef(idMenu, idFood) VALUES ("+i+","+i+")");
+                                        db.execSQL("INSERT INTO MenusFoodsCrossRef(idMenu, idFood) VALUES ("+i+","+i+")");
 
                                     Calendar date = Calendar.getInstance();
                                     Date dateDate = new Date(date.get(Calendar.YEAR),date.get(Calendar.MONTH),date.get(Calendar.DAY_OF_MONTH));
@@ -68,10 +68,6 @@ public abstract class DatabaseFoodOrganize extends RoomDatabase {
 
                                     for (int i = 1; i < 5; i++ )
                                         db.execSQL("INSERT INTO TimeMenusMenusCrossRef(idTimeMenu, idMenu) VALUES ("+i+","+i+")");
-
-                                    for (int i = 1; i < 50; i++ )
-                                        db.execSQL("INSERT INTO MenusFoodsCrossRef(idMenu, idFood) VALUES ("+i+","+i+")");
-
 
                                 }
                             })
