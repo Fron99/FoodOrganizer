@@ -4,8 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 
-
-@Entity(tableName = "MenuFoodCrossRef",
+@Entity(tableName = "MenusFoodsCrossRef",
         primaryKeys = ["idMenu","idFood"],
         foreignKeys = [
                 ForeignKey(entity = MenuDao::class,
@@ -18,7 +17,7 @@ import androidx.room.ForeignKey
                         onDelete = ForeignKey.CASCADE)
         ])
 
-class MenuFoodCrossRef(
+class MenusFoodsCrossRef(
         @ColumnInfo(name = "idMenu")
         var idMenu:Int,
         @ColumnInfo(name = "idFood")
