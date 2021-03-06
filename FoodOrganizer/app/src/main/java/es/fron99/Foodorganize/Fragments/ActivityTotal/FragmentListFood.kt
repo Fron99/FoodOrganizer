@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.fron99.Foodorganize.Adapters.AdapterListFood
@@ -30,20 +31,19 @@ class FragmentListFood : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
-
+        activityTotalVM = ViewModelProviders.of(requireActivity()).get(ActivityTotalVM::class.java)
 
 
         recyclerViewFood = view.findViewById(R.id.recyclerListFood)
         val layoutManager = LinearLayoutManager(context)
         recyclerViewFood.layoutManager = layoutManager
-        recyclerViewFood.adapter = AdapterListFood(activityTotalVM.foods.value)
+        //recyclerViewFood.adapter = AdapterListFood(activityTotalVM.foods.value)
 
         val observerFood : Observer<ArrayList<Food>> = Observer {
             recyclerViewFood.adapter?.notifyDataSetChanged()
         }
 
-        activityTotalVM.foods.observe(requireActivity(), observerFood)
+        //activityTotalVM.foods.observe(requireActivity(), observerFood)
 
     }
 

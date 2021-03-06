@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import devs.mulham.horizontalcalendar.HorizontalCalendar
@@ -31,7 +32,7 @@ class FragmentCalendarMenus : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
+        activityTotalVM = ViewModelProviders.of(requireActivity()).get(ActivityTotalVM::class.java)
 
         val startDate = activityTotalVM.daySelected.clone() as Calendar
         startDate.add(Calendar.DAY_OF_MONTH, -7)

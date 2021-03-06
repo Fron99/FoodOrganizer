@@ -1,27 +1,33 @@
 package es.fron99.Foodorganize.Repository
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import es.fron99.Foodorganize.Dao.DatabaseFoodOrganize
 import es.fron99.Foodorganize.Dao.Model.FoodDao
-import es.fron99.Foodorganize.Dao.Model.MenuDao
-import es.fron99.Foodorganize.Models.Food
-import es.fron99.Foodorganize.Models.Menu
-import es.fron99.Foodorganize.Models.TimeMenu
-import java.util.*
-import kotlin.collections.ArrayList
+import es.fron99.Foodorganize.Dao.Model.MenuWithFoods
 
 class Repository {
 
+    fun getFoods(context : Context) : LiveData<List<FoodDao>> {
+        return DatabaseFoodOrganize.getDatabase(context).foodDao().getFoods()
+    }
+
+
+    fun getFoodsById(context : Context, foodIds: IntArray?) : LiveData<List<FoodDao>> {
+        return DatabaseFoodOrganize.getDatabase(context).foodDao().getFoodsById(foodIds)
+    }
+
+    fun getMenus(context : Context) : LiveData<List<MenuWithFoods>> {
+        return DatabaseFoodOrganize.getDatabase(context).menuDao().getMenus()
+    }
+
+
+    fun getMenusById(context : Context, menusIds: IntArray?) : LiveData<List<MenuWithFoods>> {
+        return DatabaseFoodOrganize.getDatabase(context).menuDao().getMenuById(menusIds)
+    }
+
+
     /*
-
-    fun getFoods(context : Context) : ArrayList<Food>{
-        return UtilRepository.parseListFoodDaoToArrayListFood(DatabaseFoodOrganize.getDatabase(context).foodDao().getFoods())
-    }
-
-
-    fun getFoodsById(context : Context, foodIds: Int) : ArrayList<Food>{
-        return UtilRepository.parseListFoodDaoToArrayListFood(DatabaseFoodOrganize.getDatabase(context).foodDao().getFoodsById(foodIds))
-    }
 
 
     fun getFoodsOfMenu(context : Context, idMenu: Int) : ArrayList<Food>{

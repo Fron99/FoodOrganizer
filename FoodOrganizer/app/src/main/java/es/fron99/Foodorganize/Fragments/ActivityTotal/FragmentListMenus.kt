@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.fron99.Foodorganize.Adapters.AdapterListMenus
@@ -25,11 +26,11 @@ class FragmentListMenus : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
+        activityTotalVM = ViewModelProviders.of(requireActivity()).get(ActivityTotalVM::class.java)
 
         val recyclerViewFood = view.findViewById<RecyclerView>(R.id.recyclerListMenus)
         recyclerViewFood.layoutManager = LinearLayoutManager(context)
-        recyclerViewFood.adapter = AdapterListMenus(activityTotalVM.menus.value)
+        //recyclerViewFood.adapter = AdapterListMenus(activityTotalVM.menus.value)
 
     }
 

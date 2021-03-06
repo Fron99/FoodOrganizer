@@ -2,21 +2,15 @@ package es.fron99.Foodorganize.Activities
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import es.fron99.Foodorganize.Dao.DatabaseFoodOrganize
-import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentCalendarMenus
 import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListFood
 import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListMenus
-import es.fron99.Foodorganize.Models.Food
 import es.fron99.Foodorganize.R
-import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
-import java.util.*
 
 class ActivityTotal : AppCompatActivity() {
 
@@ -26,7 +20,7 @@ class ActivityTotal : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_total)
 
-        activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
+        activityTotalVM = ViewModelProviders.of(this).get(ActivityTotalVM::class.java)
 
         supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
