@@ -4,23 +4,21 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 
-@Entity(
-        tableName = "Menus_Foods",
-        primaryKeys = ["idMenu", "idFood"],
+
+@Entity(tableName = "MenuFoodCrossRef",
+        primaryKeys = ["idMenu","idFood"],
         foreignKeys = [
-                        ForeignKey(entity = MenuDao::class,
-                        parentColumns = ["id"],
+                ForeignKey(entity = MenuDao::class,
+                        parentColumns = ["idMenu"],
                         childColumns = ["idMenu"],
                         onDelete = ForeignKey.CASCADE),
-
-                        ForeignKey(entity = FoodDao::class,
-                        parentColumns = ["id"],
+                ForeignKey(entity = FoodDao::class,
+                        parentColumns = ["idFood"],
                         childColumns = ["idFood"],
                         onDelete = ForeignKey.CASCADE)
-                      ]
-)
+        ])
 
-class Menu_FoodDao(
+class MenuFoodCrossRef(
         @ColumnInfo(name = "idMenu")
         var idMenu:Int,
         @ColumnInfo(name = "idFood")

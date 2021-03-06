@@ -17,7 +17,6 @@ import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 import java.util.ArrayList
 
-
 class FragmentListFood : Fragment() {
 
     private lateinit var activityTotalVM : ActivityTotalVM

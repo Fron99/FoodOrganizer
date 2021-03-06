@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import devs.mulham.horizontalcalendar.HorizontalCalendar
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import es.fron99.Foodorganize.Adapters.AdapterListCalendarMenus
+import es.fron99.Foodorganize.Dao.DatabaseFoodOrganize
+import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
@@ -48,7 +50,7 @@ class FragmentCalendarMenus : Fragment() {
 
             override fun onDateSelected(date: Calendar, position: Int) {
                 activityTotalVM.daySelected = date
-                activityTotalVM.remplaceTimeMenu(Repository().getTimeMenusByDate(requireContext(), date))
+                //activityTotalVM.remplaceTimeMenu(Repository().getTimeMenusByDate(requireContext(), date))
             }
 
         }

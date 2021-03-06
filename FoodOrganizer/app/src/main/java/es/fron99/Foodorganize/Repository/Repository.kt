@@ -12,6 +12,7 @@ import kotlin.collections.ArrayList
 
 class Repository {
 
+    /*
 
     fun getFoods(context : Context) : ArrayList<Food>{
         return UtilRepository.parseListFoodDaoToArrayListFood(DatabaseFoodOrganize.getDatabase(context).foodDao().getFoods())
@@ -100,5 +101,7 @@ class Repository {
         return listTimeMenu
     }
 
+
+     */
 
 }

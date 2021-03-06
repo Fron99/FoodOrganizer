@@ -1,29 +1,34 @@
 package es.fron99.Foodorganize.Dao.Interfaces
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.Dao.Model.MenuDao
+import es.fron99.Foodorganize.Dao.Model.MenuWithFoods
 import es.fron99.Foodorganize.Models.Food
 
 @Dao
-interface MenuDaoInt {
+interface MenuDaoInt{
 
-    @Query("SELECT id, Name, SmallDescription FROM Menus")
-    fun getMenus(): List<MenuDao>
+    @Transaction
+    @Query("SELECT * FROM Menus")
+    fun getMenus(): LiveData<List<MenuWithFoods>>
 
-    @Query("SELECT id, Name, SmallDescription FROM Menus WHERE id = :menusIds")
-    fun getMenuById(menusIds: Int): MenuDao
+    @Transaction
+    @Query("SELECT * FROM Menus WHERE idMenu = :menusIds")
+    fun getMenuById(menusIds: IntArray?): LiveData<List<MenuWithFoods>>
 
-    @Query("SELECT M.id, M.Name, M.SmallDescription FROM TimeMenus_Menus AS TMM INNER JOIN Menus AS M ON M.id = TMM.idMenu WHERE TMM.idTimeMenu = :menusIds")
-    fun getMenusOfTimeMenu(menusIds: Int): List<MenuDao>
-
+    /*
+    @Transaction
     @Update
-    fun updateMenus(vararg menus: MenuDao?)
+    fun updateMenus(vararg objects: MenuWithFoods?)
 
+    @Transaction
     @Insert
-    fun insertMenus(vararg menus: MenuDao?)
+    fun insertMenus(vararg objects: MenuWithFoods?)
 
+    @Transaction
     @Delete
-    fun deleteMenus(menus: MenuDao?)
-
+    fun deleteMenus(vararg objects: MenuWithFoods?)
+*/
 }

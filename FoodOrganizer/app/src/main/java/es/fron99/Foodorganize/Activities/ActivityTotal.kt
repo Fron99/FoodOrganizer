@@ -28,10 +28,6 @@ class ActivityTotal : AppCompatActivity() {
 
         activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
 
-        activityTotalVM.remplaceTimeMenu(Repository().getTimeMenusByDate(this, Calendar.getInstance()))
-        activityTotalVM.remplaceFood(Repository().getFoods(this))
-        activityTotalVM.remplaceMenu(Repository().getMenus(this))
-
         supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(R.id.fragmentTotal, FragmentCalendarMenus::class.java, null)

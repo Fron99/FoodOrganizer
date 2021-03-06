@@ -14,15 +14,15 @@ class UtilRepository {
     companion object{
 
         fun parseFoodDaoToFood(foodToParse : FoodDao) : Food{
-            return Food(foodToParse.id, foodToParse.name, foodToParse.smallDescription, foodToParse.timeToPrepare)
+            return Food(foodToParse.idFood, foodToParse.name, foodToParse.smallDescription, foodToParse.timeToPrepare)
         }
 
         fun parseMenuDaoToMenu(menuToParse : MenuDao) : Menu {
-            return Menu(menuToParse.id, menuToParse.name, menuToParse.smallDescription, ArrayList())
+            return Menu(menuToParse.idMenu, menuToParse.name, menuToParse.smallDescription, ArrayList())
         }
 
         fun parseTimeMenuDaoToTimeMenu(timeMenuToParse : TimeMenuDao) : TimeMenu {
-            return TimeMenu(timeMenuToParse.id, timeMenuToParse.name, ArrayList(), Date())
+            return TimeMenu(timeMenuToParse.idTimeMenu, timeMenuToParse.name, ArrayList(), Date())
         }
 
         fun parseListFoodDaoToArrayListFood(foodToParse : List<FoodDao>) : ArrayList<Food>{
