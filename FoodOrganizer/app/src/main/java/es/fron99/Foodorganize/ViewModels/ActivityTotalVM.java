@@ -1,11 +1,13 @@
 package es.fron99.Foodorganize.ViewModels;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,12 +33,12 @@ public class ActivityTotalVM extends AndroidViewModel {
 
     public ActivityTotalVM(@NonNull Application application) {
         super(application);
-        Repository repository = new Repository();
         daySelected = Calendar.getInstance();
-        this.fragmentSelected = new MutableLiveData<>();
-        this.menus = repository.getMenus(application);
-        this.foods = repository.getFoods(application);
-        this.timeMenu = repository.getTimeMenusByDate(application, daySelected);
+        this.fragmentSelected = new MutableLiveData<>("FragmentCalendarMenus");
+        Repository repository = new Repository();
+        //this.foods = repository.getFoods(application);
+        //this.menus = repository.getMenus(application);
+        //this.timeMenu = repository.getTimeMenusByDate(application, daySelected);
     }
 
 

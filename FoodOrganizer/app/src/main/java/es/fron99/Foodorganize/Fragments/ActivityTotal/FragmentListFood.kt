@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.fron99.Foodorganize.Adapters.AdapterListFood
 import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.Models.Food
@@ -30,10 +32,11 @@ class FragmentListFood : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activityTotalVM = ViewModelProviders.of(requireActivity()).get(ActivityTotalVM::class.java)
+        activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
+
         var listFoods: ArrayList<Food> = ArrayList()
-        if (activityTotalVM.foods.value != null)
-        {
+
+        if (activityTotalVM.foods.value != null){
             listFoods.addAll(UtilRepository.parseListFoodDaoToArrayListFood(activityTotalVM.foods.value!!))
         }
 
@@ -49,6 +52,13 @@ class FragmentListFood : Fragment() {
         }
 
         activityTotalVM.foods.observe(requireActivity(), observerFood)
+
+        val floatActionBtn : FloatingActionButton = view.findViewById(R.id.floatActionBtn)
+
+        floatActionBtn.setOnClickListener {
+            activityTotalVM.changeFragmentSelected("FragmentCreateFood")
+
+        }
 
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="es.fron99.Foodorganize">
+    package="es.fron99.Foodorganize" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -10,7 +10,12 @@
         android:label="@string/appName"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FoodOrganize">
+        android:theme="@style/Theme.FoodOrganize" >
+        <activity
+            android:name=".Activities.ActivityCreateFood"
+            android:label="@string/title_activity_create_food"
+            android:theme="@style/Theme.FoodOrganize.NoActionBar" >
+        </activity>
         <!--
         <activity android:name=".Activities.ActivityTotal"/>
         <activity android:name=".Activities.ActivityLogin">
@@ -20,8 +25,8 @@
             </intent-filter>
         </activity>
         -->
-        <activity android:name="es.fron99.Foodorganize.Activities.ActivityLogin" />
-        <activity android:name="es.fron99.Foodorganize.Activities.ActivityTotal">
+        <activity android:name=".Activities.ActivityLogin" />
+        <activity android:name=".Activities.ActivityTotal" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

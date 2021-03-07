@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,11 +32,11 @@ class FragmentListMenus : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activityTotalVM = ViewModelProviders.of(requireActivity()).get(ActivityTotalVM::class.java)
+        activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
 
         var listMenus: ArrayList<Menu> = ArrayList()
-        if (activityTotalVM.menus.value != null)
-        {
+
+        if (activityTotalVM.menus.value != null){
             listMenus.addAll(UtilRepository.parseListMenuWithFoodsToArrayListMenu(activityTotalVM.menus.value!!))
         }
 

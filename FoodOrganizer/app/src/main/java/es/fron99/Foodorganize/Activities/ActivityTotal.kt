@@ -4,7 +4,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentCalendarMenus
 import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListFood
@@ -20,11 +20,18 @@ class ActivityTotal : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_total)
 
-        activityTotalVM = ViewModelProviders.of(this).get(ActivityTotalVM::class.java)
+        activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
+
+        val classGet = when (activityTotalVM.fragmentSelected.value) {
+            "FragmentCalendarMenus" -> FragmentCalendarMenus::class.java
+            "FragmentListMenus" -> FragmentListMenus::class.java
+            "FragmentListFood" -> FragmentListFood::class.java
+            else -> FragmentCalendarMenus::class.java
+        }
 
         supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.fragmentTotal, FragmentCalendarMenus::class.java, null)
+                .replace(R.id.fragmentTotal, classGet, null)
                 .commit()
 
         val btmNavView = findViewById<BottomNavigationView>(R.id.btmNavView)
@@ -49,6 +56,20 @@ class ActivityTotal : AppCompatActivity() {
         //No hacer nada, esta puesto asi para que no lance una
         //excepcion al volver a seleccionar la opcion seleccionada
         btmNavView.setOnNavigationItemReselectedListener { }
+
+        activityTotalVM.fragmentSelected.observe(this, {
+            val classGet = when (it) {
+                "FragmentCalendarMenus" -> FragmentCalendarMenus::class.java
+                "FragmentListMenus" -> FragmentListMenus::class.java
+                "FragmentListFood" -> FragmentListFood::class.java
+                else -> FragmentCalendarMenus::class.java
+            }
+
+            supportFragmentManager.beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.fragmentTotal, classGet, null)
+                    .commit()
+        })
 
     }
 
