@@ -7,10 +7,10 @@ import androidx.room.Relation
 data class TimeMenuWithMenus(
         @Embedded var timeMenu: TimeMenuDao,
         @Relation(
+                entity = MenuDao::class,
                 parentColumn = "idTimeMenu",
                 entityColumn = "idMenu",
                 associateBy = Junction(TimeMenusMenusCrossRef::class)
         )
-        //TODO Cambiar MenuDao por MenuWithFoods
         var menus: List<MenuWithFoods>
 )
