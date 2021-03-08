@@ -7,9 +7,12 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Menus")
 class MenuDao(
         @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = "id")
-        var id: Int,
+        @ColumnInfo(name = "idMenu")
+        var idMenu: Int,
         @ColumnInfo(name = "Name")
         var name:String,
         @ColumnInfo(name = "SmallDescription")
-        var smallDescription:String)
+        var smallDescription:String){
+
+        constructor(): this(0,"","")
+}

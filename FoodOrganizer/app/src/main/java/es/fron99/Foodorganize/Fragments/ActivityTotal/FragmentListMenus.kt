@@ -1,21 +1,27 @@
 package es.fron99.Foodorganize.Fragments.ActivityTotal
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import es.fron99.Foodorganize.Adapters.AdapterListFood
 import es.fron99.Foodorganize.Adapters.AdapterListMenus
+import es.fron99.Foodorganize.Dao.Model.MenuWithFoods
+import es.fron99.Foodorganize.Models.Menu
 import es.fron99.Foodorganize.R
-import es.fron99.Foodorganize.Repository.Repository
+import es.fron99.Foodorganize.Repository.UtilRepository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
+
 
 class FragmentListMenus : Fragment() {
 
     private lateinit var activityTotalVM : ActivityTotalVM
+    private lateinit var recyclerViewMenus : RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -27,9 +33,24 @@ class FragmentListMenus : Fragment() {
 
         activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
 
-        val recyclerViewFood = view.findViewById<RecyclerView>(R.id.recyclerListMenus)
-        recyclerViewFood.layoutManager = LinearLayoutManager(context)
-        recyclerViewFood.adapter = AdapterListMenus(activityTotalVM.menus.value)
+        var listMenus: ArrayList<Menu> = ArrayList()
+
+        if (activityTotalVM.menus.value != null){
+            listMenus.addAll(UtilRepository.parseListMenuWithFoodsToArrayListMenu(activityTotalVM.menus.value!!))
+        }
+
+        recyclerViewMenus = view.findViewById(R.id.recyclerListMenus)
+        val layoutManager = LinearLayoutManager(context)
+        recyclerViewMenus.layoutManager = layoutManager
+        recyclerViewMenus.adapter = AdapterListMenus(listMenus)
+
+        val observerFood : Observer<List<MenuWithFoods>> = Observer {
+            listMenus.clear()
+            listMenus.addAll(ArrayList(UtilRepository.parseListMenuWithFoodsToArrayListMenu(it)))
+            recyclerViewMenus.adapter?.notifyDataSetChanged()
+        }
+
+        activityTotalVM.menus.observe(requireActivity(), observerFood)
 
     }
 

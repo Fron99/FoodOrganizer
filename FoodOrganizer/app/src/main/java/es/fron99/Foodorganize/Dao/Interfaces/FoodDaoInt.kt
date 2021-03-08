@@ -1,28 +1,25 @@
 package es.fron99.Foodorganize.Dao.Interfaces
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import es.fron99.Foodorganize.Dao.Model.FoodDao
 
 @Dao
-interface FoodDaoInt {
+interface FoodDaoInt{
 
-    @Query("SELECT id, Name, SmallDescription, TimeToPrepare FROM Foods")
-    fun getFoods(): List<FoodDao>
+    @Query("SELECT * FROM Foods")
+    fun getFoods(): LiveData<List<FoodDao>>
 
-    @Query("SELECT id, Name, SmallDescription, TimeToPrepare FROM Foods WHERE id = :foodIds")
-    fun getFoodsById(foodIds: Int): List<FoodDao>
-
-    @Query("SELECT F.id, F.Name, F.SmallDescription, F.TimeToPrepare FROM  Menus_Foods AS MF INNER JOIN Foods AS F ON F.id = MF.idFood WHERE MF.idMenu = :menusIds")
-    fun getFoodsOfMenu(menusIds: Int): List<FoodDao>
+    @Query("SELECT * FROM Foods WHERE idFood = :foodIds")
+    fun getFoodsById(foodIds: IntArray?): LiveData<List<FoodDao>>
 
     @Update
-    fun updateFood(vararg foods: FoodDao?)
+    fun updateFoods(vararg objects: FoodDao?)
 
     @Insert
-    fun insertFood(vararg foods: FoodDao?)
+    fun insertFoods(vararg objects: FoodDao?)
 
     @Delete
-    fun deleteFood(food: FoodDao?)
-
+    fun deleteFoods(vararg objects: FoodDao?)
 
 }

@@ -2,21 +2,15 @@ package es.fron99.Foodorganize.Activities
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import es.fron99.Foodorganize.Dao.DatabaseFoodOrganize
-import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentCalendarMenus
 import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListFood
 import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListMenus
-import es.fron99.Foodorganize.Models.Food
 import es.fron99.Foodorganize.R
-import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
-import java.util.*
 
 class ActivityTotal : AppCompatActivity() {
 
@@ -28,13 +22,16 @@ class ActivityTotal : AppCompatActivity() {
 
         activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
 
-        activityTotalVM.remplaceTimeMenu(Repository().getTimeMenusByDate(this, Calendar.getInstance()))
-        activityTotalVM.remplaceFood(Repository().getFoods(this))
-        activityTotalVM.remplaceMenu(Repository().getMenus(this))
+        val classGet = when (activityTotalVM.fragmentSelected.value) {
+            "FragmentCalendarMenus" -> FragmentCalendarMenus::class.java
+            "FragmentListMenus" -> FragmentListMenus::class.java
+            "FragmentListFood" -> FragmentListFood::class.java
+            else -> FragmentCalendarMenus::class.java
+        }
 
         supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.fragmentTotal, FragmentCalendarMenus::class.java, null)
+                .replace(R.id.fragmentTotal, classGet, null)
                 .commit()
 
         val btmNavView = findViewById<BottomNavigationView>(R.id.btmNavView)
@@ -59,6 +56,20 @@ class ActivityTotal : AppCompatActivity() {
         //No hacer nada, esta puesto asi para que no lance una
         //excepcion al volver a seleccionar la opcion seleccionada
         btmNavView.setOnNavigationItemReselectedListener { }
+
+        activityTotalVM.fragmentSelected.observe(this, {
+            val classGet = when (it) {
+                "FragmentCalendarMenus" -> FragmentCalendarMenus::class.java
+                "FragmentListMenus" -> FragmentListMenus::class.java
+                "FragmentListFood" -> FragmentListFood::class.java
+                else -> FragmentCalendarMenus::class.java
+            }
+
+            supportFragmentManager.beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.fragmentTotal, classGet, null)
+                    .commit()
+        })
 
     }
 

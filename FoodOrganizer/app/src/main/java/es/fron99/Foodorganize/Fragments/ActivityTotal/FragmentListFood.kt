@@ -9,19 +9,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.fron99.Foodorganize.Adapters.AdapterListFood
+import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.Models.Food
-
 import es.fron99.Foodorganize.R
-import es.fron99.Foodorganize.Repository.Repository
+import es.fron99.Foodorganize.Repository.UtilRepository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 import java.util.ArrayList
-
 
 class FragmentListFood : Fragment() {
 
     private lateinit var activityTotalVM : ActivityTotalVM
-    private lateinit var recyclerViewFood : RecyclerView
+    private lateinit var recyclerViewFoods : RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -33,18 +33,31 @@ class FragmentListFood : Fragment() {
 
         activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
 
+        var listFoods: ArrayList<Food> = ArrayList()
 
+        if (activityTotalVM.foods.value != null){
+            listFoods.addAll(UtilRepository.parseListFoodDaoToArrayListFood(activityTotalVM.foods.value!!))
+        }
 
-        recyclerViewFood = view.findViewById(R.id.recyclerListFood)
+        recyclerViewFoods = view.findViewById(R.id.recyclerListFood)
         val layoutManager = LinearLayoutManager(context)
-        recyclerViewFood.layoutManager = layoutManager
-        recyclerViewFood.adapter = AdapterListFood(activityTotalVM.foods.value)
+        recyclerViewFoods.layoutManager = layoutManager
+        recyclerViewFoods.adapter = AdapterListFood(listFoods)
 
-        val observerFood : Observer<ArrayList<Food>> = Observer {
-            recyclerViewFood.adapter?.notifyDataSetChanged()
+        val observerFood : Observer<List<FoodDao>> = Observer {
+            listFoods.clear()
+            listFoods.addAll(ArrayList(UtilRepository.parseListFoodDaoToArrayListFood(it)))
+            recyclerViewFoods.adapter?.notifyDataSetChanged()
         }
 
         activityTotalVM.foods.observe(requireActivity(), observerFood)
+
+        val floatActionBtn : FloatingActionButton = view.findViewById(R.id.floatActionBtn)
+
+        floatActionBtn.setOnClickListener {
+            activityTotalVM.changeFragmentSelected("FragmentCreateFood")
+
+        }
 
     }
 

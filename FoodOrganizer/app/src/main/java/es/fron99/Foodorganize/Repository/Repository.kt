@@ -1,26 +1,49 @@
 package es.fron99.Foodorganize.Repository
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import es.fron99.Foodorganize.Dao.DatabaseFoodOrganize
 import es.fron99.Foodorganize.Dao.Model.FoodDao
-import es.fron99.Foodorganize.Dao.Model.MenuDao
-import es.fron99.Foodorganize.Models.Food
-import es.fron99.Foodorganize.Models.Menu
-import es.fron99.Foodorganize.Models.TimeMenu
+import es.fron99.Foodorganize.Dao.Model.MenuWithFoods
+import es.fron99.Foodorganize.Dao.Model.TimeMenuWithMenus
 import java.util.*
 import kotlin.collections.ArrayList
 
 class Repository {
 
+    /************************************************FOOD************************************************/
 
-    fun getFoods(context : Context) : ArrayList<Food>{
-        return UtilRepository.parseListFoodDaoToArrayListFood(DatabaseFoodOrganize.getDatabase(context).foodDao().getFoods())
+    fun getFoods(context : Context) : LiveData<List<FoodDao>> {
+        return DatabaseFoodOrganize.getDatabase(context).foodDao().getFoods()
+    }
+
+    fun getFoodsById(context : Context, foodIds: IntArray?) : LiveData<List<FoodDao>> {
+        return DatabaseFoodOrganize.getDatabase(context).foodDao().getFoodsById(foodIds)
+    }
+
+    /************************************************MENU************************************************/
+
+    fun getMenus(context : Context) : LiveData<List<MenuWithFoods>> {
+        return DatabaseFoodOrganize.getDatabase(context).menuDao().getMenus()
+    }
+
+    fun getMenusById(context : Context, menusIds: IntArray?) : LiveData<List<MenuWithFoods>> {
+        return DatabaseFoodOrganize.getDatabase(context).menuDao().getMenuById(menusIds)
+    }
+
+    /************************************************TIMEMENU************************************************/
+
+    fun getTimeMenus(context : Context) : LiveData<List<TimeMenuWithMenus>> {
+        return DatabaseFoodOrganize.getDatabase(context).timeMenuDao().getTimeMenus()
+    }
+
+    fun getTimeMenusByDate(context: Context, date : Calendar) : LiveData<List<TimeMenuWithMenus>> {
+        var getDateOnly : Date = Date(date.get(Calendar.YEAR),date.get(Calendar.MONTH),date.get(Calendar.DAY_OF_MONTH))
+        return DatabaseFoodOrganize.getDatabase(context).timeMenuDao().getTimeMenusByDate(getDateOnly)
     }
 
 
-    fun getFoodsById(context : Context, foodIds: Int) : ArrayList<Food>{
-        return UtilRepository.parseListFoodDaoToArrayListFood(DatabaseFoodOrganize.getDatabase(context).foodDao().getFoodsById(foodIds))
-    }
+    /*
 
 
     fun getFoodsOfMenu(context : Context, idMenu: Int) : ArrayList<Food>{
@@ -100,5 +123,7 @@ class Repository {
         return listTimeMenu
     }
 
+
+     */
 
 }
