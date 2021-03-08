@@ -14,10 +14,21 @@ import java.util.*
 class ActivityTotalVM(application: Application) : AndroidViewModel(application) {
 
     private var fragmentSelected: MutableLiveData<String>?
+    private var daySelected: Calendar
     private var timeMenu: LiveData<List<TimeMenuWithMenus>>?
     private var menus: LiveData<List<MenuWithFoods>>?
     private var foods: LiveData<List<FoodDao>>?
-    private var daySelected: Calendar
+
+
+    init {
+        fragmentSelected = MutableLiveData("FragmentCalendarMenus")
+        daySelected = Calendar.getInstance()
+        val repository = Repository()
+        //TODO Cambiar a llamadas en hilos
+        foods = repository.getFoods(application)
+        menus = repository.getMenus(application)
+        timeMenu = repository.getTimeMenusByDate(application, daySelected)
+    }
 
     fun getFragmentSelected(): LiveData<String> {
         if (fragmentSelected == null) {
@@ -30,7 +41,7 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
         if (fragmentSelected == null) {
             fragmentSelected = MutableLiveData()
         }
-        fragmentSelected!!.value = newValue
+        this.fragmentSelected?.value = newValue
     }
 
     fun getFoods(): LiveData<List<FoodDao>> {
@@ -63,17 +74,4 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
         daySelected = calendar
     }
 
-    init {
-        daySelected = Calendar.getInstance()
-        fragmentSelected = MutableLiveData("FragmentCalendarMenus")
-        /*
-        this.foods = new MutableLiveData<>(new ArrayList<>());
-        this.menus = new MutableLiveData<>(new ArrayList<>());
-        this.timeMenu = new MutableLiveData<>(new ArrayList<>());
-        */
-        val repository = Repository()
-        foods = repository.getFoods(application)
-        menus = repository.getMenus(application)
-        timeMenu = repository.getTimeMenusByDate(application, daySelected)
-    }
 }

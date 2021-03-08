@@ -38,16 +38,18 @@ class ActivityTotal : AppCompatActivity() {
 
         btmNavView.setOnNavigationItemSelectedListener { item ->
 
-            val classGet = when (item.itemId) {
-                R.id.tabCalendarMenus -> FragmentCalendarMenus::class.java
-                R.id.tabMenus -> FragmentListMenus::class.java
-                R.id.tabFood -> FragmentListFood::class.java
-                else -> FragmentCalendarMenus::class.java
-            }
-
             supportFragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
-                    .replace(R.id.fragmentTotal, classGet, null)
+                    .replace(R.id.fragmentTotal,
+
+                            when (item.itemId) {
+                                R.id.tabCalendarMenus -> FragmentCalendarMenus::class.java
+                                R.id.tabMenus -> FragmentListMenus::class.java
+                                R.id.tabFood -> FragmentListFood::class.java
+                                else -> FragmentCalendarMenus::class.java
+                            }
+
+                            ,null)
                     .commit()
 
             true
@@ -58,16 +60,16 @@ class ActivityTotal : AppCompatActivity() {
         btmNavView.setOnNavigationItemReselectedListener { }
 
         activityTotalVM.getFragmentSelected().observe(this, {
-            val classGet = when (it) {
-                "FragmentCalendarMenus" -> FragmentCalendarMenus::class.java
-                "FragmentListMenus" -> FragmentListMenus::class.java
-                "FragmentListFood" -> FragmentListFood::class.java
-                else -> FragmentCalendarMenus::class.java
-            }
-
             supportFragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
-                    .replace(R.id.fragmentTotal, classGet, null)
+                    .replace(R.id.fragmentTotal,
+                            when (it) {
+                                "FragmentCalendarMenus" -> FragmentCalendarMenus::class.java
+                                "FragmentListMenus" -> FragmentListMenus::class.java
+                                "FragmentListFood" -> FragmentListFood::class.java
+                                else -> FragmentCalendarMenus::class.java
+                            }
+                            , null)
                     .commit()
         })
 
@@ -78,7 +80,7 @@ class ActivityTotal : AppCompatActivity() {
         AlertDialog.Builder(this)
                 .setTitle("Saldras de la aplicación")
                 .setMessage("¿Estas seguro que desea salir?")
-                .setPositiveButton("Si") { dialog: DialogInterface?, which: Int -> finish() }
+                .setPositiveButton("Si") { _: DialogInterface?, _: Int -> finish() }
                 .setNegativeButton("No", null)
                 .show()
     }
