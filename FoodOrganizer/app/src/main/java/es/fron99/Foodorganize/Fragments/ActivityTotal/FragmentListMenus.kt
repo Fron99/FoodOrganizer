@@ -35,8 +35,8 @@ class FragmentListMenus : Fragment() {
 
         var listMenus: ArrayList<Menu> = ArrayList()
 
-        if (activityTotalVM.menus.value != null){
-            listMenus.addAll(UtilRepository.parseListMenuWithFoodsToArrayListMenu(activityTotalVM.menus.value!!))
+        if (activityTotalVM.getMenus().value != null){
+            listMenus.addAll(UtilRepository.parseListMenuWithFoodsToArrayListMenu(activityTotalVM.getMenus().value!!))
         }
 
         recyclerViewMenus = view.findViewById(R.id.recyclerListMenus)
@@ -50,7 +50,7 @@ class FragmentListMenus : Fragment() {
             recyclerViewMenus.adapter?.notifyDataSetChanged()
         }
 
-        activityTotalVM.menus.observe(requireActivity(), observerFood)
+        activityTotalVM.getMenus().observe(requireActivity(), observerFood)
 
     }
 

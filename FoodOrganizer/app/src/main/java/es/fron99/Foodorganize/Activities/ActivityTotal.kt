@@ -22,7 +22,7 @@ class ActivityTotal : AppCompatActivity() {
 
         activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
 
-        val classGet = when (activityTotalVM.fragmentSelected.value) {
+        val classGet = when (activityTotalVM.getFragmentSelected().value) {
             "FragmentCalendarMenus" -> FragmentCalendarMenus::class.java
             "FragmentListMenus" -> FragmentListMenus::class.java
             "FragmentListFood" -> FragmentListFood::class.java
@@ -38,7 +38,7 @@ class ActivityTotal : AppCompatActivity() {
 
         btmNavView.setOnNavigationItemSelectedListener { item ->
 
-            var classGet = when (item.itemId) {
+            val classGet = when (item.itemId) {
                 R.id.tabCalendarMenus -> FragmentCalendarMenus::class.java
                 R.id.tabMenus -> FragmentListMenus::class.java
                 R.id.tabFood -> FragmentListFood::class.java
@@ -57,7 +57,7 @@ class ActivityTotal : AppCompatActivity() {
         //excepcion al volver a seleccionar la opcion seleccionada
         btmNavView.setOnNavigationItemReselectedListener { }
 
-        activityTotalVM.fragmentSelected.observe(this, {
+        activityTotalVM.getFragmentSelected().observe(this, {
             val classGet = when (it) {
                 "FragmentCalendarMenus" -> FragmentCalendarMenus::class.java
                 "FragmentListMenus" -> FragmentListMenus::class.java

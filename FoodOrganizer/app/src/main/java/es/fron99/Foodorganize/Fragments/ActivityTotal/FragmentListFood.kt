@@ -35,8 +35,8 @@ class FragmentListFood : Fragment() {
 
         var listFoods: ArrayList<Food> = ArrayList()
 
-        if (activityTotalVM.foods.value != null){
-            listFoods.addAll(UtilRepository.parseListFoodDaoToArrayListFood(activityTotalVM.foods.value!!))
+        if (activityTotalVM.getFoods().value != null){
+            listFoods.addAll(UtilRepository.parseListFoodDaoToArrayListFood(activityTotalVM.getFoods().value!!))
         }
 
         recyclerViewFoods = view.findViewById(R.id.recyclerListFood)
@@ -50,7 +50,7 @@ class FragmentListFood : Fragment() {
             recyclerViewFoods.adapter?.notifyDataSetChanged()
         }
 
-        activityTotalVM.foods.observe(requireActivity(), observerFood)
+        activityTotalVM.getFoods().observe(requireActivity(), observerFood)
 
         val floatActionBtn : FloatingActionButton = view.findViewById(R.id.floatActionBtn)
 
