@@ -12,5 +12,5 @@ data class TimeMenuWithMenus(
                 associateBy = Junction(TimeMenusMenusCrossRef::class)
         )
         //TODO Cambiar MenuDao por MenuWithFoods
-        var menus: List<MenuDao>
+        var menus: List<MenuWithFoods>
 )

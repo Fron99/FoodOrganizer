@@ -24,4 +24,4 @@ class TimeMenusMenusCrossRef(
         @ColumnInfo(name = "idTimeMenu")
         var idTimeMenu:Int,
         @ColumnInfo(name = "idMenu")
-        var idMenuFK:Int)
+        var idMenu:Int)

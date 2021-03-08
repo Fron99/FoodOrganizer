@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import devs.mulham.horizontalcalendar.HorizontalCalendar
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import es.fron99.Foodorganize.Adapters.AdapterListCalendarMenus
@@ -36,24 +37,21 @@ class FragmentCalendarMenus : Fragment() {
 
         var listTimeMenus: ArrayList<TimeMenu> = ArrayList()
 
-        if (activityTotalVM.timeMenus.value != null){
-
+        if (activityTotalVM.timeMenus.value != null) {
             listTimeMenus.addAll(UtilRepository.parseListTimeMenuWithMenusToArrayListTimeMenu(activityTotalVM.timeMenus.value!!))
+        }
+        val startDate = activityTotalVM.daySelected.clone() as Calendar
+        startDate.add(Calendar.DAY_OF_MONTH, -7)
+        val endDate = activityTotalVM.daySelected.clone() as Calendar
+        endDate.add(Calendar.DAY_OF_MONTH, 7)
 
-            val startDate = activityTotalVM.daySelected.clone() as Calendar
-            startDate.add(Calendar.DAY_OF_MONTH, -7)
-            val endDate = activityTotalVM.daySelected.clone() as Calendar
-            endDate.add(Calendar.DAY_OF_MONTH, 7)
+        val horizontalCalendar = HorizontalCalendar.Builder(view, R.id.calendarView).range(startDate, endDate).datesNumberOnScreen(5).build()
+        horizontalCalendar.centerCalendarToPosition(0)
+        horizontalCalendar.calendarListener = object : HorizontalCalendarListener() {
 
-            val horizontalCalendar = HorizontalCalendar.Builder(requireActivity(),R.id.calendarView).range(startDate,endDate).datesNumberOnScreen(5).build()
-            horizontalCalendar.centerCalendarToPosition(0)
-            horizontalCalendar.calendarListener = object : HorizontalCalendarListener() {
-
-                override fun onDateSelected(date: Calendar, position: Int) {
-                    activityTotalVM.daySelected = date
-                    //activityTotalVM.remplaceTimeMenu(Repository().getTimeMenusByDate(requireContext(), date))
-                }
-
+            override fun onDateSelected(date: Calendar, position: Int) {
+                activityTotalVM.daySelected = date
+                //activityTotalVM.remplaceTimeMenu(Repository().getTimeMenusByDate(requireContext(), date))
             }
 
         }

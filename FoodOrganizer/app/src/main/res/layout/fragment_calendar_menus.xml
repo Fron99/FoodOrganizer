@@ -24,7 +24,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calendarView" />
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatActionBtn"
         android:layout_width="wrap_content"

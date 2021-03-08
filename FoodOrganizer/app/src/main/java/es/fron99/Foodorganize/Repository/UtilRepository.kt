@@ -67,8 +67,8 @@ class UtilRepository {
         }
 
         fun parseTimeMenuWithMenusToTimeMenu(timeMenuWithMenus : TimeMenuWithMenus) : TimeMenu {
-            //return TimeMenu(parseTimeMenuDaoToTimeMenu(timeMenuWithMenus.timeMenu), parseListMenuWithFoodsToArrayListMenu(timeMenuWithMenus.menus))
-            return TimeMenu(parseTimeMenuDaoToTimeMenu(timeMenuWithMenus.timeMenu), parseListMenuDaoToArrayListMenu(timeMenuWithMenus.menus))
+            return TimeMenu(parseTimeMenuDaoToTimeMenu(timeMenuWithMenus.timeMenu), parseListMenuWithFoodsToArrayListMenu(timeMenuWithMenus.menus))
+            //return TimeMenu(parseTimeMenuDaoToTimeMenu(timeMenuWithMenus.timeMenu), parseListMenuDaoToArrayListMenu(timeMenuWithMenus.menus))
         }
 
         fun parseListTimeMenuWithMenusToArrayListTimeMenu(timeMenuToParse : List<TimeMenuWithMenus>) : ArrayList<TimeMenu> {

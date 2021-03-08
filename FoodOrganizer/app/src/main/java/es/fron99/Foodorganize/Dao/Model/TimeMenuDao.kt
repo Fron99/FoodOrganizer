@@ -13,4 +13,7 @@ class TimeMenuDao(
         @ColumnInfo(name = "Name")
         var name:String,
         @ColumnInfo(name = "Date")
-        var date : Date)
+        var date : Date){
+
+        constructor(): this(0,"",Date())
+}

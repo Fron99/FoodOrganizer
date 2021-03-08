@@ -1,8 +1,7 @@
 package es.fron99.Foodorganize.Dao.Model
 
-import androidx.room.Embedded
-import androidx.room.Junction
-import androidx.room.Relation
+import androidx.room.*
+
 
 data class MenuWithFoods(
         @Embedded var menu: MenuDao,

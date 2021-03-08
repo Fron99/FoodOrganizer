@@ -35,10 +35,17 @@ public class ActivityTotalVM extends AndroidViewModel {
         super(application);
         daySelected = Calendar.getInstance();
         this.fragmentSelected = new MutableLiveData<>("FragmentCalendarMenus");
+        /*
+        this.foods = new MutableLiveData<>(new ArrayList<>());
+        this.menus = new MutableLiveData<>(new ArrayList<>());
+        this.timeMenu = new MutableLiveData<>(new ArrayList<>());
+        */
+
+
         Repository repository = new Repository();
-        //this.foods = repository.getFoods(application);
-        //this.menus = repository.getMenus(application);
-        //this.timeMenu = repository.getTimeMenusByDate(application, daySelected);
+        this.foods = repository.getFoods(application);
+        this.menus = repository.getMenus(application);
+        this.timeMenu = repository.getTimeMenusByDate(application, daySelected);
     }
 
 
