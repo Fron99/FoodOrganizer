@@ -23,7 +23,7 @@
     <string name="add">Añadir</string>
     <string name="addMenu">Añadir menu</string>
     <string name="addFood">Añadir comida</string>
-    <string name="addTimeMenu">Añadir franja menu</string>
+    <string name="addTimeMenu">Añadir franja horaria</string>
     <string name="nameFood">Nombre comida</string>
     <string name="description">Descripción</string>
     <string name="timeToPrepare">Tiempo de preparación</string>

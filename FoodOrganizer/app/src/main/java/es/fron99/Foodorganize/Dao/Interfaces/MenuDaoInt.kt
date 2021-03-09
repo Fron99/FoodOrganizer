@@ -29,6 +29,6 @@ interface MenuDaoInt{
 
     @Transaction
     @Delete
-    fun deleteMenus(vararg objects: MenuDao?)
+    fun deleteMenus(vararg objects: MenuDao?)   //TODO NO ESTA BIEN, SOLO BORRA EL TIME MENU PERO NO LAS RELACCIONES DE LA TABLA NM
 
 }
