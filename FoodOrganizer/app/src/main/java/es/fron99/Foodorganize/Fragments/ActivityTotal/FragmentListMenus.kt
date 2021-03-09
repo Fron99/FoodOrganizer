@@ -22,6 +22,7 @@ class FragmentListMenus : Fragment() {
 
     private lateinit var activityTotalVM : ActivityTotalVM
     private lateinit var recyclerViewMenus : RecyclerView
+    private lateinit var adapterRecyclerViewMenus : AdapterListMenus
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -35,22 +36,21 @@ class FragmentListMenus : Fragment() {
 
         var listMenus: ArrayList<Menu> = ArrayList()
 
-        if (activityTotalVM.getMenus().value != null){
-            listMenus.addAll(UtilRepository.parseListMenuWithFoodsToArrayListMenu(activityTotalVM.getMenus().value!!))
+        if (activityTotalVM.menus?.value != null){
+            listMenus.addAll(UtilRepository.parseListMenuWithFoodsToArrayListMenu(activityTotalVM.menus?.value!!))
         }
 
         recyclerViewMenus = view.findViewById(R.id.recyclerListMenus)
         val layoutManager = LinearLayoutManager(context)
         recyclerViewMenus.layoutManager = layoutManager
-        recyclerViewMenus.adapter = AdapterListMenus(listMenus)
+        adapterRecyclerViewMenus = AdapterListMenus(listMenus)
+        recyclerViewMenus.adapter = adapterRecyclerViewMenus
 
         val observerFood : Observer<List<MenuWithFoods>> = Observer {
-            listMenus.clear()
-            listMenus.addAll(ArrayList(UtilRepository.parseListMenuWithFoodsToArrayListMenu(it)))
-            recyclerViewMenus.adapter?.notifyDataSetChanged()
+            adapterRecyclerViewMenus.changeData(UtilRepository.parseListMenuWithFoodsToArrayListMenu(it))
         }
 
-        activityTotalVM.getMenus().observe(requireActivity(), observerFood)
+        activityTotalVM.menus?.observe(requireActivity(), observerFood)
 
     }
 

@@ -21,6 +21,20 @@ class Repository {
         return DatabaseFoodOrganize.getDatabase(context).foodDao().getFoodsById(foodIds)
     }
 
+    fun insertFoods(context : Context, objects: FoodDao?){
+        DatabaseFoodOrganize.getDatabase(context).foodDao().insertFoods(objects)
+    }
+
+    fun deleteFood(context : Context, objects: FoodDao?){
+        DatabaseFoodOrganize.getDatabase(context).foodDao().deleteFoods(objects)
+    }
+
+    fun updateFood(context : Context, objects: FoodDao?){
+        DatabaseFoodOrganize.getDatabase(context).foodDao().updateFoods(objects)
+    }
+
+
+
     /************************************************MENU************************************************/
 
     fun getMenus(context : Context) : LiveData<List<MenuWithFoods>> {

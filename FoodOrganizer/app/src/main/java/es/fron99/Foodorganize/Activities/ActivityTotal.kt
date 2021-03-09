@@ -1,6 +1,7 @@
 package es.fron99.Foodorganize.Activities
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -22,17 +23,33 @@ class ActivityTotal : AppCompatActivity() {
 
         activityTotalVM = ViewModelProvider(this).get(ActivityTotalVM::class.java)
 
-        val classGet = when (activityTotalVM.getFragmentSelected().value) {
-            "FragmentCalendarMenus" -> FragmentCalendarMenus::class.java
-            "FragmentListMenus" -> FragmentListMenus::class.java
-            "FragmentListFood" -> FragmentListFood::class.java
-            else -> FragmentCalendarMenus::class.java
-        }
+        initFragment()
+
+        initBtmNavView()
+
+        setObservers()
+
+    }
+
+    fun initFragment(){
 
         supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.fragmentTotal, classGet, null)
+                .replace(R.id.fragmentTotal,
+
+                        when (activityTotalVM.fragmentSelected?.value) {
+                            "FragmentCalendarMenus" -> FragmentCalendarMenus::class.java
+                            "FragmentListMenus" -> FragmentListMenus::class.java
+                            "FragmentListFood" -> FragmentListFood::class.java
+                            else -> FragmentCalendarMenus::class.java
+                        }
+
+                        , null)
                 .commit()
+
+    }
+
+    fun initBtmNavView(){
 
         val btmNavView = findViewById<BottomNavigationView>(R.id.btmNavView)
 
@@ -59,7 +76,11 @@ class ActivityTotal : AppCompatActivity() {
         //excepcion al volver a seleccionar la opcion seleccionada
         btmNavView.setOnNavigationItemReselectedListener { }
 
-        activityTotalVM.getFragmentSelected().observe(this, {
+    }
+
+    fun setObservers(){
+
+        activityTotalVM.fragmentSelected?.observe(this, {
             supportFragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
                     .replace(R.id.fragmentTotal,
@@ -73,8 +94,15 @@ class ActivityTotal : AppCompatActivity() {
                     .commit()
         })
 
-    }
+        activityTotalVM.activitySelected?.observe(this, {
+            if (!it.equals("Init")){
+                val i = Intent(this, ActivityCreate::class.java)
+                i.putExtra("fragment",it)
+                startActivityForResult(i, 1);
+            }
+        })
 
+    }
 
     override fun onBackPressed() {
         AlertDialog.Builder(this)
@@ -84,6 +112,5 @@ class ActivityTotal : AppCompatActivity() {
                 .setNegativeButton("No", null)
                 .show()
     }
-
 
 }

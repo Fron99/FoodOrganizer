@@ -22,6 +22,7 @@ class FragmentListFood : Fragment() {
 
     private lateinit var activityTotalVM : ActivityTotalVM
     private lateinit var recyclerViewFoods : RecyclerView
+    private lateinit var adapterRecyclerViewFoods : AdapterListFood
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -35,27 +36,26 @@ class FragmentListFood : Fragment() {
 
         var listFoods: ArrayList<Food> = ArrayList()
 
-        if (activityTotalVM.getFoods().value != null){
-            listFoods.addAll(UtilRepository.parseListFoodDaoToArrayListFood(activityTotalVM.getFoods().value!!))
+        if (activityTotalVM.foods?.value != null){
+            listFoods.addAll(UtilRepository.parseListFoodDaoToArrayListFood(activityTotalVM.foods?.value!!))
         }
 
         recyclerViewFoods = view.findViewById(R.id.recyclerListFood)
         val layoutManager = LinearLayoutManager(context)
         recyclerViewFoods.layoutManager = layoutManager
-        recyclerViewFoods.adapter = AdapterListFood(listFoods)
+        adapterRecyclerViewFoods = AdapterListFood(listFoods)
+        recyclerViewFoods.adapter = adapterRecyclerViewFoods
 
         val observerFood : Observer<List<FoodDao>> = Observer {
-            listFoods.clear()
-            listFoods.addAll(ArrayList(UtilRepository.parseListFoodDaoToArrayListFood(it)))
-            recyclerViewFoods.adapter?.notifyDataSetChanged()
+            adapterRecyclerViewFoods.changeData(ArrayList(UtilRepository.parseListFoodDaoToArrayListFood(it)))
         }
 
-        activityTotalVM.getFoods().observe(requireActivity(), observerFood)
+        activityTotalVM.foods?.observe(requireActivity(), observerFood)
 
         val floatActionBtn : FloatingActionButton = view.findViewById(R.id.floatActionBtn)
 
         floatActionBtn.setOnClickListener {
-            activityTotalVM.changeFragmentSelected("FragmentCreateFood")
+            activityTotalVM.changeActivitySelected("FragmentCreateFood")
 
         }
 

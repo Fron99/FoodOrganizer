@@ -9,12 +9,13 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import es.fron99.Foodorganize.Models.Menu
+import es.fron99.Foodorganize.Models.TimeMenu
 import es.fron99.Foodorganize.R
 import java.util.*
 
 
 class AdapterListMenus(dataSet: ArrayList<Menu>?) : RecyclerView.Adapter<AdapterListMenus.ViewHolder>() {
-    private val menus: ArrayList<Menu> = ArrayList(dataSet)
+    private var menus: ArrayList<Menu> = ArrayList(dataSet)
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtViewNameMenu: TextView = view.findViewById(R.id.nameFood)
@@ -69,6 +70,12 @@ class AdapterListMenus(dataSet: ArrayList<Menu>?) : RecyclerView.Adapter<Adapter
 
     override fun getItemCount(): Int {
         return menus.size
+    }
+
+    fun changeData(dataSet: ArrayList<Menu>?){
+        this.menus.clear()
+        this.menus = ArrayList(dataSet)
+        this.notifyDataSetChanged()
     }
 
 }

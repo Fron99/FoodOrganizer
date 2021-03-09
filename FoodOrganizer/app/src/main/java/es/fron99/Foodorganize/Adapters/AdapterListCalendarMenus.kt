@@ -8,14 +8,15 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import es.fron99.Foodorganize.Models.Food
 import es.fron99.Foodorganize.Models.TimeMenu
 import es.fron99.Foodorganize.R
 import java.util.*
 
 
 class AdapterListCalendarMenus(context: Context, dataSet: ArrayList<TimeMenu>?) : RecyclerView.Adapter<AdapterListCalendarMenus.ViewHolder>() {
-    private val timeMenu: ArrayList<TimeMenu> = ArrayList(dataSet)
-    private val context: Context = context
+    private var timeMenu: ArrayList<TimeMenu> = ArrayList(dataSet)
+    private var context: Context = context
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtViewNameTimeMenu: TextView = view.findViewById(R.id.txtViewNameTimeMenu)
@@ -51,6 +52,12 @@ class AdapterListCalendarMenus(context: Context, dataSet: ArrayList<TimeMenu>?) 
         timeMenu.clear()
         timeMenu.addAll(newValue!!)
         notifyDataSetChanged()
+    }
+
+    fun changeData(dataSet: ArrayList<TimeMenu>?){
+        this.timeMenu.clear()
+        this.timeMenu = ArrayList(dataSet)
+        this.notifyDataSetChanged()
     }
 
 }

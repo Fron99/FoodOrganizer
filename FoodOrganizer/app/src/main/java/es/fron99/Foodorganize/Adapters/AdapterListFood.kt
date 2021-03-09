@@ -9,19 +9,21 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.Models.Food
 import es.fron99.Foodorganize.R
+import es.fron99.Foodorganize.Repository.Repository
 import java.util.*
 
 
 class AdapterListFood(dataSet: ArrayList<Food>?) : RecyclerView.Adapter<AdapterListFood.ViewHolder>() {
-    private val food: ArrayList<Food>
+    private var food: ArrayList<Food>
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val txtViewNameMenu: TextView
-        val txtViewSmallDescriptionMenu: TextView
-        val imageView: ImageView
-        val optionsMenu: ImageView
+        private val txtViewNameMenu: TextView = view.findViewById(R.id.nameFood)
+        private val txtViewSmallDescriptionMenu: TextView = view.findViewById(R.id.smallDescriptionFood)
+        private val imageView: ImageView = view.findViewById(R.id.imageView)
+        private val optionsMenu: ImageView = view.findViewById(R.id.textViewOptions)
 
         fun setTxtViewNameMenu(nameMenu: String?) {
             txtViewNameMenu.text = nameMenu
@@ -39,12 +41,10 @@ class AdapterListFood(dataSet: ArrayList<Food>?) : RecyclerView.Adapter<AdapterL
             optionsMenu.setImageResource(id)
         }
 
-        init {
-            txtViewNameMenu = view.findViewById(R.id.nameFood)
-            txtViewSmallDescriptionMenu = view.findViewById(R.id.smallDescriptionFood)
-            imageView = view.findViewById(R.id.imageView)
-            optionsMenu = view.findViewById(R.id.textViewOptions)
+        fun getOptionsMenu() : ImageView {
+            return optionsMenu
         }
+
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -58,17 +58,14 @@ class AdapterListFood(dataSet: ArrayList<Food>?) : RecyclerView.Adapter<AdapterL
         viewHolder.setTxtViewNameMenu(food.name)
         viewHolder.setTxtViewSmallDescriptionMenu(food.smallDescription)
         viewHolder.setImageView(R.drawable.icon_food)
-        viewHolder.optionsMenu.setOnClickListener { view: View ->
-            val popup = PopupMenu(view.context, viewHolder.optionsMenu)
+        viewHolder.getOptionsMenu().setOnClickListener { view: View ->
+            val popup = PopupMenu(view.context, viewHolder.getOptionsMenu())
             popup.inflate(R.menu.menu_row_list_menu)
-            popup.setOnMenuItemClickListener { item: MenuItem ->
-                when (item.itemId) {
-                    R.id.itemEliminar ->                         //handle menu1 click
-                        return@setOnMenuItemClickListener true
-                    R.id.itemModificar ->                         //handle menu2 click
-                        return@setOnMenuItemClickListener true
-                    else -> return@setOnMenuItemClickListener false
+            popup.setOnMenuItemClickListener {
+                if (it.itemId == R.id.itemEliminar) {
+                    Repository().deleteFood(view.context, FoodDao(food.id, food.name, food.smallDescription, food.timeToPrepare))
                 }
+                return@setOnMenuItemClickListener true
             }
             popup.show()
         }
@@ -80,5 +77,11 @@ class AdapterListFood(dataSet: ArrayList<Food>?) : RecyclerView.Adapter<AdapterL
 
     init {
         food = ArrayList(dataSet)
+    }
+
+    fun changeData(dataSet: ArrayList<Food>?){
+        this.food.clear()
+        this.food = ArrayList(dataSet)
+        this.notifyDataSetChanged()
     }
 }

@@ -11,7 +11,8 @@ import java.util.*
 
 
 class AdapterListTimeMenu(dataSet: ArrayList<Menu>?) : RecyclerView.Adapter<AdapterListTimeMenu.ViewHolder>() {
-    private val menus: ArrayList<Menu> = ArrayList(dataSet)
+
+    private var menus: ArrayList<Menu> = ArrayList(dataSet)
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtViewNameMenu: TextView = view.findViewById(R.id.txtViewNameMenu)
@@ -54,11 +55,39 @@ class AdapterListTimeMenu(dataSet: ArrayList<Menu>?) : RecyclerView.Adapter<Adap
                 """.trimIndent()
         }
         viewHolder.setTxtViewSmallDescriptionMenu(descripcion)
-        viewHolder.setTxtViewTimePrepareMenu(menu.timeToPrepare.toString() + "MIN")
+        viewHolder.setTxtViewTimePrepareMenu(calculateTime(menu.timeToPrepare))
     }
 
     override fun getItemCount(): Int {
         return menus.size
+    }
+
+    fun changeData(dataSet: ArrayList<Menu>?){
+        this.menus.clear()
+        this.menus = ArrayList(dataSet)
+        this.notifyDataSetChanged()
+    }
+
+    fun calculateTime(time: Int) : String{
+
+        return (
+                if (time <= 59){"$time MIN" }
+                else{calculateHours(time)}
+                )
+
+    }
+
+    fun calculateHours(time: Int): String{
+
+        var timeS : String = ""
+
+        val hours :Int = time/60
+
+        val minuts : Int = (((time/60.toDouble()) - hours) * 60).toInt()
+
+        timeS = "$hours H $minuts MIN"
+        return timeS
+
     }
 
 }

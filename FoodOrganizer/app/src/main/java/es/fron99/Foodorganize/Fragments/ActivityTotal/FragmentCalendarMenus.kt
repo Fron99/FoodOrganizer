@@ -24,6 +24,8 @@ import kotlin.collections.ArrayList
 class FragmentCalendarMenus : Fragment() {
 
     private lateinit var activityTotalVM : ActivityTotalVM
+    private lateinit var adapterRecyclerViewCalendarMenus : AdapterListCalendarMenus
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -37,20 +39,20 @@ class FragmentCalendarMenus : Fragment() {
 
         var listTimeMenus: ArrayList<TimeMenu> = ArrayList()
 
-        if (activityTotalVM.timeMenus.value != null) {
-            listTimeMenus.addAll(UtilRepository.parseListTimeMenuWithMenusToArrayListTimeMenu(activityTotalVM.timeMenus.value!!))
+        if (activityTotalVM.timeMenus?.value != null) {
+            listTimeMenus.addAll(UtilRepository.parseListTimeMenuWithMenusToArrayListTimeMenu(activityTotalVM.timeMenus?.value!!))
         }
-        val startDate = activityTotalVM.getDaySelected().clone() as Calendar
+        val startDate = activityTotalVM.daySelected.clone() as Calendar
         startDate.add(Calendar.DAY_OF_MONTH, -7)
-        val endDate = activityTotalVM.getDaySelected().clone() as Calendar
+        val endDate = activityTotalVM.daySelected.clone() as Calendar
         endDate.add(Calendar.DAY_OF_MONTH, 7)
 
-        val horizontalCalendar = HorizontalCalendar.Builder(view, R.id.calendarView).range(startDate, endDate).datesNumberOnScreen(5).build()
+        val horizontalCalendar = HorizontalCalendar.Builder(view, R.id.calendarView).range(startDate, endDate).datesNumberOnScreen(5).defaultSelectedDate(activityTotalVM.daySelected.clone() as Calendar).build()
         horizontalCalendar.centerCalendarToPosition(0)
         horizontalCalendar.calendarListener = object : HorizontalCalendarListener() {
 
             override fun onDateSelected(date: Calendar, position: Int) {
-                activityTotalVM.setDaySelected(date)
+                activityTotalVM.daySelected = date
                 //activityTotalVM.remplaceTimeMenu(Repository().getTimeMenusByDate(requireContext(), date))
             }
 
@@ -58,13 +60,11 @@ class FragmentCalendarMenus : Fragment() {
 
         val recycledTimeMenu = view.findViewById<RecyclerView>(R.id.recycledTimeMenu)
         recycledTimeMenu.layoutManager = LinearLayoutManager(context)
-        val adapter = AdapterListCalendarMenus(requireContext(), listTimeMenus)
-        recycledTimeMenu.adapter = adapter
+        adapterRecyclerViewCalendarMenus = AdapterListCalendarMenus(requireContext(), listTimeMenus)
+        recycledTimeMenu.adapter = adapterRecyclerViewCalendarMenus
 
-        activityTotalVM.timeMenus.observe(requireActivity()) {
-            listTimeMenus.clear()
-            listTimeMenus.addAll(ArrayList(UtilRepository.parseListTimeMenuWithMenusToArrayListTimeMenu(it)))
-            recycledTimeMenu.adapter?.notifyDataSetChanged()
+        activityTotalVM.timeMenus?.observe(requireActivity()) {
+            adapterRecyclerViewCalendarMenus.changeData(UtilRepository.parseListTimeMenuWithMenusToArrayListTimeMenu(it))
         }
 
     }
