@@ -1,6 +1,7 @@
 package es.fron99.Foodorganize.Dao.Model
 
 import androidx.room.*
+import java.io.Serializable
 
 
 data class MenuWithFoods(
@@ -12,7 +13,10 @@ data class MenuWithFoods(
         )
         var foods: List<FoodDao>
 
-){
+) : Serializable {
+
+        constructor(): this(MenuDao(), ArrayList())
+
         @Ignore
         var timeToPrepare : Int = 0
                 get() {

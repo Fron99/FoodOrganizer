@@ -41,7 +41,7 @@ class FragmentListFood : Fragment() {
         recyclerViewFoods = view.findViewById(R.id.recyclerListFood)
         val layoutManager = LinearLayoutManager(context)
         recyclerViewFoods.layoutManager = layoutManager
-        adapterRecyclerViewFoods = AdapterListFood(listFoods)
+        adapterRecyclerViewFoods = AdapterListFood(requireActivity(),listFoods)
         recyclerViewFoods.adapter = adapterRecyclerViewFoods
 
         val observerFood : Observer<List<FoodDao>> = Observer {
@@ -53,8 +53,8 @@ class FragmentListFood : Fragment() {
         val floatActionBtn : FloatingActionButton = view.findViewById(R.id.floatActionBtn)
 
         floatActionBtn.setOnClickListener {
+            activityTotalVM.foodsSelected = FoodDao()
             activityTotalVM.changeActivitySelected("FragmentCreateFood")
-
         }
 
     }

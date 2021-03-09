@@ -7,6 +7,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import es.fron99.Foodorganize.Dao.Model.FoodDao
+import es.fron99.Foodorganize.Fragments.ActivityCreate.FragmentCreateFood
+import es.fron99.Foodorganize.Fragments.ActivityCreate.FragmentCreateMenu
+import es.fron99.Foodorganize.Fragments.ActivityCreate.FragmentCreateTimeMenu
 import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentCalendarMenus
 import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListFood
 import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListMenus
@@ -98,7 +102,15 @@ class ActivityTotal : AppCompatActivity() {
             if (!it.equals("Init")){
                 val i = Intent(this, ActivityCreate::class.java)
                 i.putExtra("fragment",it)
-                startActivityForResult(i, 1);
+                i.putExtra("obj",
+                        when (it) {
+                            "FragmentCreateFood" -> activityTotalVM.foodsSelected
+                            "FragmentCreateMenu" -> activityTotalVM.menusSelected
+                            "FragmentCreateTimeMenu" -> activityTotalVM.timeMenuSelected
+                            else -> activityTotalVM.foodsSelected
+                        }
+                        )
+                startActivity(i);
             }
         })
 

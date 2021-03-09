@@ -1,6 +1,8 @@
 package es.fron99.Foodorganize.Adapters
 
 
+import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -8,15 +10,22 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.Repository.Repository
+import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 import java.util.*
 
 
-class AdapterListFood(dataSet: ArrayList<FoodDao>?) : RecyclerView.Adapter<AdapterListFood.ViewHolder>() {
+class AdapterListFood(context : ViewModelStoreOwner, dataSet: ArrayList<FoodDao>?) : RecyclerView.Adapter<AdapterListFood.ViewHolder>() {
+
+    private var activityTotalVM : ActivityTotalVM
     private var food: ArrayList<FoodDao>
+
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val txtViewNameMenu: TextView = view.findViewById(R.id.nameFood)
@@ -62,7 +71,15 @@ class AdapterListFood(dataSet: ArrayList<FoodDao>?) : RecyclerView.Adapter<Adapt
             popup.inflate(R.menu.menu_row_list_menu)
             popup.setOnMenuItemClickListener {
                 if (it.itemId == R.id.itemEliminar) {
-                    Repository().deleteFood(view.context, FoodDao(food.idFood, food.name, food.smallDescription, food.timeToPrepare))
+                    AlertDialog.Builder(view.context)
+                            .setTitle("Se va a eliminar esta comida")
+                            .setMessage("¿Estas seguro que desea eliminarla?")
+                            .setPositiveButton("Si") { _: DialogInterface?, _: Int -> activityTotalVM.dropFood(FoodDao(food.idFood, "", "", 0))}
+                            .setNegativeButton("No", null)
+                            .show()
+                }else{
+                    activityTotalVM.foodsSelected = food
+                    activityTotalVM.changeActivitySelected("FragmentCreateFood")
                 }
                 return@setOnMenuItemClickListener true
             }
@@ -76,6 +93,7 @@ class AdapterListFood(dataSet: ArrayList<FoodDao>?) : RecyclerView.Adapter<Adapt
 
     init {
         food = ArrayList(dataSet)
+        activityTotalVM = ViewModelProvider(context).get(ActivityTotalVM::class.java)
     }
 
     fun changeData(dataSet: ArrayList<FoodDao>?){

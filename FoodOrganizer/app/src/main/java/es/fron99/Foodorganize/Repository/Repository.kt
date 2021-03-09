@@ -21,19 +21,17 @@ class Repository {
         return DatabaseFoodOrganize.getDatabase(context).foodDao().getFoodsById(foodIds)
     }
 
-    fun insertFoods(context : Context, objects: FoodDao?){
-        DatabaseFoodOrganize.getDatabase(context).foodDao().insertFoods(objects)
+    fun insertFoods(context : Context, vararg objects: FoodDao?){
+        DatabaseFoodOrganize.getDatabase(context).foodDao().insertFoods(*objects)
     }
 
-    fun deleteFood(context : Context, objects: FoodDao?){
-        DatabaseFoodOrganize.getDatabase(context).foodDao().deleteFoods(objects)
+    fun updateFoods(context : Context, vararg objects: FoodDao?){
+        DatabaseFoodOrganize.getDatabase(context).foodDao().updateFoods(*objects)
     }
 
-    fun updateFood(context : Context, objects: FoodDao?){
-        DatabaseFoodOrganize.getDatabase(context).foodDao().updateFoods(objects)
+    fun deleteFoods(context : Context, vararg objects: FoodDao?){
+        DatabaseFoodOrganize.getDatabase(context).foodDao().deleteFoods(*objects)
     }
-
-
 
     /************************************************MENU************************************************/
 
@@ -45,6 +43,21 @@ class Repository {
         return DatabaseFoodOrganize.getDatabase(context).menuDao().getMenuById(menusIds)
     }
 
+    /*
+    fun insertMenus(context : Context, vararg objects: MenuWithFoods?){
+        DatabaseFoodOrganize.getDatabase(context).menuDao().insertMenus(*objects)
+    }
+
+    fun updateMenus(context : Context, vararg objects: MenuWithFoods?){
+        DatabaseFoodOrganize.getDatabase(context).menuDao().updateMenus(*objects)
+    }
+
+    fun deleteMenus(context : Context, vararg objects: MenuWithFoods?){
+        DatabaseFoodOrganize.getDatabase(context).menuDao().deleteMenus(*objects)
+    }
+
+     */
+
     /************************************************TIMEMENU************************************************/
 
     fun getTimeMenus(context : Context) : LiveData<List<TimeMenuWithMenus>> {
@@ -52,92 +65,21 @@ class Repository {
     }
 
     fun getTimeMenusByDate(context: Context, date : Calendar) : LiveData<List<TimeMenuWithMenus>> {
-        var getDateOnly : Date = Date(date.get(Calendar.YEAR),date.get(Calendar.MONTH),date.get(Calendar.DAY_OF_MONTH))
-        return DatabaseFoodOrganize.getDatabase(context).timeMenuDao().getTimeMenusByDate(getDateOnly)
+        return DatabaseFoodOrganize.getDatabase(context).timeMenuDao().getTimeMenusByDate(Date(date.get(Calendar.YEAR),date.get(Calendar.MONTH),date.get(Calendar.DAY_OF_MONTH)))
+    }
+/*
+    fun insertTimeMenus(context : Context, vararg objects: TimeMenuWithMenus?){
+        DatabaseFoodOrganize.getDatabase(context).timeMenuDao().insertTimeMenus(*objects)
+    }
+
+    fun updateTimeMenus(context : Context, vararg objects: TimeMenuWithMenus?){
+        DatabaseFoodOrganize.getDatabase(context).timeMenuDao().updateTimeMenus(*objects)
+    }
+
+    fun deleteTimeMenus(context : Context, vararg objects: TimeMenuWithMenus?){
+        DatabaseFoodOrganize.getDatabase(context).timeMenuDao().deleteTimeMenus(*objects)
     }
 
 
-    /*
-
-
-    fun getFoodsOfMenu(context : Context, idMenu: Int) : ArrayList<Food>{
-        return UtilRepository.parseListFoodDaoToArrayListFood(DatabaseFoodOrganize.getDatabase(context).foodDao().getFoodsOfMenu(idMenu))
-    }
-
-
-    fun getMenus(context : Context) : ArrayList<Menu>{
-
-        val menus = UtilRepository.parseListMenuDaoToArrayListMenu(DatabaseFoodOrganize.getDatabase(context).menuDao().getMenus())
-        var listFoods : ArrayList<Food>
-
-        for (menu in menus){
-
-            listFoods = getFoodsOfMenu(context, menu.id)
-            menu.foods = listFoods
-
-        }
-
-        return menus
-    }
-
-
-    fun getMenuById(context : Context, menuId: Int) : Menu{
-
-        val menu = UtilRepository.parseMenuDaoToMenu(DatabaseFoodOrganize.getDatabase(context).menuDao().getMenuById(menuId))
-        menu.foods = getFoodsOfMenu(context, menu.id)
-        return menu
-    }
-
-
-    fun getMenusOfTimeMenu(context : Context, menusIds: Int) : ArrayList<Menu>{
-
-        val menus = UtilRepository.parseListMenuDaoToArrayListMenu(DatabaseFoodOrganize.getDatabase(context).menuDao().getMenusOfTimeMenu(menusIds))
-
-        var listFoods : ArrayList<Food>
-
-        for (menu in menus){
-
-            listFoods = getFoodsOfMenu(context, menu.id)
-            menu.foods = listFoods
-
-        }
-
-        return menus
-    }
-
-
-    fun getTimeMenus(context: Context) : ArrayList<TimeMenu> {
-
-        val listTimeMenu = UtilRepository.parseListTimeMenuDaoToArrayListTimeMenu(DatabaseFoodOrganize.getDatabase(context).timeMenuDao().getTimeMenus())
-        var listMenus : ArrayList<Menu>
-
-        for (timeMenu in listTimeMenu) {
-            listMenus = getMenusOfTimeMenu(context, timeMenu.id)
-            timeMenu.menus = listMenus
-        }
-
-        return listTimeMenu
-    }
-
-
-    fun getTimeMenusByDate(context: Context, date : Calendar) : ArrayList<TimeMenu> {
-
-        var getDateOnly : Date = Date(date.get(Calendar.YEAR),date.get(Calendar.MONTH),date.get(Calendar.DAY_OF_MONTH))
-
-        val listTimeMenu = UtilRepository.parseListTimeMenuDaoToArrayListTimeMenu(DatabaseFoodOrganize.getDatabase(context).timeMenuDao().getTimeMenusByDate(getDateOnly))
-        var listMenus : ArrayList<Menu>
-
-        for (timeMenu in listTimeMenu) {
-
-            listMenus = getMenusOfTimeMenu(context, timeMenu.id)
-            timeMenu.menus = listMenus
-
-        }
-
-        return listTimeMenu
-    }
-
-
-     */
-
+ */
 }

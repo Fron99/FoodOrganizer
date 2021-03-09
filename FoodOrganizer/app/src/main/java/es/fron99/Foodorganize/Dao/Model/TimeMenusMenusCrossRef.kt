@@ -6,19 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 
 @Entity(tableName = "TimeMenusMenusCrossRef",
-        primaryKeys = ["idTimeMenu","idMenu"],
-        foreignKeys = [
-            ForeignKey(entity = TimeMenuDao::class,
-                    parentColumns = ["idTimeMenu"],
-                    childColumns = ["idTimeMenu"],
-                    onDelete = ForeignKey.CASCADE),
-            ForeignKey(entity = MenuDao::class,
-                    parentColumns = ["idMenu"],
-                    childColumns = ["idMenu"],
-                    onDelete = ForeignKey.CASCADE)
-        ],
-        indices = [Index("idTimeMenu", unique = true),Index("idMenu", unique = true)]
-)
+        primaryKeys = ["idTimeMenu","idMenu"])
 
 class TimeMenusMenusCrossRef(
         @ColumnInfo(name = "idTimeMenu")
