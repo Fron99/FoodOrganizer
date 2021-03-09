@@ -13,9 +13,8 @@ import androidx.recyclerview.widget.SnapHelper
 import devs.mulham.horizontalcalendar.HorizontalCalendar
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import es.fron99.Foodorganize.Adapters.AdapterListCalendarMenus
-import es.fron99.Foodorganize.Models.TimeMenu
+import es.fron99.Foodorganize.Dao.Model.TimeMenuWithMenus
 import es.fron99.Foodorganize.R
-import es.fron99.Foodorganize.Repository.UtilRepository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 import java.util.*
 import kotlin.collections.ArrayList
@@ -37,10 +36,10 @@ class FragmentCalendarMenus : Fragment() {
 
         activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
 
-        var listTimeMenus: ArrayList<TimeMenu> = ArrayList()
+        var listTimeMenus: ArrayList<TimeMenuWithMenus> = ArrayList()
 
         if (activityTotalVM.timeMenus?.value != null) {
-            listTimeMenus.addAll(UtilRepository.parseListTimeMenuWithMenusToArrayListTimeMenu(activityTotalVM.timeMenus?.value!!))
+            listTimeMenus.addAll(activityTotalVM.timeMenus?.value!!)
         }
         val startDate = activityTotalVM.daySelected.clone() as Calendar
         startDate.add(Calendar.DAY_OF_MONTH, -7)
@@ -64,7 +63,7 @@ class FragmentCalendarMenus : Fragment() {
         recycledTimeMenu.adapter = adapterRecyclerViewCalendarMenus
 
         activityTotalVM.timeMenus?.observe(requireActivity()) {
-            adapterRecyclerViewCalendarMenus.changeData(UtilRepository.parseListTimeMenuWithMenusToArrayListTimeMenu(it))
+            adapterRecyclerViewCalendarMenus.changeData(ArrayList(it))
         }
 
     }

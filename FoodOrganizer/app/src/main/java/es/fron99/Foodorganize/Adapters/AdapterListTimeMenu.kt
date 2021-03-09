@@ -5,14 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import es.fron99.Foodorganize.Models.Menu
+import es.fron99.Foodorganize.Dao.Model.MenuWithFoods
 import es.fron99.Foodorganize.R
 import java.util.*
 
 
-class AdapterListTimeMenu(dataSet: ArrayList<Menu>?) : RecyclerView.Adapter<AdapterListTimeMenu.ViewHolder>() {
+class AdapterListTimeMenu(dataSet: ArrayList<MenuWithFoods>?) : RecyclerView.Adapter<AdapterListTimeMenu.ViewHolder>() {
 
-    private var menus: ArrayList<Menu> = ArrayList(dataSet)
+    private var menus: ArrayList<MenuWithFoods> = ArrayList(dataSet)
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtViewNameMenu: TextView = view.findViewById(R.id.txtViewNameMenu)
@@ -41,9 +41,9 @@ class AdapterListTimeMenu(dataSet: ArrayList<Menu>?) : RecyclerView.Adapter<Adap
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val menu = menus[position]
-        viewHolder.setTxtViewNameMenu(menu.name)
+        viewHolder.setTxtViewNameMenu(menu.menu.name)
         var descripcion = """
-            ${menu.smallDescription}
+            ${menu.menu.smallDescription}
             
             
             """.trimIndent()
@@ -62,7 +62,7 @@ class AdapterListTimeMenu(dataSet: ArrayList<Menu>?) : RecyclerView.Adapter<Adap
         return menus.size
     }
 
-    fun changeData(dataSet: ArrayList<Menu>?){
+    fun changeData(dataSet: ArrayList<MenuWithFoods>?){
         this.menus.clear()
         this.menus = ArrayList(dataSet)
         this.notifyDataSetChanged()
@@ -80,11 +80,8 @@ class AdapterListTimeMenu(dataSet: ArrayList<Menu>?) : RecyclerView.Adapter<Adap
     fun calculateHours(time: Int): String{
 
         var timeS : String = ""
-
         val hours :Int = time/60
-
         val minuts : Int = (((time/60.toDouble()) - hours) * 60).toInt()
-
         timeS = "$hours H $minuts MIN"
         return timeS
 

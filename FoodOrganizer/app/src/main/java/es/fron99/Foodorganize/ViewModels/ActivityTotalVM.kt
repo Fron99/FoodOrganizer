@@ -68,7 +68,7 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
         //TODO Cambiar a llamadas en hilos
         foods = repository.getFoods(application)
         menus = repository.getMenus(application)
-        timeMenus = repository.getTimeMenus(application)
+        timeMenus = repository.getTimeMenusByDate(application, daySelected)
     }
 
     fun changeFragmentSelected(newValue: String) {

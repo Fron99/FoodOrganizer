@@ -10,14 +10,13 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import es.fron99.Foodorganize.Dao.Model.FoodDao
-import es.fron99.Foodorganize.Models.Food
 import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.Repository.Repository
 import java.util.*
 
 
-class AdapterListFood(dataSet: ArrayList<Food>?) : RecyclerView.Adapter<AdapterListFood.ViewHolder>() {
-    private var food: ArrayList<Food>
+class AdapterListFood(dataSet: ArrayList<FoodDao>?) : RecyclerView.Adapter<AdapterListFood.ViewHolder>() {
+    private var food: ArrayList<FoodDao>
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val txtViewNameMenu: TextView = view.findViewById(R.id.nameFood)
@@ -63,7 +62,7 @@ class AdapterListFood(dataSet: ArrayList<Food>?) : RecyclerView.Adapter<AdapterL
             popup.inflate(R.menu.menu_row_list_menu)
             popup.setOnMenuItemClickListener {
                 if (it.itemId == R.id.itemEliminar) {
-                    Repository().deleteFood(view.context, FoodDao(food.id, food.name, food.smallDescription, food.timeToPrepare))
+                    Repository().deleteFood(view.context, FoodDao(food.idFood, food.name, food.smallDescription, food.timeToPrepare))
                 }
                 return@setOnMenuItemClickListener true
             }
@@ -79,7 +78,7 @@ class AdapterListFood(dataSet: ArrayList<Food>?) : RecyclerView.Adapter<AdapterL
         food = ArrayList(dataSet)
     }
 
-    fun changeData(dataSet: ArrayList<Food>?){
+    fun changeData(dataSet: ArrayList<FoodDao>?){
         this.food.clear()
         this.food = ArrayList(dataSet)
         this.notifyDataSetChanged()

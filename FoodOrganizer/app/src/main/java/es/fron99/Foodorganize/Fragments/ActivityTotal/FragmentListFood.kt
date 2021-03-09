@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.fron99.Foodorganize.Adapters.AdapterListFood
 import es.fron99.Foodorganize.Dao.Model.FoodDao
-import es.fron99.Foodorganize.Models.Food
 import es.fron99.Foodorganize.R
-import es.fron99.Foodorganize.Repository.UtilRepository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 import java.util.ArrayList
 
@@ -34,10 +32,10 @@ class FragmentListFood : Fragment() {
 
         activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
 
-        var listFoods: ArrayList<Food> = ArrayList()
+        var listFoods: ArrayList<FoodDao> = ArrayList()
 
         if (activityTotalVM.foods?.value != null){
-            listFoods.addAll(UtilRepository.parseListFoodDaoToArrayListFood(activityTotalVM.foods?.value!!))
+            listFoods.addAll(activityTotalVM.foods?.value!!)
         }
 
         recyclerViewFoods = view.findViewById(R.id.recyclerListFood)
@@ -47,7 +45,7 @@ class FragmentListFood : Fragment() {
         recyclerViewFoods.adapter = adapterRecyclerViewFoods
 
         val observerFood : Observer<List<FoodDao>> = Observer {
-            adapterRecyclerViewFoods.changeData(ArrayList(UtilRepository.parseListFoodDaoToArrayListFood(it)))
+            adapterRecyclerViewFoods.changeData(ArrayList(ArrayList(it)))
         }
 
         activityTotalVM.foods?.observe(requireActivity(), observerFood)
