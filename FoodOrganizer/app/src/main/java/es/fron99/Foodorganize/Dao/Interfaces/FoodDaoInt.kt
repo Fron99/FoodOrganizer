@@ -13,11 +13,11 @@ interface FoodDaoInt{
     @Query("SELECT * FROM Foods WHERE idFood = :foodIds")
     fun getFoodsById(foodIds: IntArray?): LiveData<List<FoodDao>>
 
-    @Update
-    fun updateFoods(vararg objects: FoodDao?)
-
     @Insert
     fun insertFoods(vararg objects: FoodDao?)
+
+    @Update
+    fun updateFoods(vararg objects: FoodDao?)
 
     @Delete
     fun deleteFoods(vararg objects: FoodDao?)

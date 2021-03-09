@@ -9,12 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import es.fron99.Foodorganize.Adapters.AdapterListFood
 import es.fron99.Foodorganize.Adapters.AdapterListMenus
+import es.fron99.Foodorganize.Dao.Model.MenuDao
 import es.fron99.Foodorganize.Dao.Model.MenuWithFoods
-import es.fron99.Foodorganize.Models.Menu
 import es.fron99.Foodorganize.R
-import es.fron99.Foodorganize.Repository.UtilRepository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 
 
@@ -34,10 +32,10 @@ class FragmentListMenus : Fragment() {
 
         activityTotalVM = ViewModelProvider(requireActivity()).get(ActivityTotalVM::class.java)
 
-        var listMenus: ArrayList<Menu> = ArrayList()
+        var listMenus: ArrayList<MenuWithFoods> = ArrayList()
 
         if (activityTotalVM.menus?.value != null){
-            listMenus.addAll(UtilRepository.parseListMenuWithFoodsToArrayListMenu(activityTotalVM.menus?.value!!))
+            listMenus.addAll(activityTotalVM.menus?.value!!)
         }
 
         recyclerViewMenus = view.findViewById(R.id.recyclerListMenus)
@@ -47,7 +45,7 @@ class FragmentListMenus : Fragment() {
         recyclerViewMenus.adapter = adapterRecyclerViewMenus
 
         val observerFood : Observer<List<MenuWithFoods>> = Observer {
-            adapterRecyclerViewMenus.changeData(UtilRepository.parseListMenuWithFoodsToArrayListMenu(it))
+            adapterRecyclerViewMenus.changeData(ArrayList(it))
         }
 
         activityTotalVM.menus?.observe(requireActivity(), observerFood)

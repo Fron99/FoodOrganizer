@@ -8,14 +8,14 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import es.fron99.Foodorganize.Models.Menu
-import es.fron99.Foodorganize.Models.TimeMenu
+import es.fron99.Foodorganize.Dao.Model.MenuDao
+import es.fron99.Foodorganize.Dao.Model.MenuWithFoods
 import es.fron99.Foodorganize.R
 import java.util.*
 
 
-class AdapterListMenus(dataSet: ArrayList<Menu>?) : RecyclerView.Adapter<AdapterListMenus.ViewHolder>() {
-    private var menus: ArrayList<Menu> = ArrayList(dataSet)
+class AdapterListMenus(dataSet: ArrayList<MenuWithFoods>?) : RecyclerView.Adapter<AdapterListMenus.ViewHolder>() {
+    private var menus: ArrayList<MenuWithFoods> = ArrayList(dataSet)
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtViewNameMenu: TextView = view.findViewById(R.id.nameFood)
@@ -49,8 +49,8 @@ class AdapterListMenus(dataSet: ArrayList<Menu>?) : RecyclerView.Adapter<Adapter
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val menu = menus[position]
-        viewHolder.setTxtViewNameMenu(menu.name)
-        viewHolder.setTxtViewSmallDescriptionMenu(menu.smallDescription)
+        viewHolder.setTxtViewNameMenu(menu.menu.name)
+        viewHolder.setTxtViewSmallDescriptionMenu(menu.menu.smallDescription)
         viewHolder.setImageView(R.drawable.icon_menus)
         viewHolder.optionsMenu.setOnClickListener { view: View ->
             val popup = PopupMenu(view.context, viewHolder.optionsMenu)
@@ -72,7 +72,7 @@ class AdapterListMenus(dataSet: ArrayList<Menu>?) : RecyclerView.Adapter<Adapter
         return menus.size
     }
 
-    fun changeData(dataSet: ArrayList<Menu>?){
+    fun changeData(dataSet: ArrayList<MenuWithFoods>?){
         this.menus.clear()
         this.menus = ArrayList(dataSet)
         this.notifyDataSetChanged()

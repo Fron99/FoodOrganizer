@@ -4,15 +4,15 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import es.fron99.Foodorganize.Dao.Model.FoodDao
-import es.fron99.Foodorganize.Dao.Model.MenuWithFoods
-import es.fron99.Foodorganize.Dao.Model.TimeMenuWithMenus
+import es.fron99.Foodorganize.Dao.Model.*
 import es.fron99.Foodorganize.Repository.Repository
 import java.util.*
 
-
 class ActivityTotalVM(application: Application) : AndroidViewModel(application) {
+
+    /*********************************************************************************************************************/
+
+    private lateinit var repository : Repository
 
     var fragmentSelected: MutableLiveData<String>?
         get() {
@@ -35,6 +35,8 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
             return field.clone() as Calendar
         }
 
+    lateinit var timeMenuSelected: TimeMenuWithMenus
+
     var timeMenus: LiveData<List<TimeMenuWithMenus>>?
         get() {
             if (field == null) {
@@ -42,6 +44,8 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
             }
             return field!!
         }
+
+    lateinit var menusSelected: MenuWithFoods
 
     var menus: LiveData<List<MenuWithFoods>>?
         get() {
@@ -51,6 +55,8 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
             return field!!
         }
 
+    lateinit var foodsSelected: FoodDao
+
     var foods: LiveData<List<FoodDao>>?
         get() {
             if (field == null) {
@@ -59,18 +65,6 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
             return field!!
         }
 
-
-    init {
-        fragmentSelected = MutableLiveData("FragmentCalendarMenus")
-        activitySelected = MutableLiveData("Init")
-        daySelected = Calendar.getInstance()
-        val repository = Repository()
-        //TODO Cambiar a llamadas en hilos
-        foods = repository.getFoods(application)
-        menus = repository.getMenus(application)
-        timeMenus = repository.getTimeMenus(application)
-    }
-
     fun changeFragmentSelected(newValue: String) {
         if (fragmentSelected == null) {
             fragmentSelected = MutableLiveData()
@@ -78,11 +72,73 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
         this.fragmentSelected?.value = newValue
     }
 
+
+    init {
+        fragmentSelected = MutableLiveData("FragmentCalendarMenus")
+        activitySelected = MutableLiveData("Init")
+        daySelected = Calendar.getInstance()
+        repository = Repository()
+        //TODO Cambiar a llamadas en hilos
+        foods = repository.getFoods(application)
+        menus = repository.getMenus(application)
+        timeMenus = repository.getTimeMenusByDate(application, daySelected)
+        foodsSelected = FoodDao()
+        menusSelected = MenuWithFoods()
+        timeMenuSelected = TimeMenuWithMenus()
+    }
+
+    /*********************************************************************************************************************/
+
     fun changeActivitySelected(newValue: String) {
         if (activitySelected == null) {
             activitySelected = MutableLiveData()
         }
         this.activitySelected?.value = newValue
     }
+
+    /*************************************************************FOOD***********************************************************/
+
+    fun insertFood(food : FoodDao){
+        repository.insertFoods(getApplication(), food)
+    }
+
+    fun updateFood(food : FoodDao){
+        repository.updateFoods(getApplication(), food)
+    }
+
+    fun dropFood(food : FoodDao){
+        repository.deleteFoods(getApplication(), food)
+    }
+
+    /*************************************************************MENU***********************************************************/
+/*
+    fun insertMenu(menu : MenuWithFoods){
+        repository.insertMenus(getApplication(), menu)
+    }
+
+    fun updateMenu(menu : MenuWithFoods){
+        repository.updateMenus(getApplication(), menu)
+    }
+
+    fun dropMenu(menu : MenuWithFoods){
+        repository.deleteMenus(getApplication(), menu)
+    }
+
+
+    /*************************************************************TIMEMENU***********************************************************/
+
+    fun insertTimeMenu(timeMenu : TimeMenuWithMenus){
+        repository.insertTimeMenus(getApplication(), timeMenu)
+    }
+
+    fun updateTimeMenu(timeMenu : TimeMenuWithMenus){
+        repository.updateTimeMenus(getApplication(), timeMenu)
+    }
+
+    fun dropTimeMenu(timeMenu : TimeMenuWithMenus){
+        repository.deleteTimeMenus(getApplication(), timeMenu)
+    }
+
+ */
 
 }
