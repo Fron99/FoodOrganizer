@@ -1,5 +1,6 @@
 package es.fron99.Foodorganize.Adapters
 
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -7,15 +8,22 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
+import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.Dao.Model.MenuDao
 import es.fron99.Foodorganize.Dao.Model.MenuWithFoods
 import es.fron99.Foodorganize.R
+import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 import java.util.*
 
 
-class AdapterListMenus(dataSet: ArrayList<MenuWithFoods>?) : RecyclerView.Adapter<AdapterListMenus.ViewHolder>() {
-    private var menus: ArrayList<MenuWithFoods> = ArrayList(dataSet)
+class AdapterListMenus(context : ViewModelStoreOwner, dataSet: ArrayList<MenuWithFoods>?) : RecyclerView.Adapter<AdapterListMenus.ViewHolder>() {
+
+    private var activityTotalVM : ActivityTotalVM
+    private var menus: ArrayList<MenuWithFoods>
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtViewNameMenu: TextView = view.findViewById(R.id.nameFood)
@@ -57,12 +65,20 @@ class AdapterListMenus(dataSet: ArrayList<MenuWithFoods>?) : RecyclerView.Adapte
             popup.inflate(R.menu.menu_row_list_menu)
             popup.setOnMenuItemClickListener { item: MenuItem ->
                 when (item.itemId) {
-                    R.id.itemEliminar ->                         //handle menu1 click
-                        return@setOnMenuItemClickListener true
-                    R.id.itemModificar ->                         //handle menu2 click
-                        return@setOnMenuItemClickListener true
-                    else -> return@setOnMenuItemClickListener false
+                    R.id.itemEliminar ->{
+                        AlertDialog.Builder(view.context)
+                                .setTitle("Se va a eliminar este menu")
+                                .setMessage("¿Estas seguro que desea eliminarla?")
+                                .setPositiveButton("Si") { _: DialogInterface?, _: Int -> activityTotalVM.dropMenu(MenuDao(menu.menu.idMenu,"",""))}
+                                .setNegativeButton("No", null)
+                                .show()
+                    }
+                    R.id.itemModificar ->{
+                        activityTotalVM.menusSelected = menu
+                        activityTotalVM.changeActivitySelected("FragmentCreateMenu")
+                    }
                 }
+                return@setOnMenuItemClickListener true
             }
             popup.show()
         }
@@ -70,6 +86,11 @@ class AdapterListMenus(dataSet: ArrayList<MenuWithFoods>?) : RecyclerView.Adapte
 
     override fun getItemCount(): Int {
         return menus.size
+    }
+
+    init {
+        menus = ArrayList(dataSet)
+        activityTotalVM = ViewModelProvider(context).get(ActivityTotalVM::class.java)
     }
 
     fun changeData(dataSet: ArrayList<MenuWithFoods>?){

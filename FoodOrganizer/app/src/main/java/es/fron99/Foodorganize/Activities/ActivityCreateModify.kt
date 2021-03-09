@@ -2,22 +2,17 @@ package es.fron99.Foodorganize.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import androidx.lifecycle.ViewModelProvider
 import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.Dao.Model.MenuWithFoods
 import es.fron99.Foodorganize.Dao.Model.TimeMenuWithMenus
-import es.fron99.Foodorganize.Fragments.ActivityCreate.FragmentCreateFood
-import es.fron99.Foodorganize.Fragments.ActivityCreate.FragmentCreateMenu
-import es.fron99.Foodorganize.Fragments.ActivityCreate.FragmentCreateTimeMenu
-import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentCalendarMenus
-import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListFood
-import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListMenus
+import es.fron99.Foodorganize.Fragments.ActivityCreate.FragmentCreateModifyFood
+import es.fron99.Foodorganize.Fragments.ActivityCreate.FragmentCreateModifyMenu
+import es.fron99.Foodorganize.Fragments.ActivityCreate.FragmentCreateModifyTimeMenu
 import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.ViewModels.ActivityCreateVM
-import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 
-class ActivityCreate : AppCompatActivity() {
+class ActivityCreateModify : AppCompatActivity() {
 
     private lateinit var activityCreateVM: ActivityCreateVM
 
@@ -48,10 +43,10 @@ class ActivityCreate : AppCompatActivity() {
                 .replace(R.id.fragmentContainer,
 
                         when (fragment) {
-                            "FragmentCreateFood" -> FragmentCreateFood::class.java
-                            "FragmentCreateMenu" -> FragmentCreateMenu::class.java
-                            "FragmentCreateTimeMenu" -> FragmentCreateTimeMenu::class.java
-                            else -> FragmentCreateFood::class.java
+                            "FragmentCreateFood" -> FragmentCreateModifyFood::class.java
+                            "FragmentCreateMenu" -> FragmentCreateModifyMenu::class.java
+                            "FragmentCreateTimeMenu" -> FragmentCreateModifyTimeMenu::class.java
+                            else -> FragmentCreateModifyFood::class.java
                         }
 
                         , null)

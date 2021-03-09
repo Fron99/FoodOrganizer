@@ -24,9 +24,10 @@ interface TimeMenuDaoInt{
     @Transaction
     @Insert
     fun insertTimeMenus(vararg objects: TimeMenuWithMenus?)
+    */
 
     @Transaction
     @Delete
-    fun deleteTimeMenus(vararg objects: TimeMenuWithMenus?)
-*/
+    fun deleteTimeMenus(vararg objects: TimeMenuDao?)
+
 }

@@ -41,7 +41,7 @@ class FragmentListMenus : Fragment() {
         recyclerViewMenus = view.findViewById(R.id.recyclerListMenus)
         val layoutManager = LinearLayoutManager(context)
         recyclerViewMenus.layoutManager = layoutManager
-        adapterRecyclerViewMenus = AdapterListMenus(listMenus)
+        adapterRecyclerViewMenus = AdapterListMenus(requireActivity(),listMenus)
         recyclerViewMenus.adapter = adapterRecyclerViewMenus
 
         val observerFood : Observer<List<MenuWithFoods>> = Observer {

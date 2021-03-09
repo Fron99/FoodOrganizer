@@ -116,17 +116,23 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
         repository.insertMenus(getApplication(), menu)
     }
 
+
+
     fun updateMenu(menu : MenuWithFoods){
         repository.updateMenus(getApplication(), menu)
     }
 
-    fun dropMenu(menu : MenuWithFoods){
+ */
+
+
+    fun dropMenu(menu : MenuDao){
         repository.deleteMenus(getApplication(), menu)
     }
 
 
     /*************************************************************TIMEMENU***********************************************************/
 
+    /*
     fun insertTimeMenu(timeMenu : TimeMenuWithMenus){
         repository.insertTimeMenus(getApplication(), timeMenu)
     }
@@ -135,10 +141,10 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
         repository.updateTimeMenus(getApplication(), timeMenu)
     }
 
-    fun dropTimeMenu(timeMenu : TimeMenuWithMenus){
+     */
+
+    fun dropTimeMenu(timeMenu : TimeMenuDao){
         repository.deleteTimeMenus(getApplication(), timeMenu)
     }
-
- */
 
 }

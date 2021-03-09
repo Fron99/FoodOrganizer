@@ -3,6 +3,7 @@ package es.fron99.Foodorganize.Dao.Model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.util.*
 
 @Entity(tableName = "TimeMenus")
@@ -13,7 +14,7 @@ class TimeMenuDao(
         @ColumnInfo(name = "Name")
         var name:String,
         @ColumnInfo(name = "Date")
-        var date : Date){
+        var date : Date): Serializable {
 
         constructor(): this(0,"",Date())
 }

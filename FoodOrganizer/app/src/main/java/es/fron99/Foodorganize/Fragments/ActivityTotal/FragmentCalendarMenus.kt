@@ -59,7 +59,7 @@ class FragmentCalendarMenus : Fragment() {
 
         val recycledTimeMenu = view.findViewById<RecyclerView>(R.id.recycledTimeMenu)
         recycledTimeMenu.layoutManager = LinearLayoutManager(context)
-        adapterRecyclerViewCalendarMenus = AdapterListCalendarMenus(requireContext(), listTimeMenus)
+        adapterRecyclerViewCalendarMenus = AdapterListCalendarMenus(requireActivity(), listTimeMenus)
         recycledTimeMenu.adapter = adapterRecyclerViewCalendarMenus
 
         activityTotalVM.timeMenus?.observe(requireActivity()) {

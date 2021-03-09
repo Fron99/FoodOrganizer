@@ -15,7 +15,7 @@ import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityCreateVM
 
 
-class FragmentCreateFood : Fragment() {
+class FragmentCreateModifyFood : Fragment() {
 
     private lateinit var activityCreateVM: ActivityCreateVM
     private lateinit var btnSave : Button

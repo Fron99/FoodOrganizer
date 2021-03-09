@@ -3,9 +3,7 @@ package es.fron99.Foodorganize.Repository
 import android.content.Context
 import androidx.lifecycle.LiveData
 import es.fron99.Foodorganize.Dao.DatabaseFoodOrganize
-import es.fron99.Foodorganize.Dao.Model.FoodDao
-import es.fron99.Foodorganize.Dao.Model.MenuWithFoods
-import es.fron99.Foodorganize.Dao.Model.TimeMenuWithMenus
+import es.fron99.Foodorganize.Dao.Model.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -51,12 +49,11 @@ class Repository {
     fun updateMenus(context : Context, vararg objects: MenuWithFoods?){
         DatabaseFoodOrganize.getDatabase(context).menuDao().updateMenus(*objects)
     }
+    */
 
-    fun deleteMenus(context : Context, vararg objects: MenuWithFoods?){
+    fun deleteMenus(context : Context, vararg objects: MenuDao?){
         DatabaseFoodOrganize.getDatabase(context).menuDao().deleteMenus(*objects)
     }
-
-     */
 
     /************************************************TIMEMENU************************************************/
 
@@ -75,11 +72,10 @@ class Repository {
     fun updateTimeMenus(context : Context, vararg objects: TimeMenuWithMenus?){
         DatabaseFoodOrganize.getDatabase(context).timeMenuDao().updateTimeMenus(*objects)
     }
+    */
 
-    fun deleteTimeMenus(context : Context, vararg objects: TimeMenuWithMenus?){
+    fun deleteTimeMenus(context : Context, vararg objects: TimeMenuDao?){
         DatabaseFoodOrganize.getDatabase(context).timeMenuDao().deleteTimeMenus(*objects)
     }
 
-
- */
 }

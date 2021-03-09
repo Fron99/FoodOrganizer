@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import es.fron99.Foodorganize.R
 
 
-class FragmentCreateTimeMenu : Fragment() {
+class FragmentCreateModifyTimeMenu : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

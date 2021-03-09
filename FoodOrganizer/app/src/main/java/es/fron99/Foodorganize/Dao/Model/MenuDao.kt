@@ -3,6 +3,7 @@ package es.fron99.Foodorganize.Dao.Model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "Menus")
 class MenuDao(
@@ -12,7 +13,7 @@ class MenuDao(
         @ColumnInfo(name = "Name")
         var name:String,
         @ColumnInfo(name = "SmallDescription")
-        var smallDescription:String){
+        var smallDescription:String): Serializable {
 
         constructor(): this(0,"","")
 }

@@ -70,16 +70,19 @@ class AdapterListFood(context : ViewModelStoreOwner, dataSet: ArrayList<FoodDao>
             val popup = PopupMenu(view.context, viewHolder.getOptionsMenu())
             popup.inflate(R.menu.menu_row_list_menu)
             popup.setOnMenuItemClickListener {
-                if (it.itemId == R.id.itemEliminar) {
-                    AlertDialog.Builder(view.context)
-                            .setTitle("Se va a eliminar esta comida")
-                            .setMessage("¿Estas seguro que desea eliminarla?")
-                            .setPositiveButton("Si") { _: DialogInterface?, _: Int -> activityTotalVM.dropFood(FoodDao(food.idFood, "", "", 0))}
-                            .setNegativeButton("No", null)
-                            .show()
-                }else{
-                    activityTotalVM.foodsSelected = food
-                    activityTotalVM.changeActivitySelected("FragmentCreateFood")
+                when (it.itemId) {
+                    R.id.itemEliminar ->{
+                        AlertDialog.Builder(view.context)
+                                .setTitle("Se va a eliminar esta comida")
+                                .setMessage("¿Estas seguro que desea eliminarla?")
+                                .setPositiveButton("Si") { _: DialogInterface?, _: Int -> activityTotalVM.dropFood(FoodDao(food.idFood, "", "", 0))}
+                                .setNegativeButton("No", null)
+                                .show()
+                    }
+                    R.id.itemModificar ->{
+                        activityTotalVM.foodsSelected = food
+                        activityTotalVM.changeActivitySelected("FragmentCreateFood")
+                    }
                 }
                 return@setOnMenuItemClickListener true
             }

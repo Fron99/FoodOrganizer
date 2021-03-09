@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrganize">
-        <activity android:name=".Activities.ActivityCreate"></activity>
+        <activity android:name=".Activities.ActivityCreateModify"></activity>
         <!--
         <activity android:name=".Activities.ActivityTotal"/>
         <activity android:name=".Activities.ActivityLogin">
