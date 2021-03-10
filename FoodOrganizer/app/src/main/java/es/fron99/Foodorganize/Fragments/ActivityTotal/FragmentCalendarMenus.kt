@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import devs.mulham.horizontalcalendar.HorizontalCalendar
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import es.fron99.Foodorganize.Adapters.AdapterListCalendarMenus
+import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.Dao.Model.TimeMenuWithMenus
 import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
@@ -38,21 +40,20 @@ class FragmentCalendarMenus : Fragment() {
 
         var listTimeMenus: ArrayList<TimeMenuWithMenus> = ArrayList()
 
-        if (activityTotalVM.timeMenus?.value != null) {
-            listTimeMenus.addAll(activityTotalVM.timeMenus?.value!!)
+        if (activityTotalVM.timeMenus().value != null) {
+            listTimeMenus.addAll(activityTotalVM.timeMenus().value!!)
         }
-        val startDate = activityTotalVM.daySelected.clone() as Calendar
+        val startDate = activityTotalVM.getDaySelected()?.clone() as Calendar
         startDate.add(Calendar.DAY_OF_MONTH, -7)
-        val endDate = activityTotalVM.daySelected.clone() as Calendar
+        val endDate = activityTotalVM.getDaySelected()?.clone() as Calendar
         endDate.add(Calendar.DAY_OF_MONTH, 7)
 
-        val horizontalCalendar = HorizontalCalendar.Builder(view, R.id.calendarView).range(startDate, endDate).datesNumberOnScreen(5).defaultSelectedDate(activityTotalVM.daySelected.clone() as Calendar).build()
+        val horizontalCalendar = HorizontalCalendar.Builder(view, R.id.calendarView).range(startDate, endDate).datesNumberOnScreen(5).defaultSelectedDate(activityTotalVM.getDaySelected()!!.clone() as Calendar).build()
         horizontalCalendar.centerCalendarToPosition(0)
         horizontalCalendar.calendarListener = object : HorizontalCalendarListener() {
 
             override fun onDateSelected(date: Calendar, position: Int) {
-                activityTotalVM.daySelected = date
-                //activityTotalVM.remplaceTimeMenu(Repository().getTimeMenusByDate(requireContext(), date))
+                activityTotalVM.changeDaySelected(date)
             }
 
         }
@@ -62,8 +63,15 @@ class FragmentCalendarMenus : Fragment() {
         adapterRecyclerViewCalendarMenus = AdapterListCalendarMenus(requireActivity(), listTimeMenus)
         recycledTimeMenu.adapter = adapterRecyclerViewCalendarMenus
 
-        activityTotalVM.timeMenus?.observe(requireActivity()) {
+        activityTotalVM.timeMenus().observe(requireActivity()) {
             adapterRecyclerViewCalendarMenus.changeData(ArrayList(it))
+        }
+
+        val floatActionBtn : FloatingActionButton = view.findViewById(R.id.floatActionBtn)
+
+        floatActionBtn.setOnClickListener {
+            activityTotalVM.foodsSelected = FoodDao()
+            activityTotalVM.changeActivitySelected("FragmentCreateTimeMenu")
         }
 
     }

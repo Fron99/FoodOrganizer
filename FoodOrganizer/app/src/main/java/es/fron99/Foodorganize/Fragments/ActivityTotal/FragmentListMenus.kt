@@ -9,7 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.fron99.Foodorganize.Adapters.AdapterListMenus
+import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.Dao.Model.MenuDao
 import es.fron99.Foodorganize.Dao.Model.MenuWithFoods
 import es.fron99.Foodorganize.R
@@ -49,6 +51,13 @@ class FragmentListMenus : Fragment() {
         }
 
         activityTotalVM.menus?.observe(requireActivity(), observerFood)
+
+        val floatActionBtn : FloatingActionButton = view.findViewById(R.id.floatActionBtn)
+
+        floatActionBtn.setOnClickListener {
+            activityTotalVM.foodsSelected = FoodDao()
+            activityTotalVM.changeActivitySelected("FragmentCreateMenu")
+        }
 
     }
 

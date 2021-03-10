@@ -1,18 +1,21 @@
 package es.fron99.Foodorganize.ViewModels
 
 import android.app.Application
+import androidx.arch.core.util.Function
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import es.fron99.Foodorganize.Dao.Model.*
 import es.fron99.Foodorganize.Repository.Repository
 import java.util.*
+
 
 class ActivityTotalVM(application: Application) : AndroidViewModel(application) {
 
     /*********************************************************************************************************************/
 
-    private lateinit var repository : Repository
+    private var repository : Repository
 
     var fragmentSelected: MutableLiveData<String>?
         get() {
@@ -30,13 +33,12 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
             return field!!
         }
 
-    var daySelected: Calendar
-        get() {
-            return field.clone() as Calendar
-        }
+    private var daySelected: MutableLiveData<Calendar>?
 
-    lateinit var timeMenuSelected: TimeMenuWithMenus
 
+    var timeMenuSelected: TimeMenuWithMenus
+
+    /*
     var timeMenus: LiveData<List<TimeMenuWithMenus>>?
         get() {
             if (field == null) {
@@ -45,7 +47,9 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
             return field!!
         }
 
-    lateinit var menusSelected: MenuWithFoods
+
+     */
+    var menusSelected: MenuWithFoods
 
     var menus: LiveData<List<MenuWithFoods>>?
         get() {
@@ -55,7 +59,7 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
             return field!!
         }
 
-    lateinit var foodsSelected: FoodDao
+    var foodsSelected: FoodDao
 
     var foods: LiveData<List<FoodDao>>?
         get() {
@@ -72,19 +76,37 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
         this.fragmentSelected?.value = newValue
     }
 
+    fun changeDaySelected(date: Calendar) {
+        if (daySelected == null) {
+            daySelected = MutableLiveData(Calendar.getInstance())
+        }
+        this.daySelected?.value = date
+    }
+
+    fun getDaySelected() : Calendar? {
+        if (daySelected == null) {
+            daySelected = MutableLiveData(Calendar.getInstance())
+        }
+        return this.daySelected?.value
+    }
+
 
     init {
         fragmentSelected = MutableLiveData("FragmentCalendarMenus")
         activitySelected = MutableLiveData("Init")
-        daySelected = Calendar.getInstance()
+        daySelected = MutableLiveData(Calendar.getInstance())
         repository = Repository()
         //TODO Cambiar a llamadas en hilos
         foods = repository.getFoods(application)
         menus = repository.getMenus(application)
-        timeMenus = repository.getTimeMenusByDate(application, daySelected)
         foodsSelected = FoodDao()
         menusSelected = MenuWithFoods()
         timeMenuSelected = TimeMenuWithMenus()
+    }
+
+    fun timeMenus(): LiveData<List<TimeMenuWithMenus>> {
+        return Transformations.switchMap( daySelected as LiveData<*>) {
+        daySelected?.value?.let { repository.getTimeMenusByDate(getApplication(), it) } }
     }
 
     /*********************************************************************************************************************/
@@ -98,15 +120,15 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
 
     /*************************************************************FOOD***********************************************************/
 
-    fun insertFood(food : FoodDao){
+    fun insertFood(food: FoodDao){
         repository.insertFoods(getApplication(), food)
     }
 
-    fun updateFood(food : FoodDao){
+    fun updateFood(food: FoodDao){
         repository.updateFoods(getApplication(), food)
     }
 
-    fun dropFood(food : FoodDao){
+    fun dropFood(food: FoodDao){
         repository.deleteFoods(getApplication(), food)
     }
 
@@ -125,7 +147,7 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
  */
 
 
-    fun dropMenu(menu : MenuDao){
+    fun dropMenu(menu: MenuDao){
         repository.deleteMenus(getApplication(), menu)
     }
 
@@ -143,7 +165,7 @@ class ActivityTotalVM(application: Application) : AndroidViewModel(application) 
 
      */
 
-    fun dropTimeMenu(timeMenu : TimeMenuDao){
+    fun dropTimeMenu(timeMenu: TimeMenuDao){
         repository.deleteTimeMenus(getApplication(), timeMenu)
     }
 

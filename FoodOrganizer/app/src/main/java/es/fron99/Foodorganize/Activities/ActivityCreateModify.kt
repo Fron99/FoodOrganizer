@@ -25,7 +25,6 @@ class ActivityCreateModify : AppCompatActivity() {
         val fragment = intent.extras?.getString("fragment")
         val obj = intent.extras?.get("obj")
 
-
         if(obj is FoodDao){
             activityCreateVM.foodSelected = obj
         }else{
