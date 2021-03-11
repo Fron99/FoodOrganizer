@@ -16,6 +16,8 @@ interface TimeMenuDaoInt{
     @Query("SELECT * FROM TimeMenus WHERE Date = :date")
     fun getTimeMenusByDate(date: Date): LiveData<List<TimeMenuWithMenus>>
 
+    //TODO Implementar insert y updates. Cambiar a clase abstracta para implementar los metodos de insercion
+
     /*
     @Transaction
     @Update

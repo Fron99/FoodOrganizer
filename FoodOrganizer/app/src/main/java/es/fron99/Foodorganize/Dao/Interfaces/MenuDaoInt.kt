@@ -17,6 +17,8 @@ interface MenuDaoInt{
     @Query("SELECT * FROM Menus WHERE idMenu = :menusIds")
     fun getMenuById(menusIds: IntArray?): LiveData<List<MenuWithFoods>>
 
+    //TODO Implementar insert y updates. Cambiar a clase abstracta para implementar los metodos de insercion
+
     /*
     @Transaction
     @Insert

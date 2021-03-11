@@ -47,13 +47,13 @@ public abstract class DatabaseFoodOrganize extends RoomDatabase {
                                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
                                     super.onCreate(db);
 
-                                    for (int i = 0; i < 50; i++ )
+                                    for (int i = 0; i < 10; i++ )
                                         db.execSQL("INSERT INTO Foods(Name, SmallDescription, TimeToPrepare) VALUES ('Comida Ejemplo "+i+"','Descripcion de comida de ejemplo',5)");
 
-                                    for (int i = 0; i < 50; i++ )
+                                    for (int i = 0; i < 10; i++ )
                                         db.execSQL("INSERT INTO Menus(Name, SmallDescription) VALUES ('Menu Ejemplo "+i+"','Descripcion de comida de ejemplo')");
 
-                                    for (int i = 1; i < 50; i++ )
+                                    for (int i = 1; i < 10; i++ )
                                         db.execSQL("INSERT INTO MenusFoodsCrossRef(idMenu, idFood) VALUES ("+i+","+i+")");
 
                                     Calendar date = Calendar.getInstance();

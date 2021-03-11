@@ -1,7 +1,10 @@
 package es.fron99.Foodorganize.Adapters
 
+
+import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -13,10 +16,13 @@ import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.R
+import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 import java.util.*
 
-class AdapterListFood(context : ViewModelStoreOwner, dataSet: ArrayList<FoodDao>?) : RecyclerView.Adapter<AdapterListFood.ViewHolder>() {
+//TODO Modificar todo esto, solo dejar asi para demostracion
+
+class AdapterListFoodModify(context : ViewModelStoreOwner, dataSet: ArrayList<FoodDao>?) : RecyclerView.Adapter<AdapterListFoodModify.ViewHolder>() {
 
     private var activityTotalVM : ActivityTotalVM
     private var food: ArrayList<FoodDao>
@@ -52,7 +58,7 @@ class AdapterListFood(context : ViewModelStoreOwner, dataSet: ArrayList<FoodDao>
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.row_list_food_and_menus, viewGroup, false)
+                .inflate(R.layout.row_list_food_and_menus_modify, viewGroup, false)
         return ViewHolder(view)
     }
 
@@ -63,7 +69,7 @@ class AdapterListFood(context : ViewModelStoreOwner, dataSet: ArrayList<FoodDao>
         viewHolder.setImageView(R.drawable.icon_food)
         viewHolder.getOptionsMenu().setOnClickListener { view: View ->
             val popup = PopupMenu(view.context, viewHolder.getOptionsMenu())
-            popup.inflate(R.menu.menu_row_list_menu)
+            popup.inflate(R.menu.menu_row_list_menu_modify)
             popup.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.itemEliminar ->{
@@ -73,10 +79,6 @@ class AdapterListFood(context : ViewModelStoreOwner, dataSet: ArrayList<FoodDao>
                                 .setPositiveButton("Si") { _: DialogInterface?, _: Int -> activityTotalVM.dropFood(FoodDao(food.idFood, "", "", 0))}
                                 .setNegativeButton("No", null)
                                 .show()
-                    }
-                    R.id.itemModificar ->{
-                        activityTotalVM.foodsSelected = food
-                        activityTotalVM.changeActivitySelected("FragmentCreateFood")
                     }
                 }
                 return@setOnMenuItemClickListener true

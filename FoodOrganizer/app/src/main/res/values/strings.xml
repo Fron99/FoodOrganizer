@@ -38,4 +38,9 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="options">Opciones</string>
+    <string name="nameTimeMenu">Nombre franja horaria</string>
+    <string name="menuToSearch">Menu a buscar</string>
+    <string name="nameMenu">Nombre del menu</string>
+    <string name="foodToSearch">Comida a buscar</string>
+    <string name="date">Fecha</string>
 </resources>

@@ -9,6 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import es.fron99.Foodorganize.Fragments.ActivityLogin.FragmentSignIn
 import es.fron99.Foodorganize.Fragments.ActivityLogin.FragmentSignUp
 import es.fron99.Foodorganize.Fragments.ActivityLogin.InitFragment
+import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentCalendarMenus
+import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListFood
+import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListMenus
 import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.ViewModels.ActivityLoginVM
 
@@ -20,51 +23,61 @@ class ActivityLogin : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        if (actionBar != null) {
-            actionBar!!.hide()
-        }
+        actionBar?.hide()
 
         activityLoginVM = ViewModelProvider(this).get(ActivityLoginVM::class.java)
+
+        initFragment()
+
+        asignObservers()
+
+    }
+
+
+    fun initFragment(){
+
+        /********************************************************Init********************************************************/
 
         supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(R.id.fragmentLogin, InitFragment::class.java, null)
                 .commit()
 
-        asignObservers()
-
     }
+
 
     private fun asignObservers() {
 
-        val observerFragmentSelected = Observer { s: String? ->
+        /********************************************************activityLoginVM.getFragmentSelected********************************************************/
 
-            var fragmentToGo = when (s) {
-                "SignIn" -> FragmentSignIn::class.java
-                "SignUp" -> FragmentSignUp::class.java
-                else -> FragmentSignIn::class.java
-            }
+        activityLoginVM.getFragmentSelected().observe(this, { s: String? ->
 
             supportFragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
-                    .replace(R.id.fragmentLogin, fragmentToGo, null)
+                    .replace(R.id.fragmentLogin,
+
+                            when (s) {
+                                "SignIn" -> FragmentSignIn::class.java
+                                "SignUp" -> FragmentSignUp::class.java
+                                else -> FragmentSignIn::class.java
+                            }
+
+                            , null)
                     .addToBackStack("")
                     .commit()
-        }
+        })
 
-        activityLoginVM.getFragmentSelected().observe(this, observerFragmentSelected)
+        /********************************************************activityLoginVM.getLogginOk********************************************************/
 
         val context: Context = this
 
-        val observerLogginOk = Observer { bool: Boolean ->
+        activityLoginVM.getLogginOk().observe(this, { bool: Boolean ->
             if (bool) {
                 finish()
                 val goToActivityTotal = Intent(context, ActivityTotal::class.java)
                 startActivity(goToActivityTotal)
             }
-        }
-
-        activityLoginVM.getLogginOk().observe(this, observerLogginOk)
+        })
 
     }
 

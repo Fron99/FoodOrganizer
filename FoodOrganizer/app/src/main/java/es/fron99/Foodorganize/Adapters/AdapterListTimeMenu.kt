@@ -15,9 +15,9 @@ class AdapterListTimeMenu(dataSet: ArrayList<MenuWithFoods>?) : RecyclerView.Ada
     private var menus: ArrayList<MenuWithFoods> = ArrayList(dataSet)
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val txtViewNameMenu: TextView = view.findViewById(R.id.txtViewNameMenu)
-        val txtViewSmallDescriptionMenu: TextView = view.findViewById(R.id.txtViewSmallDescriptionMenu)
-        val txtViewTimePrepareMenu: TextView = view.findViewById(R.id.txtViewTimePrepareMenu)
+        private val txtViewNameMenu: TextView = view.findViewById(R.id.txtViewNameMenu)
+        private val txtViewSmallDescriptionMenu: TextView = view.findViewById(R.id.txtViewSmallDescriptionMenu)
+        private val txtViewTimePrepareMenu: TextView = view.findViewById(R.id.txtViewTimePrepareMenu)
 
         fun setTxtViewNameMenu(nameMenu: String?) {
             txtViewNameMenu.text = nameMenu
@@ -68,7 +68,7 @@ class AdapterListTimeMenu(dataSet: ArrayList<MenuWithFoods>?) : RecyclerView.Ada
         this.notifyDataSetChanged()
     }
 
-    fun calculateTime(time: Int) : String{
+    private fun calculateTime(time: Int) : String{
 
         return (
                 if (time <= 59){"$time MIN" }
@@ -77,7 +77,7 @@ class AdapterListTimeMenu(dataSet: ArrayList<MenuWithFoods>?) : RecyclerView.Ada
 
     }
 
-    fun calculateHours(time: Int): String{
+    private fun calculateHours(time: Int): String{
 
         var timeS : String = ""
         val hours :Int = time/60

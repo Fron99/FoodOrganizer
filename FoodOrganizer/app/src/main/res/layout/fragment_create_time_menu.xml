@@ -1,4 +1,5 @@
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,12 +7,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
         app:cardElevation="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,9 +26,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="70dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="20dp"
                 android:fontFamily="@font/poppinsbold"
                 android:text="@string/addTimeMenu"
                 android:textSize="25sp"
@@ -46,8 +44,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="30dp"
-                android:hint="@string/nameFood"
-                app:layout_constraintBottom_toTopOf="@id/textInputLayoutDescription"
+                android:hint="@string/nameTimeMenu"
+                app:layout_constraintBottom_toTopOf="@id/textViewDate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtViewTitle">
@@ -63,41 +61,47 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutDescription"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewDate"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:hint="@string/description"
-                app:layout_constraintBottom_toTopOf="@id/textInputLayoutTimePrepare"
+                android:hint="@string/date"
+                android:textSize="25sp"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@id/autoCompleteTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textInputLayoutName">
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutName"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextUsername"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/poppinsmedium"
-                    android:inputType="textMultiLine" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/autoCompleteTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:hint="@string/menuToSearch"
+                app:layout_constraintBottom_toTopOf="@id/recyclerListMenusAsign"
+                app:layout_constraintEnd_toEndOf="@+id/recyclerListMenusAsign"
+                app:layout_constraintStart_toStartOf="@+id/recyclerListMenusAsign"
+                app:layout_constraintTop_toBottomOf="@id/textViewDate"
+                tools:ignore="LabelFor" />
+
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/textInputLayoutTimePrepare"
+                android:id="@+id/recyclerListMenusAsign"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="40dp"
                 android:hint="@string/timeToPrepare"
                 app:layout_constraintBottom_toTopOf="@id/btnSave"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textInputLayoutDescription" />
+                app:layout_constraintTop_toBottomOf="@id/autoCompleteTextView" />
 
             <Button
                 android:id="@+id/btnSave"
@@ -110,7 +114,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutTimePrepare" />
+                app:layout_constraintTop_toBottomOf="@+id/recyclerListMenusAsign" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

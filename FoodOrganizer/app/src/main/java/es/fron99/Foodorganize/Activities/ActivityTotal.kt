@@ -25,7 +25,7 @@ class ActivityTotal : AppCompatActivity() {
 
         initFragment()
 
-        initBtmNavView()
+        setOnClicks()
 
         setObservers()
 
@@ -33,11 +33,13 @@ class ActivityTotal : AppCompatActivity() {
 
     fun initFragment(){
 
+        /********************************************************Init********************************************************/
+
         supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(R.id.fragmentTotal,
 
-                        when (activityTotalVM.fragmentSelected?.value) {
+                        when (activityTotalVM.getFragmentSelected().value) {
                             "FragmentCalendarMenus" -> FragmentCalendarMenus::class.java
                             "FragmentListMenus" -> FragmentListMenus::class.java
                             "FragmentListFood" -> FragmentListFood::class.java
@@ -49,11 +51,11 @@ class ActivityTotal : AppCompatActivity() {
 
     }
 
-    fun initBtmNavView(){
+    fun setOnClicks(){
 
-        val btmNavView = findViewById<BottomNavigationView>(R.id.btmNavView)
+        /********************************************************R.id.btmNavView********************************************************/
 
-        btmNavView.setOnNavigationItemSelectedListener { item ->
+        findViewById<BottomNavigationView>(R.id.btmNavView).setOnNavigationItemSelectedListener { item ->
 
             supportFragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
@@ -74,13 +76,15 @@ class ActivityTotal : AppCompatActivity() {
 
         //No hacer nada, esta puesto asi para que no lance una
         //excepcion al volver a seleccionar la opcion seleccionada
-        btmNavView.setOnNavigationItemReselectedListener { }
+        findViewById<BottomNavigationView>(R.id.btmNavView).setOnNavigationItemReselectedListener { }
 
     }
 
     fun setObservers(){
 
-        activityTotalVM.fragmentSelected?.observe(this, {
+        /********************************************************activityTotalVM.getFragmentSelected********************************************************/
+
+        activityTotalVM.getFragmentSelected().observe(this, {
             supportFragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
                     .replace(R.id.fragmentTotal,
@@ -94,7 +98,9 @@ class ActivityTotal : AppCompatActivity() {
                     .commit()
         })
 
-        activityTotalVM.activitySelected?.observe(this, {
+        /********************************************************activityTotalVM.getActivitySelected********************************************************/
+
+        activityTotalVM.getActivitySelected().observe(this, {
             if (!it.equals("Init")){
                 val i = Intent(this, ActivityCreateModify::class.java)
                 i.putExtra("fragment",it)

@@ -4,58 +4,39 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-
+@Suppress("unused")
 class ActivityLoginVM : ViewModel() {
 
-    private var fragmentSelected: MutableLiveData<String>?
-    private var logginOk: MutableLiveData<Boolean>?
+    /************************************************FragmentSelected************************************************/
+
+    private var fragmentSelected: MutableLiveData<String> = MutableLiveData()
 
     fun getFragmentSelected(): LiveData<String> {
-        if (fragmentSelected == null) {
-            fragmentSelected = MutableLiveData()
-        }
-        return this.fragmentSelected!!
+        return this.fragmentSelected
     }
 
-    val valueFragmentSelected: String?
-        get() {
-            if (fragmentSelected == null) {
-                fragmentSelected = MutableLiveData()
-            }
-            return fragmentSelected!!.value
-        }
+    fun valueFragmentSelected(): String? {
+        return fragmentSelected.value
+    }
 
     fun changeFragmentSelected(newValue: String) {
-        if (fragmentSelected == null) {
-            fragmentSelected = MutableLiveData()
-        }
-        fragmentSelected!!.value = newValue
+        fragmentSelected.value = newValue
     }
+
+    /************************************************LogginOk************************************************/
+
+    private var logginOk: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun getLogginOk(): LiveData<Boolean> {
-        if (logginOk == null) {
-            logginOk = MutableLiveData()
-        }
-        return this.logginOk!!
+        return this.logginOk
     }
 
-    val valueLogginOk: Boolean?
-        get() {
-            if (logginOk == null) {
-                logginOk = MutableLiveData()
-            }
-            return logginOk!!.value
-        }
+    fun getvalueLogginOk(): Boolean? {
+        return logginOk.value
+    }
 
     fun changeLogginOk(newValue: Boolean) {
-        if (logginOk == null) {
-            logginOk = MutableLiveData()
-        }
-        logginOk!!.value = newValue
+        logginOk.value = newValue
     }
 
-    init {
-        fragmentSelected = MutableLiveData()
-        logginOk = MutableLiveData(false)
-    }
 }

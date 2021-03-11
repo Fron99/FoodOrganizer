@@ -14,6 +14,7 @@ import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityCreateVM
 
+//TODO Replantear todo, dejar esto solo para que funcione
 
 class FragmentCreateModifyFood : Fragment() {
 
