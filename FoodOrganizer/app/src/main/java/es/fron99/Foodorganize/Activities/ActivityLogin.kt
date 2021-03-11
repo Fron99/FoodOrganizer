@@ -9,6 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import es.fron99.Foodorganize.Fragments.ActivityLogin.FragmentSignIn
 import es.fron99.Foodorganize.Fragments.ActivityLogin.FragmentSignUp
 import es.fron99.Foodorganize.Fragments.ActivityLogin.InitFragment
+import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentCalendarMenus
+import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListFood
+import es.fron99.Foodorganize.Fragments.ActivityTotal.FragmentListMenus
 import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.ViewModels.ActivityLoginVM
 
@@ -20,22 +23,32 @@ class ActivityLogin : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        if (actionBar != null) {
-            actionBar!!.hide()
-        }
+        actionBar?.hide()
 
         activityLoginVM = ViewModelProvider(this).get(ActivityLoginVM::class.java)
+
+        initFragment()
+
+        asignObservers()
+
+    }
+
+
+    fun initFragment(){
+
+        /********************************************************Init********************************************************/
 
         supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(R.id.fragmentLogin, InitFragment::class.java, null)
                 .commit()
 
-        asignObservers()
-
     }
 
+
     private fun asignObservers() {
+
+        /********************************************************activityLoginVM.getFragmentSelected********************************************************/
 
         activityLoginVM.getFragmentSelected().observe(this, { s: String? ->
 
@@ -54,6 +67,7 @@ class ActivityLogin : AppCompatActivity() {
                     .commit()
         })
 
+        /********************************************************activityLoginVM.getLogginOk********************************************************/
 
         val context: Context = this
 

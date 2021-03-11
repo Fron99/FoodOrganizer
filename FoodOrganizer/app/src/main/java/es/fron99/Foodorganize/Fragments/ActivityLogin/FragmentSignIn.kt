@@ -17,10 +17,8 @@ import es.fron99.Foodorganize.ViewModels.ActivityLoginVM
 
 
 class FragmentSignIn : Fragment() {
-    private var activityLoginVM: ActivityLoginVM? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
+    private lateinit var activityLoginVM: ActivityLoginVM
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -53,7 +51,7 @@ class FragmentSignIn : Fragment() {
                             email, password).addOnCompleteListener(requireActivity()) { task: Task<AuthResult?> ->
 
                         if (task.isSuccessful) {
-                            activityLoginVM!!.changeLogginOk(true)
+                            activityLoginVM.changeLogginOk(true)
                         }else{
                             Toast.makeText(requireContext(),"Credenciales no validas", Toast.LENGTH_LONG).show()
                         }

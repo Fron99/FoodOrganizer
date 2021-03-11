@@ -61,6 +61,8 @@ class FragmentSignUp : Fragment() {
                                 email, password).addOnCompleteListener(requireActivity()) { task: Task<AuthResult?> ->
                             if (task.isSuccessful) {
                                 activityLoginVM!!.changeLogginOk(true)
+                            }else{
+                                Toast.makeText(requireContext(),"Ocurrio un error. Intente con otro correo", Toast.LENGTH_LONG).show()
                             }
                         }
 

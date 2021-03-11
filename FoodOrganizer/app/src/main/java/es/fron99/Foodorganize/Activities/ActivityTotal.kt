@@ -25,13 +25,15 @@ class ActivityTotal : AppCompatActivity() {
 
         initFragment()
 
-        initBtmNavView()
+        setOnClicks()
 
         setObservers()
 
     }
 
     fun initFragment(){
+
+        /********************************************************Init********************************************************/
 
         supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
@@ -49,11 +51,11 @@ class ActivityTotal : AppCompatActivity() {
 
     }
 
-    fun initBtmNavView(){
+    fun setOnClicks(){
 
-        val btmNavView = findViewById<BottomNavigationView>(R.id.btmNavView)
+        /********************************************************R.id.btmNavView********************************************************/
 
-        btmNavView.setOnNavigationItemSelectedListener { item ->
+        findViewById<BottomNavigationView>(R.id.btmNavView).setOnNavigationItemSelectedListener { item ->
 
             supportFragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
@@ -74,11 +76,13 @@ class ActivityTotal : AppCompatActivity() {
 
         //No hacer nada, esta puesto asi para que no lance una
         //excepcion al volver a seleccionar la opcion seleccionada
-        btmNavView.setOnNavigationItemReselectedListener { }
+        findViewById<BottomNavigationView>(R.id.btmNavView).setOnNavigationItemReselectedListener { }
 
     }
 
     fun setObservers(){
+
+        /********************************************************activityTotalVM.getFragmentSelected********************************************************/
 
         activityTotalVM.getFragmentSelected().observe(this, {
             supportFragmentManager.beginTransaction()
@@ -93,6 +97,8 @@ class ActivityTotal : AppCompatActivity() {
                             , null)
                     .commit()
         })
+
+        /********************************************************activityTotalVM.getActivitySelected********************************************************/
 
         activityTotalVM.getActivitySelected().observe(this, {
             if (!it.equals("Init")){

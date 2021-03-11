@@ -27,9 +27,9 @@ class AdapterListMenusModify(context : ViewModelStoreOwner, dataSet: ArrayList<M
     private var menus: ArrayList<MenuWithFoods>
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val txtViewNameMenu: TextView = view.findViewById(R.id.nameFood)
-        val txtViewSmallDescriptionMenu: TextView = view.findViewById(R.id.smallDescriptionFood)
-        val imageView: ImageView = view.findViewById(R.id.imageView)
+        private val txtViewNameMenu: TextView = view.findViewById(R.id.nameFood)
+        private val txtViewSmallDescriptionMenu: TextView = view.findViewById(R.id.smallDescriptionFood)
+        private val imageView: ImageView = view.findViewById(R.id.imageView)
         val optionsMenu: ImageView = view.findViewById(R.id.textViewOptions)
 
         fun setTxtViewNameMenu(nameMenu: String?) {
