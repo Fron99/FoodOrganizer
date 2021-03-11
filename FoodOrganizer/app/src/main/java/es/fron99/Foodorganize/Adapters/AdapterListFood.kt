@@ -1,10 +1,7 @@
 package es.fron99.Foodorganize.Adapters
 
-
-import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -16,10 +13,8 @@ import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import es.fron99.Foodorganize.Dao.Model.FoodDao
 import es.fron99.Foodorganize.R
-import es.fron99.Foodorganize.Repository.Repository
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 import java.util.*
-
 
 class AdapterListFood(context : ViewModelStoreOwner, dataSet: ArrayList<FoodDao>?) : RecyclerView.Adapter<AdapterListFood.ViewHolder>() {
 

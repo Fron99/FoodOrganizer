@@ -37,34 +37,33 @@ class ActivityLogin : AppCompatActivity() {
 
     private fun asignObservers() {
 
-        val observerFragmentSelected = Observer { s: String? ->
-
-            var fragmentToGo = when (s) {
-                "SignIn" -> FragmentSignIn::class.java
-                "SignUp" -> FragmentSignUp::class.java
-                else -> FragmentSignIn::class.java
-            }
+        activityLoginVM.getFragmentSelected().observe(this, { s: String? ->
 
             supportFragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
-                    .replace(R.id.fragmentLogin, fragmentToGo, null)
+                    .replace(R.id.fragmentLogin,
+
+                            when (s) {
+                                "SignIn" -> FragmentSignIn::class.java
+                                "SignUp" -> FragmentSignUp::class.java
+                                else -> FragmentSignIn::class.java
+                            }
+
+                            , null)
                     .addToBackStack("")
                     .commit()
-        }
+        })
 
-        activityLoginVM.getFragmentSelected().observe(this, observerFragmentSelected)
 
         val context: Context = this
 
-        val observerLogginOk = Observer { bool: Boolean ->
+        activityLoginVM.getLogginOk().observe(this, { bool: Boolean ->
             if (bool) {
                 finish()
                 val goToActivityTotal = Intent(context, ActivityTotal::class.java)
                 startActivity(goToActivityTotal)
             }
-        }
-
-        activityLoginVM.getLogginOk().observe(this, observerLogginOk)
+        })
 
     }
 

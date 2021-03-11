@@ -37,7 +37,7 @@ class ActivityTotal : AppCompatActivity() {
                 .setReorderingAllowed(true)
                 .replace(R.id.fragmentTotal,
 
-                        when (activityTotalVM.fragmentSelected?.value) {
+                        when (activityTotalVM.getFragmentSelected().value) {
                             "FragmentCalendarMenus" -> FragmentCalendarMenus::class.java
                             "FragmentListMenus" -> FragmentListMenus::class.java
                             "FragmentListFood" -> FragmentListFood::class.java
@@ -80,7 +80,7 @@ class ActivityTotal : AppCompatActivity() {
 
     fun setObservers(){
 
-        activityTotalVM.fragmentSelected?.observe(this, {
+        activityTotalVM.getFragmentSelected().observe(this, {
             supportFragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
                     .replace(R.id.fragmentTotal,
@@ -94,7 +94,7 @@ class ActivityTotal : AppCompatActivity() {
                     .commit()
         })
 
-        activityTotalVM.activitySelected?.observe(this, {
+        activityTotalVM.getActivitySelected().observe(this, {
             if (!it.equals("Init")){
                 val i = Intent(this, ActivityCreateModify::class.java)
                 i.putExtra("fragment",it)

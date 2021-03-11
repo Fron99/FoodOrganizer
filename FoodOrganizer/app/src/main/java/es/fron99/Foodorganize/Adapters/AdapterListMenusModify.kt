@@ -19,6 +19,7 @@ import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.ViewModels.ActivityTotalVM
 import java.util.*
 
+//TODO Modificar todo esto, solo dejar asi para demostracion
 
 class AdapterListMenusModify(context : ViewModelStoreOwner, dataSet: ArrayList<MenuWithFoods>?) : RecyclerView.Adapter<AdapterListMenusModify.ViewHolder>() {
 

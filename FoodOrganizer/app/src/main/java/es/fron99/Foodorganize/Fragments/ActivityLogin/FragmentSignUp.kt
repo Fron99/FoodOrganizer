@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.tasks.Task
@@ -24,30 +25,69 @@ class FragmentSignUp : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         activityLoginVM = ViewModelProvider(requireActivity()).get(ActivityLoginVM::class.java)
+
         asignOnClicks(view)
+
     }
 
     private fun asignOnClicks(view: View) {
-        val btnSigUp = view.findViewById<Button>(R.id.outlinedButton)
-        btnSigUp.setOnClickListener {
-            val email = (view.findViewById<View>(R.id.textInputLayoutEmail) as TextInputLayout).editText!!.text.toString()
-            val password = (view.findViewById<View>(R.id.textInputLayoutPassword) as TextInputLayout).editText!!.text.toString()
-            if (password.length >= 6) {
 
-                //TODO Añadir mas emails, dejar asi por ahora
-                if (email.contains("@gmail.com")) {
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-                            email, password).addOnCompleteListener(requireActivity()) { task: Task<AuthResult?> ->
+        /****************************************************R.id.outlinedButton****************************************************/
 
-                        //TODO Mostrar mensaje de error
-                        if (task.isSuccessful) {
-                            activityLoginVM!!.changeLogginOk(true)
+        view.findViewById<Button>(R.id.outlinedButton).setOnClickListener {
+
+            val textInputLayoutEmail = view.findViewById<TextInputLayout>(R.id.textInputLayoutEmail)
+            val textInputLayoutPassword = view.findViewById<TextInputLayout>(R.id.textInputLayoutPassword)
+            val textInputLayoutConfirmPassword = view.findViewById<TextInputLayout>(R.id.textInputLayoutConfirmPassword)
+
+
+            val email = textInputLayoutEmail.editText?.text.toString()
+            val password = textInputLayoutPassword.editText?.text.toString()
+            val passwordConfirm = textInputLayoutConfirmPassword.editText?.text.toString()
+
+            if (password == passwordConfirm){
+
+                textInputLayoutConfirmPassword.isErrorEnabled = false
+
+                if (checkPassword(password)) {
+                    textInputLayoutPassword.isErrorEnabled = false
+
+                    if (checkEmail(email)) {
+                        textInputLayoutEmail.isErrorEnabled = false
+
+                        FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+                                email, password).addOnCompleteListener(requireActivity()) { task: Task<AuthResult?> ->
+                            if (task.isSuccessful) {
+                                activityLoginVM!!.changeLogginOk(true)
+                            }
                         }
+
+                    }else{
+                        textInputLayoutEmail.error = "Email no valido. Tiene que ser @gmail.com"
                     }
+                }else{
+                    textInputLayoutPassword.error = "Contraseña no valida. Minimo 6 caracteres"
                 }
+
+            }else{
+                textInputLayoutConfirmPassword.error = "Las contraseñas no coinciden."
             }
+
         }
+
     }
+
+
+    private fun checkPassword(pass : String) : Boolean{ //TODO Add more checks
+        return pass.length >= 6
+    }
+
+
+    private fun checkEmail(email : String) : Boolean{ //TODO Add more checks
+        return email.contains("@gmail.com")
+    }
+
 }
 

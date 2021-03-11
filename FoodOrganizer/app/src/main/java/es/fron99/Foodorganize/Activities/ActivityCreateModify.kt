@@ -12,6 +12,9 @@ import es.fron99.Foodorganize.Fragments.ActivityCreate.FragmentCreateModifyTimeM
 import es.fron99.Foodorganize.R
 import es.fron99.Foodorganize.ViewModels.ActivityCreateVM
 
+//TODO Cambiar esto. Esto deve devolver el objeto modificado
+//TODO Si el objeto es modificado sera devuelto con su id y Si el objeto es creado sera devuelto con su id con valor -1
+
 class ActivityCreateModify : AppCompatActivity() {
 
     private lateinit var activityCreateVM: ActivityCreateVM
